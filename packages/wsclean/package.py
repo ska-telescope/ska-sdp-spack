@@ -15,7 +15,7 @@ class Wsclean(CMakePackage):
 
     version('3.0', commit='9ee587c576caad779dc127bb3f83858513679333', submodules=True)
 
-    depends_on('hdf5-autotools+hl+cxx')
+    depends_on('hdf5-autotools+cxx')
     depends_on('fftw')
     depends_on('everybeam')
     depends_on('cuda')
