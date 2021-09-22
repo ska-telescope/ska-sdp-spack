@@ -17,6 +17,7 @@ class Wsclean(CMakePackage):
 
     depends_on('hdf5-autotools+cxx')
     depends_on('fftw')
+    depends_on('casacore@3.3.0')
     depends_on('everybeam')
     depends_on('cuda')
     depends_on('idg')
