@@ -17,6 +17,7 @@ class Everybeam(CMakePackage):
     version('0.2.0', commit='74fe444e0052d1179126ba4742eec8392336019d', submodules=True)
 
     depends_on('hdf5+cxx')
-    depends_on('casacore@3.3.0', when='@0.1.3')
-    depends_on('casacore@3.4.0', when='@0.2.0')
+    depends_on('casacore@3.3.0')
+    depends_on('boost+filesystem+system')
+    depends_on('fftw')
     depends_on('cmake@3.18.4')
