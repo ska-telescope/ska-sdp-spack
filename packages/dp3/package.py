@@ -12,6 +12,7 @@ class Dp3(CMakePackage):
     homepage = "https://www.astron.nl/citt/DP3"
     git      = "https://git.astron.nl/RD/DP3.git"
 
+    version('5.0', commit='50de337bed30525a4c0583ea977a58c976a7cc39', submodules=True)
     version('5.1', commit='f2a8afd677f2bff3937bb1c350d1b0ad340bb514', submodules=True)
 
     depends_on('aoflagger@3.1.0')
