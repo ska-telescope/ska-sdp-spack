@@ -13,6 +13,8 @@ class Everybeam(CMakePackage):
     homepage = "https://git.astron.nl/RD/EveryBeam"
     git      = "https://git.astron.nl/RD/EveryBeam.git"
 
+    version('0.1.1', commit='21a36d40edc479a9bb0dacb06760fc2a5888953b', submodules=True)
+    version('0.1.2', commit='f633da915ada8f67dd566bee2f7cc643ff2b9960', submodules=True)
     version('0.1.3', commit='0e1339782fa09d91f0cf37c3cf5f4a1aab62cd97', submodules=True)
     version('0.2.0', commit='74fe444e0052d1179126ba4742eec8392336019d', submodules=True)
 
