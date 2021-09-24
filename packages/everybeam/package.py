@@ -18,6 +18,6 @@ class Everybeam(CMakePackage):
 
     depends_on('hdf5+cxx@1.10.7')
     depends_on('casacore@3.3.0')
-    depends_on('boost+filesystem+system@1.77.0')
+    depends_on('boost+filesystem+system@1.76.0')
     depends_on('fftw@3.3.9')
     depends_on('cmake@3.18.4')
