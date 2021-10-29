@@ -16,7 +16,7 @@ class Aoflagger(CMakePackage):
     depends_on('casacore+python@3.3.0')
     depends_on('cfitsio@3.49')
     depends_on('fftw@3.3.9:')
-    depends_on('boost+python+numpy@1.76.0')
+    depends_on('boost+python+numpy@1.73.0:')
     depends_on('hdf5@1.10.7')
     depends_on('libxml2')
     depends_on('lapack')

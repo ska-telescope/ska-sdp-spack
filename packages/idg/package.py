@@ -14,7 +14,7 @@ class Idg(CMakePackage):
     homepage = "https://www.astron.nl/citt/IDG/"
     git      = "https://git.astron.nl/RD/idg"
 
-    version('master', commit='f3dce7b1b395d9d37a484fb7cf05079147f34b2d')
+    version('latest', branch='master')
 
     variant('cuda', default=False, description='Enable CUDA support')
     variant('python', default=False, description='Enable Python support')
@@ -33,7 +33,6 @@ class Idg(CMakePackage):
             self.define('BUILD_WITH_PYTHON', '+python' in spec),
             self.define('PERFORMANCE_REPORT', '+report' in spec),
         ]
-
         return args
 
     def setup_run_environment(self, env):
@@ -41,3 +40,6 @@ class Idg(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             env.prepend_path('PATH', join_path(self.prefix.bin, 'examples', 'python'))
+            import re
+            python_version = re.search(r'python@([\d].[\d])', str(spec)).group(1)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))

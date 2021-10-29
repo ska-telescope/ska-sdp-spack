@@ -17,9 +17,30 @@ class Everybeam(CMakePackage):
     version('0.1.2', commit='f633da915ada8f67dd566bee2f7cc643ff2b9960', submodules=True)
     version('0.1.3', commit='0e1339782fa09d91f0cf37c3cf5f4a1aab62cd97', submodules=True)
     version('0.2.0', commit='74fe444e0052d1179126ba4742eec8392336019d', submodules=True)
+    version('0.2.1', commit='c80fbffc3ba49ce0cc9a5d7ea38e2717b5b60d80', submodules=True) # Not an official release
+    version('0.2.2', commit='37b37d33017b21bde0dec9d8ca05594b65ee7695', submodules=True) # Not an official release
+    version('0.2.3', commit='4d6b8eac69ba26726fb50cff086c6d8d794283ce', submodules=True) # Not an official release
+    version('latest', branch='master', submodules=True)
+
+    variant('python', default=True, description='Enable Python support')
 
     depends_on('hdf5+cxx@1.10.7')
     depends_on('casacore@3.3.0')
-    depends_on('boost+filesystem+system@1.76.0')
+    depends_on('boost+filesystem+system@1.73.0:')
     depends_on('fftw@3.3.9')
     depends_on('cmake@3.18.4')
+    depends_on('python', when='+python')
+
+    def cmake_args(self):
+        spec = self.spec
+        args = [
+            self.define('BUILD_WITH_PYTHON', '+python' in spec),
+        ]
+        return args
+
+    def setup_run_environment(self, env):
+        spec = self.spec
+        if ('+python') in spec:
+            import re
+            python_version = re.search(r'python@([\d].[\d])', str(self.spec)).group(1)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
