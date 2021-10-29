@@ -52,18 +52,20 @@ In this case (on DAS-6), we have the default CentOS GCC/8.4.1 compiler, as well 
 You might also want to customize the modules that are being generated, by configuring `~/.spack/modules.yaml `:
 ```
 modules:
-  default:
-    tcl:
-      core_compilers:
-      - gcc@9.3.0
-      - gcc@8.4.1
-      hash_length: 0
-      blacklist:
-      - everything you don't
-      - want a modulefile for
-      - is added to this list
+  enable:
+  - tcl
+  tcl:
+    hash_length: 0
+    naming_scheme: ${COMPILERNAME}/${COMPILERVER}/${PACKAGE}/${VERSION}
+    all:
+      environment:
+        set:
+          '{name}_ROOT': '{prefix}'
+    openblas:
+      suffixes:
+        threads=pthreads: mt
+    blacklist:
+    - everything you don't
+    - want a modulefile for
+    - is added to this list
 ```
-This does three things:
-- Organize modulefiles in a hierarchy, based on the compiler version used.
-- Remove the ugly (albeit sometimes usefull) hash at the end of a modulefile name.
-- Prevent certain modulefiles from being generated. This can be quite a long list, e.g. exclude modules like `autoconf`, `m4`, and `tar`.
