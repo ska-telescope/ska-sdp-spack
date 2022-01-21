@@ -28,7 +28,9 @@ class Dp3(CMakePackage):
     depends_on('hdf5+cxx')
 
     def setup_build_environment(self, env):
-        if self.spec.satisfies('@latest'):
+        print(self.spec.version)
+        if (self.spec.satisfies('@latest') or
+           int(str(self.spec.version.joined)) >= 52):
             env.set("OPENBLAS_NUM_THREADS", "1")
 
     def setup_run_environment(self, env):
