@@ -13,11 +13,11 @@ class Aoflagger(CMakePackage):
     git      = "https://gitlab.com/aroffringa/aoflagger.git"
     version('3.1.0', commit='18b70b9836552d7a632c457ffd8822e57a3ebe7b', submodules=True)
 
-    depends_on('casacore+python@3.3.0')
-    depends_on('cfitsio@3.49')
-    depends_on('fftw@3.3.9:')
-    depends_on('boost+python+numpy@1.73.0:')
-    depends_on('hdf5@1.10.7')
+    depends_on('casacore')
+    depends_on('cfitsio')
+    depends_on('fftw')
+    depends_on('boost+python+numpy')
+    depends_on('hdf5')
     depends_on('libxml2')
     depends_on('lapack')
     depends_on('lua')

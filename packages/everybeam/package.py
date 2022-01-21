@@ -25,12 +25,12 @@ class Everybeam(CMakePackage):
 
     variant('python', default=True, description='Enable Python support')
 
-    depends_on('hdf5+cxx@1.10.7')
-    depends_on('casacore@3.3.0')
-    depends_on('boost+filesystem+system@1.73.0:')
-    depends_on('fftw@3.3.9')
-    depends_on('cmake@3.18.4')
+    depends_on('hdf5+cxx')
+    depends_on('casacore')
+    depends_on('boost+filesystem+system')
+    depends_on('fftw')
     depends_on('python', when='+python')
+    depends_on('cmake@3.18.6', when='@0.2.0')
 
     def cmake_args(self):
         spec = self.spec

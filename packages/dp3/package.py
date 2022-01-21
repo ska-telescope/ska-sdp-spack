@@ -20,12 +20,14 @@ class Dp3(CMakePackage):
     variant('python', default=True, description='Enable Python support')
 
     depends_on('aoflagger@3.1.0')
+    depends_on('everybeam@0.3.0', when='@5.2')
     depends_on('everybeam@0.1.3', when='@5.1')
     depends_on('everybeam@0.1.1', when='@5.0')
     depends_on('everybeam@latest', when='@latest')
-    depends_on('openblas threads=pthreads', when='@latest')
-    depends_on('boost@1.73.0')
-    depends_on('hdf5+cxx')
+    depends_on('openblas', when='@5.2')
+    depends_on('openblas', when='@latest')
+    depends_on('boost')
+    depends_on('hdf5')
 
     def setup_build_environment(self, env):
         print(self.spec.version)

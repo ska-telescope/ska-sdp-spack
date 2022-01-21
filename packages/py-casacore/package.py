@@ -13,11 +13,10 @@ class PyCasacore(PythonPackage):
 
     version('3.4.0', sha256='f654781292308de70c037981f5f7f5aeb02cf980a6f1367d1c294e7b4fca42ce')
 
-    depends_on('python@3.6:', type=('build', 'run'))
     depends_on('py-setuptools', type='build')
-    depends_on('casacore+python@3.3.0')
-    depends_on('cfitsio@3.49')
-    depends_on('boost+python@1.73.0')
+    depends_on('casacore+python')
+    depends_on('cfitsio')
+    depends_on('boost+python')
 
     def setup_build_environment(self, env):
         env.prepend_path('LD_LIBRARY_PATH', self.spec['boost'].prefix.lib)
