@@ -29,3 +29,8 @@ class Wsclean(CMakePackage):
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")
+
+    def setup_run_environment(self, env):
+        env.set("OPENBLAS_NUM_THREADS", "1")
+        env.prepend_path('PATH', self.prefix.bin)
+        spec = self.spec
