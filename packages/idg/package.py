@@ -14,7 +14,8 @@ class Idg(CMakePackage):
     homepage = "https://www.astron.nl/citt/IDG/"
     git      = "https://git.astron.nl/RD/idg"
 
-    version('latest', branch='master')
+    version('0.8.1', commit='a09f3c85094c592f9304fff4c31e920c7592c3c3', submodules=True)	
+    version('latest', branch='master', preferred=True)
 
     variant('cuda', default=False, description='Enable CUDA support')
     variant('python', default=False, description='Enable Python support')

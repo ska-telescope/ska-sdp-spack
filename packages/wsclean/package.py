@@ -15,7 +15,7 @@ class Wsclean(CMakePackage):
 
     version('3.0', commit='9ee587c576caad779dc127bb3f83858513679333', submodules=True)
     version('3.0.1', commit='1a4e5928689b23d3034549c2541829427d91fa8e', submodules=True)
-    version('latest', branch='master', submodules=True)
+    version('latest', branch='master', submodules=True, preferred=True)
 
     depends_on('hdf5+cxx')
     depends_on('fftw')
