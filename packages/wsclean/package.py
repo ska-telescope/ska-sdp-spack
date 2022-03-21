@@ -23,8 +23,9 @@ class Wsclean(CMakePackage):
     depends_on('everybeam@0.2.0', when='@3.0')
     depends_on('everybeam@0.3.0', when='@:3.0')
     depends_on('idg+cuda+python@latest')
-    depends_on('boost')
+    depends_on('boost+date_time+program_options')
     depends_on('openblas threads=pthreads')
+    depends_on('gsl')
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")
