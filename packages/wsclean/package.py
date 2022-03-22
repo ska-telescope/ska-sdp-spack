@@ -22,7 +22,7 @@ class Wsclean(CMakePackage):
     depends_on('casacore')
     depends_on('everybeam@0.2.0', when='@3.0')
     depends_on('everybeam@0.3.0', when='@:3.0')
-    depends_on('idg+cuda+python@latest')
+    depends_on('idg+cuda+python')
     depends_on('boost+date_time+program_options')
     depends_on('openblas threads=pthreads')
     depends_on('gsl')
