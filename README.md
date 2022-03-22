@@ -1,114 +1,39 @@
-# Getting started
+# Initial setup
+First, create a folder (change `<prefix>` with a name of your choice) and change directory it:
+
 ```
+mkdir <prefix>
 cd <prefix>
+```
+
+If `spack` is already installed, you can skip cloning it (**remember** to source its environment):
+```
 git clone https://github.com/spack/spack.git
+source ./spack/share/spack/setup-env.sh
+```
+The above command will clone Spack in the directory you have created beforehand (you can clone it in a different directory).
+
+Clone this repository and add it to `spack`:
+```
 git clone https://git.astron.nl/RD/schaap-spack.git
-source <prefix>/share/spack/setup-env.sh
 spack repo add ./schaap-spack
 ```
 
 After this initial setup, you could run `spack install wsclean`, as this will install `wsclean` and all its dependencies.
 
-Next, you could install `dp3` separately (wich also installs `aoflagger` as a dependency): `spack install dp3`.
+Next, you could install `dp3` separately (which also installs `aoflagger` as a dependency): `spack install dp3`.
 
-# Example deployment
-On the ASTRON side of the DAS-6 cluster, `schaap-spack` is used to deploy a set of commonly used software packages.
-
-This system uses Rocky Linux 8.5 and has gcc/9.4.0 pre-installed using Spack. To this end, we first install gcc/9.4.0 using the system compiler (gcc/8.5.0):
+# Additional notes
+- It is crucial to fix the Spack version to have identical software versions. Different Spack versions will have different preferred versions of packages, e.g Spack v0.17.1 will install `cuda@11.5.0`, while the latest Spack version may install `cuda@11.6.1`. For more information on how to deploy WSClean and IDG using Spack, see the [wiki](https://git.astron.nl/RD/schaap-spack/-/wikis/Reproducible-SW-environment-with-Spack).
+- The steps mentioned above will install the latest version (master branch) on WSClean and IDG. If you want to install the latest stable release. Check the ones available with `spack info <module_name>`, where `<module_name>`, can be `wsclean` or `idg`.
+For example:
 ```
-spack install gcc@9.4.0
-```
-Next, we add the newly installed compiler:
-```
-spack compiler find
-```
-And use this to 'seed' the gcc/9.4.0 stack:
-```
-spack install gcc@9.4.0 %gcc@9.4.0
+spack install wsclean@3.0.1 ^idg@0.8.1
 ```
 
-To initialize the Spack environment, run the following command:
+- On certain systems, some specific package versions (for instance for CUDA) may cause issues. A workaround is to use another (older) version, e.g.:
 ```
-spack env create gcc-940
+spack install cuda@10.0.130
+spack install idg ^cuda@10.0.130
+spack install wsclean ^cuda@10.0.130
 ```
-
-You should now have a `<prefix>/spack/var/spack/environments/gcc-940/spack.yaml` file.
-Fill it with the appropriate settings:
-```
-spack:
-  packages:
-    all:
-      target: [zen2]
-  specs:
-  - boost@1.73.0 +filesystem+system+python+numpy
-  - casacore@3.4.0 +python
-  - hdf5@1.10.7 +cxx+hl+threadsafe~mpi
-  - openblas threads=pthreads
-  - aoflagger@3.1.0
-  - cfitsio@3.49
-  - dp3@5.2
-  - wsclean@3.0.1
-  - dysco@1.2
-  - anaconda3@2021.05
-  - py-astropy@4.0.1.post1
-  - py-casacore@3.4.0
-  - py-cmake-format@0.6.10
-  - py-pandas@1.3.5
-  - py-pytest@6.2.5
-  - py-h5py@3.6.0~mpi
-  - ninja@1.10.2
-  - gcc@9.4.0
-  - git+tcltk
-  - py-pip
-  - py-ipython
-  - cmake@3.22.1
-  - podman
-  - py-scipy ^py-setuptools@59.4.0
-  - llvm@12.0.1~compiler-rt~gold~internal_unwind~libcxx~lld~lldb~omp_as_runtime~polly
-  - py-pycuda
-  - py-pynvml@11.4.1
-  - py-sphinx
-  - doxygen+graphviz
-  view: false
-  concretization: together
-  repos:
-  - <prefix>/spack-repos/schaap-spack
-  'compilers:':
-  - compiler:
-      spec: gcc@9.4.0
-      paths:
-        cc: <prefix>/spack/opt/spack/linux-rocky8-zen2/gcc-9.4.0/gcc-9.4.0-v7mri5dxxclgf4hq3x6nytsnnjoaaeuo/bin/gcc
-        cxx: <prefix>/spack/opt/spack/linux-rocky8-zen2/gcc-9.4.0/gcc-9.4.0-v7mri5dxxclgf4hq3x6nytsnnjoaaeuo/bin/g++
-        f77: <prefix>/spack/opt/spack/linux-rocky8-zen2/gcc-9.4.0/gcc-9.4.0-v7mri5dxxclgf4hq3x6nytsnnjoaaeuo/bin/gfortran
-        fc: <prefix>/spack/opt/spack/linux-rocky8-zen2/gcc-9.4.0/gcc-9.4.0-v7mri5dxxclgf4hq3x6nytsnnjoaaeuo/bin/gfortran
-      flags: {}
-      operating_system: rocky8
-      target: x86_64
-      modules: []
-      environment: {}
-      extra_rpaths: []
-  modules:
-    enable:
-    - tcl
-    tcl:
-      hash_length: 0
-      naming_scheme: ${COMPILERNAME}/${COMPILERVER}/${PACKAGE}/${VERSION}
-      all:
-        environment:
-          set:
-            '{name}_ROOT': '{prefix}'
-```
-
-Take note of a few specific settings:
-- your target may vary, e.g. `cascadelake` instead of `zen2`
-- `concretization: together` makes sure that you don't end up with duplicate packages
-- we use a custom naming scheme for the (TCL) environment modules
-- for consistency and convenience, every environment module has a `{name}_ROOT` variable
-
-The only thing left to do is to run:
-```
-spack env activate gcc-940
-spack install
-```
-
-Wait for (quite) a bit and enjoy your software!
