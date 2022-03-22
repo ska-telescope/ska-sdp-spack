@@ -36,6 +36,7 @@ class Dp3(CMakePackage):
             env.set("OPENBLAS_NUM_THREADS", "1")
 
     def setup_run_environment(self, env):
+        env.set("OPENBLAS_NUM_THREADS", "1")
         spec = self.spec
         if ('+python') in spec:
             import re
