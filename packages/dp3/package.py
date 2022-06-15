@@ -9,7 +9,7 @@ class Dp3(CMakePackage):
     """LOFAR preprocessing software, including averaging,
 	flagging, various kinds of calibration and more."""
 
-    homepage = "https://www.astron.nl/citt/DP3"
+    homepage = "https://dp3.readthedocs.io"
     git      = "https://git.astron.nl/RD/DP3.git"
 
     version('5.0', commit='50de337bed30525a4c0583ea977a58c976a7cc39', submodules=True)
