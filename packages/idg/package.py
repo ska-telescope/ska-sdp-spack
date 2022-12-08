@@ -12,7 +12,7 @@ class Idg(CMakePackage):
        process."""
 
     homepage = "https://idg.readthedocs.io"
-    git      = "https://git.astron.nl/RD/idg"
+    git      = "https://git.astron.nl/RD/idg.git"
 
     version('0.8.1', commit='a09f3c85094c592f9304fff4c31e920c7592c3c3', submodules=True)
     version('latest', branch='master', preferred=True)
