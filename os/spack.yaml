@@ -1,0 +1,19 @@
+spack:
+  specs:
+    - matrix:
+      - [wsclean@3.2^idg@1.1.0+cuda+python, dp3@5.4]
+      - ['%gcc@GCC_VERSION']
+  view: false
+  concretizer:
+    unify: true
+  modules:
+    default:
+      enable:
+      - tcl
+      tcl:
+        hash_length: 0
+        naming_scheme: ${COMPILERNAME}/${COMPILERVER}/${PACKAGE}/${VERSION}
+        all:
+          environment:
+            set:
+              '{name}_ROOT': '{prefix}'

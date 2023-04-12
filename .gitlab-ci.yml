@@ -1,0 +1,53 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+
+variables:
+  SPACK_VERSION: v0.18.1
+
+.build-docker:
+  image: docker:stable
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} --build-arg SPACK_VERSION=${SPACK_VERSION} -f os/${OS_NAME}.dockerfile .
+    - docker push ${CI_REGISTRY_IMAGE}/${OS_NAME}
+
+build-spackrocky:
+  variables:
+    OS_NAME: rockylinux
+  
+  extends:
+   - .build-docker
+
+build-spackubuntu:
+  variables:
+    OS_NAME: ubuntu
+  
+  extends:
+   - .build-docker
+
+
+.test-schaap:
+  image: ${CI_REGISTRY_IMAGE}/${OS_NAME} 
+  allow_failure: true
+  script:
+   - . /opt/spack/share/spack/setup-env.sh
+   - spack env activate lofar
+   - spack repo add .
+   - spack install
+
+test-rockylinux:
+  variables:
+    OS_NAME: rockylinux
+  
+  extends:
+   - .test-schaap
+
+test-ubuntu:
+  variables:
+    OS_NAME: ubuntu
+  
+  extends:
+   - .test-schaap
