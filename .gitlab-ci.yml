@@ -31,7 +31,6 @@ build-spackubuntu:
 
 .test-schaap:
   image: ${CI_REGISTRY_IMAGE}/${OS_NAME} 
-  allow_failure: true
   script:
    - . /opt/spack/share/spack/setup-env.sh
    - spack env activate lofar

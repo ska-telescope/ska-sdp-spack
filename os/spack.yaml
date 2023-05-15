@@ -1,7 +1,7 @@
 spack:
   specs:
     - matrix:
-      - [wsclean@3.2^idg@1.1.0+cuda+python, dp3@5.4]
+      - [wsclean@3.2^idg@1.1.0+cuda+python, dp3@5.4, rum@latest+python]
       - ['%gcc@GCC_VERSION']
   view: false
   concretizer:
