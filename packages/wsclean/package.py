@@ -24,11 +24,12 @@ class Wsclean(CMakePackage):
 
     depends_on('hdf5+cxx')
     depends_on('fftw')
-    depends_on('casacore')
+    depends_on('casacora+data')
     depends_on('everybeam@0.2.0', when='@3.0')
     depends_on('everybeam@0.3.0', when='@3.0.1')
     depends_on('everybeam@0.3.0', when='@3.1')
     depends_on('everybeam@0.4.0', when='@3.2:')
+    depends_on('everybeam@0.4.0', when='@latest')
     depends_on('idg@1.0.0', when='@3.1')
     depends_on('idg@1.1.0', when='@3.2:')
     depends_on('idg+cuda', when='+cuda')
@@ -36,6 +37,7 @@ class Wsclean(CMakePackage):
     depends_on('boost+date_time+program_options')
     depends_on('openblas threads=pthreads')
     depends_on('gsl')
+    depends_on('git')
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")

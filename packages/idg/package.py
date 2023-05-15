@@ -27,6 +27,7 @@ class Idg(CMakePackage):
     depends_on('openblas')
     depends_on('cuda', when='+cuda')
     depends_on('python', when='+python')
+    depends_on('git')
 
     def cmake_args(self):
         spec = self.spec

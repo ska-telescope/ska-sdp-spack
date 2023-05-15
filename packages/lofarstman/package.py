@@ -13,4 +13,4 @@ class Lofarstman(CMakePackage):
 
     version('latest', branch='master')
 
-    depends_on('casacore')
+    depends_on('casacore+data')
