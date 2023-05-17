@@ -9,7 +9,7 @@ from spack.package import *
 from spack.pkg.builtin.boost import Boost
 
 
-class CasacoreData(CMakePackage):
+class Casacore(CMakePackage):
     """A suite of c++ libraries for radio astronomy data processing."""
 
     homepage = "https://github.com/casacore/casacore"

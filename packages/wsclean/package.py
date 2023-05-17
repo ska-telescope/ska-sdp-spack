@@ -24,7 +24,7 @@ class Wsclean(CMakePackage):
 
     depends_on('hdf5+cxx')
     depends_on('fftw')
-    depends_on('casacora+data')
+    depends_on('casacore+data')
     depends_on('everybeam@0.2.0', when='@3.0')
     depends_on('everybeam@0.3.0', when='@3.0.1')
     depends_on('everybeam@0.3.0', when='@3.1')

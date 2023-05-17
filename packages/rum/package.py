@@ -11,7 +11,7 @@ class Rum(CMakePackage):
     homepage = "https://gitlab.com/ska-telescope/sdp/ska-sdp-rum"
     git      = "https://gitlab.com/ska-telescope/sdp/ska-sdp-rum"
 
-    version('latest', branch='cpu-stat', preferred=True)
+    version('latest', branch='main', preferred=True)
    
     variant('python', default=False, description='Enable Python bindings support')
 
