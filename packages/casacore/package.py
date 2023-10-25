@@ -6,16 +6,20 @@
 import os
 
 from spack.package import *
-from spack.pkg.builtin.boost import Boost
 
 
 class Casacore(CMakePackage):
     """A suite of c++ libraries for radio astronomy data processing."""
 
     homepage = "https://github.com/casacore/casacore"
-    url = "https://github.com/casacore/casacore/archive/v2.4.1.tar.gz"
+    url = "https://github.com/casacore/casacore/archive/refs/tags/v3.5.0.tar.gz"
 
-    version("3.4.0", sha256="31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1")
+    # TODO: support multiple spack versions (maintainers option)
+    # spack version > 18.1 changed the maintainers syntax
+    # maintainers("mpokorny")
+
+    version("3.5.0", sha256="63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91")
+    version("3.4.0", sha256="31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1", preferred=True)
     version("3.3.0", sha256="3a714644b908ef6e81489b792cc9b80f6d8267a275e15d38a42a6a5137d39d3d")
     version("3.2.0", sha256="ae5d3786cb6dfdd7ebc5eecc0c724ff02bbf6929720bc23be43a027978e79a5f")
     version("3.1.2", sha256="ac94f4246412eb45d503f1019cabe2bb04e3861e1f3254b832d9b1164ea5f281")
@@ -26,15 +30,17 @@ class Casacore(CMakePackage):
 
     depends_on("cmake@3.7.1:", type="build")
 
-    variant("openmp", default=False, description="Build OpenMP support")
-    variant("shared", default=True, description="Build shared libraries")
-    variant("readline", default=True, description="Build readline support")
-    # see note below about the reason for disabling the "sofa" variant
-    # variant('sofa', default=False, description='Build SOFA support')
     variant("adios2", default=False, description="Build ADIOS2 support")
+    variant("dysco", default=True, when="@3.5.0:", description="Build Dysco storage manager")
     variant("fftpack", default=False, description="Build FFTPack")
     variant("hdf5", default=False, description="Build HDF5 support")
+    variant("mpi", default=False, description="Use MPI for parallel I/O")
+    variant("openmp", default=False, description="Build OpenMP support")
     variant("python", default=False, description="Build python support")
+    variant("readline", default=True, description="Build readline support")
+    variant("shared", default=True, description="Build shared libraries")
+    variant("tablelocking", default=True, description="Enable table locking")
+    variant("threads", default=True, description="Use mutex thread synchronization")
     variant("data", default=False, description="Download WSRT measures archive from the ASTRON FTP server")
 
     # Force dependency on readline in v3.2 and earlier. Although the
@@ -52,34 +58,35 @@ class Casacore(CMakePackage):
     depends_on("wcslib@4.20:+cfitsio")
     depends_on("fftw@3.0.0: precision=float,double", when="@3.4.0:")
     depends_on("fftw@3.0.0: precision=float,double", when="~fftpack")
-    # SOFA dependency suffers the same problem in CMakeLists.txt as readline;
-    # force a dependency when building unit tests
     depends_on("sofa-c", type="test")
     depends_on("hdf5", when="+hdf5")
     depends_on("adios2+mpi", when="+adios2")
-    depends_on("mpi", when="+adios2")
+    depends_on("mpi", when="+mpi")
     depends_on("python@2.6:", when="+python")
-    depends_on("boost+python", when="+python")
+    depends_on("boost +python", when="+python")
+    depends_on("boost +system +filesystem", when="+dysco")
+    depends_on("py-numpy", when="+python")
+    depends_on("gsl", when="+dysco")
     depends_on("tar", when="+data")
 
-    # TODO: replace this with an explicit list of components of Boost,
-    # for instance depends_on('boost +filesystem')
-    # See https://github.com/spack/spack/pull/22303 for reference
-    depends_on(Boost.with_default_variants, when="+python")
-    depends_on("py-numpy", when="+python")
+    conflicts("~mpi", when="+adios2")
+    conflicts("+tablelocking", when="+mpi")
+    conflicts("~threads", when="+openmp")
 
     def cmake_args(self):
         args = []
         spec = self.spec
 
+        args.append(self.define_from_variant("BUILD_DYSCO", "dysco"))
+        args.append(self.define_from_variant("ENABLE_TABLELOCKING", "tablelocking"))
         args.append(self.define_from_variant("ENABLE_SHARED", "shared"))
+        args.append(self.define_from_variant("USE_THREADS", "threads"))
         args.append(self.define_from_variant("USE_OPENMP", "openmp"))
         args.append(self.define_from_variant("USE_READLINE", "readline"))
         args.append(self.define_from_variant("USE_HDF5", "hdf5"))
         args.append(self.define_from_variant("USE_ADIOS2", "adios2"))
-        args.append(self.define_from_variant("USE_MPI", "adios2"))
-        if spec.satisfies("+adios2"):
-            args.append(self.define("ENABLE_TABLELOCKING", False))
+        args.append(self.define_from_variant("USE_MPI", "mpi"))
+        args.append("-DPORTABLE=ON")  # let Spack determine arch build flags
 
         # fftw3 is required by casacore starting with v3.4.0, but the
         # old fftpack is still available. For v3.4.0 and later, we
@@ -89,7 +96,6 @@ class Casacore(CMakePackage):
         if spec.satisfies("@3.4.0:"):
             if spec.satisfies("+fftpack"):
                 args.append("-DBUILD_FFTPACK_DEPRECATED=YES")
-            args.append(self.define("USE_FFTW3", True))
         else:
             args.append(self.define("USE_FFTW3", spec.satisfies("~fftpack")))
 
@@ -108,9 +114,8 @@ class Casacore(CMakePackage):
         # Download WSRT measures archive from the ASTRON FTP server and copy it to the {self.prefix}/share/casacore/data/ path
         spec = self.spec
         if spec.satisfies("+data"):
-         os.system(f"wget -nv -O {self.prefix}/WSRT_Measures.ztar ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar")
-         os.system(f"mkdir -p {self.prefix}/share/casacore/data/")
-         os.system(f"tar xfz {self.prefix}/WSRT_Measures.ztar -C {self.prefix}/share/casacore/data/")
+            os.system(f"wget -nv -O {self.prefix}/WSRT_Measures.ztar ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar")
+            os.system(f"mkdir -p {self.prefix}/share/casacore/data/")
+            os.system(f"tar xfz {self.prefix}/WSRT_Measures.ztar -C {self.prefix}/share/casacore/data/")
         # Rely on CMake ability to find hdf5, available since CMake 3.7.X
         os.remove("cmake/FindHDF5.cmake")
-
