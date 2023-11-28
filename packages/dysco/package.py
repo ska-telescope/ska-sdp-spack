@@ -14,12 +14,22 @@ class Dysco(CMakePackage):
     version('1.2', commit='v1.2', submodules=True)
     version('latest', branch='master', submodules=True, preferred=True)
 
-    depends_on('casacore')
     depends_on('boost+date_time+program_options')
-    depends_on('openblas threads=pthreads')
-    depends_on('gsl')
+    depends_on('casacore')
+    variant('debug-information', default=False, description='Enable debug information')
     depends_on('git')
+    depends_on('gsl')
+    depends_on('openblas threads=pthreads')
     depends_on('python')
+
+    def cmake_args(self):
+        spec = self.spec
+        args = []
+        if '+debug-information' in spec:
+            args = [
+                self.define('CMAKE_CXX_FLAGS', "-g")
+            ]
+        return args
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")

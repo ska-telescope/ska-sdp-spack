@@ -34,6 +34,16 @@ class Dp3(CMakePackage):
     depends_on('hdf5')
     depends_on('gsl')
     depends_on('git')
+    variant('debug-information', default=False, description='Enable debug information')
+
+    def cmake_args(self):
+        spec = self.spec
+        args = []
+        if '+debug-information' in spec:
+            args = [
+                self.define('CMAKE_CXX_FLAGS', "-g")
+            ]
+        return args
 
     def setup_build_environment(self, env):
         print(self.spec.version)

@@ -23,6 +23,7 @@ class Wsclean(CMakePackage):
 
     variant('python', default=False, description='Enable Python support')
     variant('cuda', default=False, description='Enable CUDA support')
+    variant('debug-information', default=False, description='Enable debug information')
 
     depends_on('hdf5+cxx')
     depends_on('fftw')
@@ -44,6 +45,16 @@ class Wsclean(CMakePackage):
     depends_on('openblas threads=pthreads')
     depends_on('gsl')
     depends_on('git')
+
+    def cmake_args(self):
+        spec = self.spec
+        args = []
+        if '+debug-information' in spec:
+            args = [
+                self.define('CMAKE_CXX_FLAGS', "-g"),
+                self.define('RADLER_CXX_FLAGS', "-g")
+            ]
+        return args
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")

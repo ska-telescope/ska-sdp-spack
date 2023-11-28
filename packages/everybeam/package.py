@@ -25,6 +25,7 @@ class Everybeam(CMakePackage):
     version('0.5.3', commit='v0.5.3', submodules=True) 
     version('latest', branch='master', submodules=True)
 
+    variant('debug-information', default=False, description='Enable debug information')
     variant('python', default=True, description='Enable Python support')
 
     depends_on('hdf5+cxx')
@@ -42,6 +43,8 @@ class Everybeam(CMakePackage):
         args = [
             self.define('BUILD_WITH_PYTHON', '+python' in spec),
         ]
+        if '+debug-information' in spec:
+            args.append(self.define('CMAKE_CXX_FLAGS', "-g"))
         return args
 
     def setup_run_environment(self, env):
