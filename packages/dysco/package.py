@@ -11,7 +11,7 @@ class Dysco(CMakePackage):
     homepage = "https://github.com/aroffringa/dysco/wiki"
     git      = "https://github.com/aroffringa/dysco.git"
 
-    version('1.2', commit='425895c97806125995e74de11d075c8760022fd6', submodules=True)
+    version('1.2', commit='v1.2', submodules=True)
     version('latest', branch='master', submodules=True, preferred=True)
 
     depends_on('casacore')

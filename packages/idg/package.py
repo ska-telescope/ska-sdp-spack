@@ -14,9 +14,10 @@ class Idg(CMakePackage):
     homepage = "https://idg.readthedocs.io"
     git      = "https://git.astron.nl/RD/idg.git"
 
-    version('0.8.1', commit='a09f3c85094c592f9304fff4c31e920c7592c3c3', submodules=True)
-    version('1.0.0', commit='3322756fb8b6e3bb1fe5293f3e07e40623ff8486', submodules=True)
-    version('1.1.0', commit='948960a1bdb664a6af33023b3ba6a869aab6d9f4', submodules=True)
+    version('0.8.1', commit='0.8.1', submodules=True)
+    version('1.0.0', commit='1.0.0', submodules=True)
+    version('1.1.0', commit='1.1.0', submodules=True)
+    version('1.2.0', commit='1.2.0', submodules=True)
     version('latest', branch='master', preferred=True)
 
     variant('cuda', default=False, description='Enable CUDA support')

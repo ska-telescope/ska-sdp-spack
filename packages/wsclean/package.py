@@ -13,10 +13,12 @@ class Wsclean(CMakePackage):
     homepage = "https://wsclean.readthedocs.io/"
     git      = "https://gitlab.com/aroffringa/wsclean.git"
 
-    version('3.0', commit='9ee587c576caad779dc127bb3f83858513679333', submodules=True)
-    version('3.0.1', commit='1a4e5928689b23d3034549c2541829427d91fa8e', submodules=True)
-    version('3.1', commit='ea18d0139e35050d58b2758cf5015539f3e2d870', submodules=True)
-    version('3.2', commit='a499367a07e183b1e6936af6731eccc0baeec2d7', submodules=True)
+    version('3.0', commit='v3.0', submodules=True)
+    version('3.0.1', commit='v3.0.1', submodules=True)
+    version('3.1', commit='v3.1', submodules=True)
+    version('3.2', commit='v3.2', submodules=True)
+    version('3.3', commit='v3.3', submodules=True)
+    version('3.4', commit='v3.4', submodules=True)
     version('latest', branch='master', submodules=True, preferred=True)
 
     variant('python', default=False, description='Enable Python support')
@@ -28,10 +30,14 @@ class Wsclean(CMakePackage):
     depends_on('everybeam@0.2.0', when='@3.0')
     depends_on('everybeam@0.3.0', when='@3.0.1')
     depends_on('everybeam@0.3.0', when='@3.1')
-    depends_on('everybeam@0.4.0', when='@3.2:')
+    depends_on('everybeam@0.4.0', when='@3.2')
+    depends_on('everybeam@0.5.1', when='@3.3')
+    depends_on('everybeam@0.5.3', when='@3.4:')
     depends_on('everybeam@0.4.0', when='@latest')
     depends_on('idg@1.0.0', when='@3.1')
-    depends_on('idg@1.1.0', when='@3.2:')
+    depends_on('idg@1.1.0', when='@3.2')
+    depends_on('idg@1.1.0', when='@3.3')
+    depends_on('idg@1.2.0', when='@3.4:')
     depends_on('idg+cuda', when='+cuda')
     depends_on('idg+python', when='+python')
     depends_on('boost+date_time+program_options')

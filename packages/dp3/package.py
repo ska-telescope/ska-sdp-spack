@@ -12,19 +12,19 @@ class Dp3(CMakePackage):
     homepage = "https://dp3.readthedocs.io"
     git      = "https://git.astron.nl/RD/DP3.git"
 
-    version('5.0', commit='50de337bed30525a4c0583ea977a58c976a7cc39', submodules=True)
-    version('5.1', commit='f2a8afd677f2bff3937bb1c350d1b0ad340bb514', submodules=True)
-    version('5.2', commit='b2e0f5e2dfb88312540bd99258e84e761c08e7ea', submodules=True)
-    version('5.3', commit='49b73a393e5990a6f83bbeb17ed23515dca5a459', submodules=True)
-    version('5.4', commit='e52127d5de2ea12fb066eb4544947a4a61a2b0e0', submodules=True) #Unofficial release
+    version('5.0', commit='v5.0', submodules=True)
+    version('5.1', commit='v5.1', submodules=True)
+    version('5.2', commit='v5.2', submodules=True)
+    version('5.3', commit='v5.3', submodules=True)
+    version('6.0', commit='v6.0', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('python', default=True, description='Enable Python support')
 
     depends_on('aoflagger@3.1.0', when='@:5.2')
     depends_on('aoflagger@3.2.0', when='@5.3:')
-    depends_on('everybeam@0.4.0', when='@latest')
-    depends_on('everybeam@0.4.0', when='@5.4')
+    depends_on('everybeam@0.5.3', when='@latest')
+    depends_on('everybeam@0.5.3', when='@6.0:')
     depends_on('everybeam@0.3.0', when='@5.3')
     depends_on('everybeam@0.3.0', when='@5.2')
     depends_on('everybeam@0.1.3', when='@5.1')

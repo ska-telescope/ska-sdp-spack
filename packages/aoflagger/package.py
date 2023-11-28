@@ -11,8 +11,12 @@ class Aoflagger(CMakePackage):
 
     homepage = "https://sourceforge.net/projects/aoflagger/"
     git      = "https://gitlab.com/aroffringa/aoflagger.git"
-    version('3.1.0', commit='18b70b9836552d7a632c457ffd8822e57a3ebe7b', submodules=True)
-    version('3.2.0', commit='34f04470b831a217a94d89a0e65dbd7649a3852b', submodules=True)
+    version('3.1.0', commit='v3.1.0', submodules=True)
+    version('3.2.0', commit='v3.2.0', submodules=True)
+    version('3.3.0', commit='v3.3.0', submodules=True)
+    version('3.4.0', commit='v3.4.0', submodules=True)
+    version('latest', branch='master', submodules=True)
+    
 
     variant('gui', default=False, description='Build rfigui and aoqplot tools')
 
