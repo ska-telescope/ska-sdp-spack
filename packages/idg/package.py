@@ -49,5 +49,5 @@ class Idg(CMakePackage):
         if ('+python') in spec:
             env.prepend_path('PATH', join_path(self.prefix.bin, 'examples', 'python'))
             import re
-            python_version = re.search(r'python@([\d].[\d])', str(spec)).group(1)
+            python_version = re.search(r'python@=([\d.]+)', str(self.spec)).group(1)
             env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
