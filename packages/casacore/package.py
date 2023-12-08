@@ -18,8 +18,8 @@ class Casacore(CMakePackage):
     # spack version > 18.1 changed the maintainers syntax
     # maintainers("mpokorny")
 
-    version("3.5.0", sha256="63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91")
-    version("3.4.0", sha256="31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1", preferred=True)
+    version("3.5.0", sha256="63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91", preferred=True)
+    version("3.4.0", sha256="31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1")
     version("3.3.0", sha256="3a714644b908ef6e81489b792cc9b80f6d8267a275e15d38a42a6a5137d39d3d")
     version("3.2.0", sha256="ae5d3786cb6dfdd7ebc5eecc0c724ff02bbf6929720bc23be43a027978e79a5f")
     version("3.1.2", sha256="ac94f4246412eb45d503f1019cabe2bb04e3861e1f3254b832d9b1164ea5f281")
