@@ -12,7 +12,7 @@ class Rum(CMakePackage):
     git      = "https://gitlab.com/ska-telescope/sdp/ska-sdp-rum"
 
     version('latest', branch='main', preferred=True)
-   
+
     variant('python', default=False, description='Enable Python bindings support')
 
     depends_on('python', when='+python')
@@ -29,6 +29,5 @@ class Rum(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             import re
-            python_version = re.search(r'python@=([\d.]+)', str(self.spec)).group(1)
+            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
             env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python"))
-

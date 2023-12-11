@@ -28,7 +28,7 @@ class Libpowersensor(CMakePackage):
         spec = self.spec
         args = [
             self.define('BUILD_ARDUINO_POWERSENSOR', '+arduino' in spec),
-            self.define('BUILD_LIKWID_POWERSENSOR', '+likwid' in spec), 
+            self.define('BUILD_LIKWID_POWERSENSOR', '+likwid' in spec),
             self.define('BUILD_NVML_POWERSENSOR', '+nvml' in spec),
             self.define('BUILD_PYTHON_POWERSENSOR', '+python' in spec),
             self.define('BUILD_ROCM_POWERSENSOR', '+rocm' in spec),
@@ -39,6 +39,5 @@ class Libpowersensor(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             import re
-            python_version = re.search(r'python@=([\d.]+)', str(self.spec)).group(1)
+            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
             env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python"))
-

@@ -21,8 +21,8 @@ class Everybeam(CMakePackage):
     version('0.3.1', commit='v0.3.1', submodules=True)
     version('0.4.0', commit='v0.4.0', submodules=True)
     version('0.5.1', commit='v0.5.1', submodules=True)
-    version('0.5.2', commit='v0.5.2', submodules=True) 
-    version('0.5.3', commit='v0.5.3', submodules=True) 
+    version('0.5.2', commit='v0.5.2', submodules=True)
+    version('0.5.3', commit='v0.5.3', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('debug-information', default=False, description='Enable debug information')
@@ -33,7 +33,6 @@ class Everybeam(CMakePackage):
     depends_on('boost+filesystem+system')
     depends_on('fftw')
     depends_on('gsl', when='@0.4.0:')
-    depends_on('gsl', when='@0.5.0:')
     depends_on('python', when='+python')
     depends_on('cmake@3.18.6', when='@0.2.0')
     depends_on('git')
@@ -51,5 +50,5 @@ class Everybeam(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             import re
-            python_version = re.search(r'python@=([\d.]+)', str(self.spec)).group(1)
+            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
             env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))

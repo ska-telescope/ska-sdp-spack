@@ -16,6 +16,9 @@ class Dp3(CMakePackage):
     version('5.1', commit='v5.1', submodules=True)
     version('5.2', commit='v5.2', submodules=True)
     version('5.3', commit='v5.3', submodules=True)
+    # 5.4 is not an actual DP3 version, however, WSClean uses this version
+    # in its CI jobs on DAS-6.
+    version('5.4', commit='e52127d5de2ea12fb066eb4544947a4a61a2b0e0', submodules=True)
     version('6.0', commit='v6.0', submodules=True)
     version('latest', branch='master', submodules=True)
 
@@ -27,6 +30,7 @@ class Dp3(CMakePackage):
     depends_on('aoflagger@3.1.0', when='@:5.2')
     depends_on('everybeam@0.5.3', when='@latest')
     depends_on('everybeam@0.5.3', when='@6.0:')
+    depends_on('everybeam@0.4.0', when='@5.4')
     depends_on('everybeam@0.3.0', when='@5.3')
     depends_on('everybeam@0.3.0', when='@5.2')
     depends_on('everybeam@0.1.3', when='@5.1')
@@ -36,6 +40,7 @@ class Dp3(CMakePackage):
     depends_on('hdf5')
     depends_on('gsl')
     depends_on('git')
+    depends_on('python', when='+python')
     variant('debug-information', default=False, description='Enable debug information')
 
     def cmake_args(self):
@@ -58,5 +63,5 @@ class Dp3(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             import re
-            python_version = re.search(r'python@=([\d.]+)', str(self.spec)).group(1)
+            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
             env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
