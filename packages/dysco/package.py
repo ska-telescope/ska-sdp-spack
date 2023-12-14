@@ -36,4 +36,5 @@ class Dysco(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")
+        env.prepend_path("LD_LIBRARY_PATH", join_path(self.prefix, "lib"))
         spec = self.spec
