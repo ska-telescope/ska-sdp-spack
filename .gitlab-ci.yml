@@ -2,51 +2,49 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - test
 
-variables:
-  SPACK_VERSION: v0.18.1
-
 .build-docker:
   image: docker:stable
   stage: build
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} --build-arg SPACK_VERSION=${SPACK_VERSION} -f os/${OS_NAME}.dockerfile .
+    - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} -f os/${OS_NAME}.dockerfile .
     - docker push ${CI_REGISTRY_IMAGE}/${OS_NAME}
 
 build-spackrocky:
   variables:
     OS_NAME: rockylinux
-  
-  extends:
-   - .build-docker
+  extends: .build-docker
 
 build-spackubuntu:
   variables:
     OS_NAME: ubuntu
-  
-  extends:
-   - .build-docker
+  extends: .build-docker
 
 
 .test-schaap:
-  image: ${CI_REGISTRY_IMAGE}/${OS_NAME} 
+  image: ${CI_REGISTRY_IMAGE}/${OS_NAME}
   script:
-   - . /opt/spack/share/spack/setup-env.sh
-   - spack env activate lofar
-   - spack repo add .
-   - spack install
+    - . /opt/spack/share/spack/setup-env.sh
+    - spack find -v -l
+    - spack repo add .
+    - spack env create schaap
+    - spack env activate schaap
+    - GCC_VERSION=$(gcc --version | head -n 1)
+    - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
+    - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
+    - cp os/spack.yaml /opt/spack/var/spack/environments/schaap/spack.yaml
+    - spack concretize
+    - spack install
 
 test-rockylinux:
+  needs: ["build-spackrocky"]
   variables:
     OS_NAME: rockylinux
-  
-  extends:
-   - .test-schaap
+  extends: .test-schaap
 
 test-ubuntu:
+  needs: ["build-spackubuntu"]
   variables:
     OS_NAME: ubuntu
-  
-  extends:
-   - .test-schaap
+  extends: .test-schaap

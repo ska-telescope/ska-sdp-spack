@@ -26,7 +26,6 @@ class Dp3(CMakePackage):
 
     depends_on('aoflagger@3.4.0', when='@latest')
     depends_on('aoflagger@3.4.0', when='@6.0:')
-    depends_on('aoflagger@3.2.0', when='@5.4')
     depends_on('aoflagger@3.2.0', when='@5.3')
     depends_on('aoflagger@3.1.0', when='@:5.2')
     depends_on('everybeam@0.5.3', when='@latest')

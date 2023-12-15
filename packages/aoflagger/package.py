@@ -16,7 +16,7 @@ class Aoflagger(CMakePackage):
     version('3.3.0', commit='v3.3.0', submodules=True)
     version('3.4.0', commit='v3.4.0', submodules=True)
     version('latest', branch='master', submodules=True)
-    
+
 
     variant('debug-information', default=False, description='Enable debug information')
     variant('gui', default=False, description='Build rfigui and aoqplot tools')
@@ -25,7 +25,7 @@ class Aoflagger(CMakePackage):
     depends_on('cfitsio')
     depends_on('fftw')
     depends_on('boost+python+numpy')
-    depends_on('hdf5@:1.10.7')
+    depends_on('hdf5')
     depends_on('libxml2')
     depends_on('lapack')
     depends_on('lua')
