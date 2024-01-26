@@ -74,6 +74,8 @@ class Casacore(CMakePackage):
     conflicts("+tablelocking", when="+mpi")
     conflicts("~threads", when="+openmp")
 
+    patch("gcc13.patch", when="%gcc@13:")
+
     def cmake_args(self):
         args = []
         spec = self.spec
