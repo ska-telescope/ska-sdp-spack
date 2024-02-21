@@ -25,7 +25,7 @@ class Wsclean(CMakePackage):
     variant('cuda', default=False, description='Enable CUDA support')
     variant('debug-information', default=False, description='Enable debug information')
 
-    depends_on('hdf5+cxx')
+    depends_on('hdf5+cxx+threadsafe')
     depends_on('fftw')
     depends_on('casacore+data')
     depends_on('everybeam@0.2.0', when='@3.0')
