@@ -17,6 +17,9 @@ class Dal2(CMakePackage):
 
     depends_on('hdf5')
     depends_on('swig')
+    depends_on('python', when='+python')
+
+    patch("cxx11.patch", when="@v3.3.2")
 
     def cmake_args(self):
         spec = self.spec

@@ -1,0 +1,11 @@
+--- spack-src/dal/CMakeLists.txt
++++ spack-src/dal/CMakeLists.txt
+@@ -103,6 +103,7 @@
+
+ # Build version.
+ set_target_properties(lofardal PROPERTIES VERSION ${DAL_VERSION_STRING})
++target_compile_options(lofardal PUBLIC "-std=c++11")
+
+ # Our API version is major.minor.
+ # To link to .major.minor, pass '-Wl,-soname,liblofardal.so.M.m' to GCC, or '-soname liblofardal.so.M.m' to its linker,
+
