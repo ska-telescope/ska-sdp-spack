@@ -14,6 +14,9 @@ RUN git clone --depth=1 --branch=${SPACK_VERSION} https://github.com/spack/spack
 LABEL SPACK_VERSION=${SPACK_VERSION}
 LABEL OS_VERSION="rockylinux:8"
 
+# AST-1508: Prevent parallel builds of cfitsio, since they sometimes fail.
+RUN sed -i "16i\    parallel = False" /opt/spack/var/spack/repos/builtin/packages/cfitsio/package.py
+
 # Pre-install some packages so the test jobs become shorter.
 RUN . /opt/spack/share/spack/setup-env.sh && \
     spack compiler find && \
