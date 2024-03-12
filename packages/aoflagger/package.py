@@ -24,7 +24,7 @@ class Aoflagger(CMakePackage):
     depends_on('casacore+data')
     depends_on('cfitsio')
     depends_on('fftw')
-    depends_on('boost+python+numpy')
+    depends_on('boost+python+numpy+date_time')
     depends_on('hdf5')
     depends_on('libxml2')
     depends_on('lapack')
