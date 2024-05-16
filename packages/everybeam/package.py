@@ -25,6 +25,7 @@ class Everybeam(CMakePackage):
     version('0.5.3', commit='v0.5.3', submodules=True)
     version('0.5.4', commit='v0.5.4', submodules=True)
     version('0.5.5', commit='v0.5.5', submodules=True)
+    version('0.6.0', commit='v0.6.0', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('debug-information', default=False, description='Enable debug information')
