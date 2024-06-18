@@ -20,6 +20,7 @@ class Dp3(CMakePackage):
     # in its CI jobs on DAS-6.
     version('5.4', commit='e52127d5de2ea12fb066eb4544947a4a61a2b0e0', submodules=True)
     version('6.0', commit='v6.0', submodules=True)
+    version('6.1', commit='v6.1', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('python', default=True, description='Enable Python support')
