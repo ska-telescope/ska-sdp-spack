@@ -35,7 +35,7 @@ class Wsclean(CMakePackage):
     depends_on('everybeam@0.5.1', when='@3.3')
     depends_on('everybeam@0.5.3', when='@3.4:')
     depends_on('everybeam@0.6.0', when='@latest')
-    depends_on('dp3@6.1', when='@latest')
+    depends_on('dp3@6.1:,latest', when='@latest')
     depends_on('idg@1.0.0', when='@3.1')
     depends_on('idg@1.1.0', when='@3.2')
     depends_on('idg@1.1.0', when='@3.3')
