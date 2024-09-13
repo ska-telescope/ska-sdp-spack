@@ -27,6 +27,9 @@ versioning:
   stage: prepare
   needs: ["versioning"]
   image: docker:stable
+  variables:
+    # Makes 'docker manifest' work:
+    DOCKER_CLI_EXPERIMENTAL: enabled
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
