@@ -1,17 +1,21 @@
-stages:          # List of stages for jobs, and their order of execution
+stages:
   - build
   - test
+
+default:
+  tags:
+    - ska-default
 
 .build-docker:
   image: docker:stable
   stage: build
-  tags:
-    - dind
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
     - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} -f os/${OS_NAME}.dockerfile .
     - docker push ${CI_REGISTRY_IMAGE}/${OS_NAME}
+  services:
+    - docker:stable-dind
 
 build-spackrocky:
   variables:
@@ -24,18 +28,18 @@ build-spackubuntu:
   extends: .build-docker
 
 
-.test-schaap:
+.test:
   image: ${CI_REGISTRY_IMAGE}/${OS_NAME}
   script:
     - . /opt/spack/share/spack/setup-env.sh
     - spack find -v -l
     - spack repo add .
-    - spack env create schaap
-    - spack env activate schaap
+    - spack env create sdp
+    - spack env activate sdp
     - GCC_VERSION=$(gcc --version | head -n 1)
     - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
     - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
-    - cp os/spack.yaml /opt/spack/var/spack/environments/schaap/spack.yaml
+    - cp os/spack.yaml /opt/spack/var/spack/environments/sdp/spack.yaml
     - spack concretize
     - spack install
 
@@ -43,10 +47,10 @@ test-rockylinux:
   needs: ["build-spackrocky"]
   variables:
     OS_NAME: rockylinux
-  extends: .test-schaap
+  extends: .test
 
 test-ubuntu:
   needs: ["build-spackubuntu"]
   variables:
     OS_NAME: ubuntu
-  extends: .test-schaap
+  extends: .test
