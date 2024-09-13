@@ -71,11 +71,11 @@ prepare-spackubuntu:
     - spack install
 
 test-rockylinux:
-  needs: ["prepare-spackrocky"]
+  needs: ["versioning", "prepare-spackrocky"]
   image: ${IMAGE_ROCKYLINUX}
   extends: .test
 
 test-ubuntu:
-  needs: ["prepare-spackubuntu"]
+  needs: ["versioning", "prepare-spackubuntu"]
   image: ${IMAGE_UBUNTU}
   extends: .test
