@@ -1,35 +1,62 @@
 stages:
-  - build
+  - versioning
+  - prepare
   - test
 
 default:
   tags:
     - ska-default
 
-.build-docker:
+# The 'IMAGE' variables allow reusing docker images between different pipelines.
+# See https://confluence.skatelescope.org/display/SE/Caching+Docker+images+using+GitLab+CI+registry
+versioning:
+  stage: versioning
+  image: bitnami/git
+  script:
+    # Unshallowing ensures that 'git log' works
+    - git fetch --unshallow
+    - echo IMAGE_ROCKYLINUX=${CI_REGISTRY_IMAGE}/rockylinux:$(git log -n 1 --pretty=format:%H -- os/rockylinux.dockerfile) > versions.env
+    - echo IMAGE_UBUNTU=${CI_REGISTRY_IMAGE}/ubuntu:$(git log -n 1 --pretty=format:%H -- os/ubuntu.dockerfile) >> versions.env
+    - cat versions.env
+  artifacts:
+    reports:
+      dotenv: versions.env
+
+
+.prepare:
+  stage: prepare
+  needs: ["versioning"]
   image: docker:stable
-  stage: build
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
-    - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} -f os/${OS_NAME}.dockerfile .
-    - docker push ${CI_REGISTRY_IMAGE}/${OS_NAME}
+    - |
+      if ! docker manifest inspect $DOCKER_IMAGE > /dev/null || [ "$BUILD_DOCKER_IMAGE" = "1" ]; then
+        if [ "$BUILD_DOCKER_IMAGE" = "1" ]; then
+          DOCKER_CACHE_PARAMETERS="--no-cache"
+        else
+          DOCKER_CACHE_PARAMETERS=""
+        fi
+        docker build $DOCKER_BUILD_ARG ${DOCKER_CACHE_PARAMETERS} --tag $DOCKER_IMAGE -f $DOCKER_FILE .
+        docker push $DOCKER_IMAGE
+      fi
   services:
     - docker:stable-dind
 
-build-spackrocky:
+prepare-spackrocky:
+  extends: .prepare
   variables:
-    OS_NAME: rockylinux
-  extends: .build-docker
+    DOCKER_IMAGE: ${IMAGE_ROCKYLINUX}
+    DOCKER_FILE: os/rockylinux.dockerfile
 
-build-spackubuntu:
+prepare-spackubuntu:
+  extends: .prepare
   variables:
-    OS_NAME: ubuntu
-  extends: .build-docker
+    DOCKER_IMAGE: ${IMAGE_UBUNTU}
+    DOCKER_FILE: os/ubuntu.dockerfile
 
 
 .test:
-  image: ${CI_REGISTRY_IMAGE}/${OS_NAME}
   script:
     - . /opt/spack/share/spack/setup-env.sh
     - spack find -v -l
@@ -44,13 +71,11 @@ build-spackubuntu:
     - spack install
 
 test-rockylinux:
-  needs: ["build-spackrocky"]
-  variables:
-    OS_NAME: rockylinux
+  needs: ["prepare-spackrocky"]
+  image: ${IMAGE_ROCKYLINUX}
   extends: .test
 
 test-ubuntu:
-  needs: ["build-spackubuntu"]
-  variables:
-    OS_NAME: ubuntu
+  needs: ["prepare-spackubuntu"]
+  image: ${IMAGE_UBUNTU}
   extends: .test
