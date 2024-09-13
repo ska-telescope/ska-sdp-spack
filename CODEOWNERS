@@ -1,0 +1,9 @@
+* @mnijhuis-tos
+/packages/dal2/ @bramveenboer
+/packages/hipfft-cuda/ @bramveenboer
+/packages/idg/ @mnijhuis-tos @bramveenboer
+/packages/libpowersensor/ @stefano.corda
+/packages/pmt/ @stefano.corda
+/packages/pqxx*/ @bramveenboer
+/packages/qpid/ @bramveenboer
+/packages/rum/ @stefano.corda
