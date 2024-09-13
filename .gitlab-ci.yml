@@ -1,52 +1,85 @@
-stages:          # List of stages for jobs, and their order of execution
+stages:
+  - versioning
+  - prepare
   - build
-  - test
 
-.build-docker:
-  image: docker:stable
-  stage: build
+default:
   tags:
-    - dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - ska-default
+
+# The 'IMAGE' variables allow reusing docker images between different pipelines.
+# See https://confluence.skatelescope.org/display/SE/Caching+Docker+images+using+GitLab+CI+registry
+versioning:
+  stage: versioning
+  image: bitnami/git
   script:
-    - docker build -t ${CI_REGISTRY_IMAGE}/${OS_NAME} -f os/${OS_NAME}.dockerfile .
-    - docker push ${CI_REGISTRY_IMAGE}/${OS_NAME}
+    # Unshallowing ensures that 'git log' works
+    - git fetch --unshallow
+    - echo IMAGE_ROCKYLINUX=${CI_REGISTRY_IMAGE}/rockylinux:$(git log -n 1 --pretty=format:%H -- os/rockylinux.dockerfile) > versions.env
+    - echo IMAGE_UBUNTU=${CI_REGISTRY_IMAGE}/ubuntu:$(git log -n 1 --pretty=format:%H -- os/ubuntu.dockerfile) >> versions.env
+    - cat versions.env
+  artifacts:
+    reports:
+      dotenv: versions.env
 
-build-spackrocky:
+
+.prepare:
+  stage: prepare
+  needs: ["versioning"]
+  image: docker:stable
   variables:
-    OS_NAME: rockylinux
-  extends: .build-docker
+    # Makes 'docker manifest' work:
+    DOCKER_CLI_EXPERIMENTAL: enabled
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - |
+      if ! docker manifest inspect $DOCKER_IMAGE > /dev/null || [ "$BUILD_DOCKER_IMAGE" = "1" ]; then
+        if [ "$BUILD_DOCKER_IMAGE" = "1" ]; then
+          DOCKER_CACHE_PARAMETERS="--no-cache"
+        else
+          DOCKER_CACHE_PARAMETERS=""
+        fi
+        docker build $DOCKER_BUILD_ARG ${DOCKER_CACHE_PARAMETERS} --tag $DOCKER_IMAGE -f $DOCKER_FILE .
+        docker push $DOCKER_IMAGE
+      fi
+  services:
+    - docker:stable-dind
 
-build-spackubuntu:
+prepare-spackrocky:
+  extends: .prepare
   variables:
-    OS_NAME: ubuntu
-  extends: .build-docker
+    DOCKER_IMAGE: ${IMAGE_ROCKYLINUX}
+    DOCKER_FILE: os/rockylinux.dockerfile
+
+prepare-spackubuntu:
+  extends: .prepare
+  variables:
+    DOCKER_IMAGE: ${IMAGE_UBUNTU}
+    DOCKER_FILE: os/ubuntu.dockerfile
 
 
-.test-schaap:
-  image: ${CI_REGISTRY_IMAGE}/${OS_NAME}
+.build:
+  stage: build
   script:
     - . /opt/spack/share/spack/setup-env.sh
     - spack find -v -l
     - spack repo add .
-    - spack env create schaap
-    - spack env activate schaap
+    - spack env create sdp
+    - spack env activate sdp
     - GCC_VERSION=$(gcc --version | head -n 1)
     - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
     - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
-    - cp os/spack.yaml /opt/spack/var/spack/environments/schaap/spack.yaml
+    - cp os/spack.yaml /opt/spack/var/spack/environments/sdp/spack.yaml
     - spack concretize
     - spack install
 
-test-rockylinux:
-  needs: ["build-spackrocky"]
-  variables:
-    OS_NAME: rockylinux
-  extends: .test-schaap
+build-rockylinux:
+  needs: ["versioning", "prepare-spackrocky"]
+  image: ${IMAGE_ROCKYLINUX}
+  extends: .build
 
-test-ubuntu:
-  needs: ["build-spackubuntu"]
-  variables:
-    OS_NAME: ubuntu
-  extends: .test-schaap
+build-ubuntu:
+  needs: ["versioning", "prepare-spackubuntu"]
+  image: ${IMAGE_UBUNTU}
+  extends: .build
