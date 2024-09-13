@@ -1,7 +1,7 @@
 stages:
   - versioning
   - prepare
-  - test
+  - build
 
 default:
   tags:
@@ -59,7 +59,8 @@ prepare-spackubuntu:
     DOCKER_FILE: os/ubuntu.dockerfile
 
 
-.test:
+.build:
+  stage: build
   script:
     - . /opt/spack/share/spack/setup-env.sh
     - spack find -v -l
@@ -73,12 +74,12 @@ prepare-spackubuntu:
     - spack concretize
     - spack install
 
-test-rockylinux:
+build-rockylinux:
   needs: ["versioning", "prepare-spackrocky"]
   image: ${IMAGE_ROCKYLINUX}
-  extends: .test
+  extends: .build
 
-test-ubuntu:
+build-ubuntu:
   needs: ["versioning", "prepare-spackubuntu"]
   image: ${IMAGE_UBUNTU}
-  extends: .test
+  extends: .build
