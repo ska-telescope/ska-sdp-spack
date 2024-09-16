@@ -2,6 +2,8 @@ stages:
   - versioning
   - prepare
   - build
+  - publish
+  - pages
 
 default:
   tags:
@@ -83,3 +85,11 @@ build-ubuntu:
   needs: ["versioning", "prepare-spackubuntu"]
   image: ${IMAGE_UBUNTU}
   extends: .build
+
+include:
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/docs.gitlab-ci.yml"
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/release.gitlab-ci.yml"
