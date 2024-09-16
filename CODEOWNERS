@@ -1,0 +1,12 @@
+# Default owner(s)
+* @mnijhuis-tos
+
+# Overrides for specific packages
+/packages/dal2/ @bramveenboer
+/packages/hipfft-cuda/ @bramveenboer
+/packages/idg/ @mnijhuis-tos @bramveenboer
+/packages/libpowersensor/ @bramveenboer
+/packages/pmt/ @bramveenboer
+/packages/pqxx*/ @bramveenboer
+/packages/qpid/ @bramveenboer
+/packages/rum/ @stefano.corda
