@@ -80,13 +80,20 @@ prepare-spackubuntu:
     # Ignore absent buildcache by adding "|| true"
     - spack buildcache update-index gitlab-mirror || true
     - spack concretize
-    # Install base packages, one by one, and update the buildcache. In case the
+    # Install some packages, one by one, and update the buildcache. In case the
     # CI job times out, the next run will be faster as it uses the buildcache.
     - |
-      for package in gmake zlib-ng cfitsio fftw git gsl hdf5+cxx "openblas threads=pthreads" python py-numpy wcslib+cfitsio; do
+      for package in cfitsio fftw git gsl python py-numpy; do
         spack install --use-cache --no-check-signature $package
-        spack buildcache push --unsigned --update-index gitlab-mirror ${package%% *}
+        spack buildcache push --unsigned --update-index gitlab-mirror $package
       done
+    - spack install --use-cache --no-check-signature
+    - spack buildcache push --unsigned --update-index gitlab-mirror
+  # Retry on timeout: The buildcache should make retries faster.
+  retry:
+    max: 1
+    when: job_execution_timeout
+
 
 build-rockylinux:
   needs: ["versioning", "prepare-spackrocky"]
