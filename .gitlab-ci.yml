@@ -83,9 +83,9 @@ prepare-spackubuntu:
     # Install base packages, one by one, and update the buildcache. In case the
     # CI job times out, the next run will be faster as it uses the buildcache.
     - |
-      for package in cfitsio fftw git gsl hdf5+cxx "openblas threads=pthreads" python py-numpy wcslib+cfitsio; do
-        spack install $package
-        spack buildcache push gitlab-mirror ${package%% *}
+      for package in gmake zlib-ng cfitsio fftw git gsl hdf5+cxx "openblas threads=pthreads" python py-numpy wcslib+cfitsio; do
+        spack install --use-cache --no-check-signature $package
+        spack buildcache push --unsigned --update-index gitlab-mirror ${package%% *}
       done
 
 build-rockylinux:

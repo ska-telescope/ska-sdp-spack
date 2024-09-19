@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
       bash build-essential ca-certificates coreutils curl \
-      gfortran git gpg lsb-release python3 python3-pip \
+      file gfortran git gpg lsb-release python3 python3-pip \
       unzip zip wget && \
     rm -rf /var/lib/apt/lists/* /var/apt/cache
 
