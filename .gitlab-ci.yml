@@ -1,3 +1,6 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 stages:
   - versioning
   - prepare
@@ -73,8 +76,17 @@ prepare-spackubuntu:
     - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
     - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
     - cp os/spack.yaml /opt/spack/var/spack/environments/sdp/spack.yaml
+    - spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
+    # Ignore absent buildcache by adding "|| true"
+    - spack buildcache update-index gitlab-mirror || true
     - spack concretize
-    - spack install
+    # Install base packages, one by one, and update the buildcache. In case the
+    # CI job times out, the next run will be faster as it uses the buildcache.
+    - |
+      for package in cfitsio fftw git gsl hdf5+cxx "openblas threads=pthreads" python py-numpy wcslib+cfitsio; do
+        spack install $package
+        spack buildcache push gitlab-mirror ${package%% *}
+      done
 
 build-rockylinux:
   needs: ["versioning", "prepare-spackrocky"]
