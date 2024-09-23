@@ -4,6 +4,9 @@
    contain the root `toctree` directive.
 
 
+SKA-SDP-SPACK
+=============
+
 .. HOME SECTION ==================================================
 
 .. Hidden toctree to manage the sidebar navigation.
@@ -27,4 +30,3 @@
 .. COMMUNITY SECTION ==================================================
 
 ..
-
