@@ -9,4 +9,4 @@
 /packages/pmt/ @bramveenboer
 /packages/pqxx*/ @bramveenboer
 /packages/qpid/ @bramveenboer
-/packages/rum/ @stefano.corda
+/packages/rum/ @bramveenboer
