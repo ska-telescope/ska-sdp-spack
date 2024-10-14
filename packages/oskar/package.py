@@ -14,7 +14,7 @@ class Oskar(CMakePackage):
 
     # maintainers("saliei", "fdulwich")
 
-    license("BSD-3-Clause", checked_by="saliei")
+    license("BSD-3-Clause")
 
     version("2.8.3", sha256="828fe0ff72019bec3b6fa10a3928f9aa2aa1a5c6a4a8d5643364cfd6ddd50fac")
     version("2.8.2", sha256="f28ae5afc85f28df1636820cc97bb833fd53cff517c3bf0c27500a71bb66c4e3")
