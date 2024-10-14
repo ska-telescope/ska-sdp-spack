@@ -16,7 +16,7 @@ class Oskar(CMakePackage):
 
     license("BSD-3-Clause")
 
-    version("2.8.3", sha256="828fe0ff72019bec3b6fa10a3928f9aa2aa1a5c6a4a8d5643364cfd6ddd50fac")
+    version("2.8.3", sha256="828fe0ff72019bec3b6fa10a3928f9aa2aa1a5c6a4a8d5643364cfd6ddd50fac", preferred=True)
     version("2.8.2", sha256="f28ae5afc85f28df1636820cc97bb833fd53cff517c3bf0c27500a71bb66c4e3")
     version("2.8.1", sha256="218c841726d4dd376565a3ddfa967ef0c7e2b0a0779611a54307f4b4ab975ed5")
     version("2.8.0", sha256="2fdaf1d4a06bcb66ee580a4baf084bd3187dfa123b4ee036a5c9328184b1d606")
@@ -26,11 +26,13 @@ class Oskar(CMakePackage):
     version("2.6.1", sha256="5b9a4cdbceaebf91ffa3bb7fb086bc69417e085246fea4b269641710d0dc515d")
     version("2.6.0", sha256="57b400476bbbe502f6f967dc6613ea3f2158ce8c544c8d8af1502089cec226fc")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("cmake@3.1.0:", type="build")
 
     variant("cuda", default=False, description="Build CUDA kernels")
     variant("cuda_arch", values=("2.0", "2.1", "3.0", "3.2", "3.5", "3.7", "5.0", "5.2", \
-            "6.0", "6.1", "6.2", "7.0", "7.5", "8.0", "8.6", "8.7"), default="all", multi=True, 
+            "6.0", "6.1", "6.2", "7.0", "7.5", "8.0", "8.6", "8.7", "all"), default="all", multi=True, 
         description="Build for CUDA arch")
     variant("opencl", default=False, description="Experimental support for OpenCL")
     variant("casacore", default=False, description="Required to use CASA Measurement Sets")
@@ -47,7 +49,8 @@ class Oskar(CMakePackage):
         
         if "+cuda" in self.spec:
             args.append("-DFIND_CUDA=ON")
-            args.append("-DCUDA_ARCH={0}".format(";".join(self.spec["cuda_arch"].value)))
+            if "+cuda_arch" in self.spec:
+                args.append("-DCUDA_ARCH={0}".format(";".join(self.spec["cuda_arch"].value)))
         else:
             args.append("-DFIND_CUDA=OFF")
 
