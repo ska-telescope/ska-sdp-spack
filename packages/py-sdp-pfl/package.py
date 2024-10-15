@@ -18,7 +18,8 @@ class PySdpPfl(PythonPackage):
 
     license("BSD-3-Clause")
 
-    version("develop-1.1.7", branch="main", preferred=True)
+    version("develop-1.2.0", branch="main", preferred=True)
+    version("1.2.0", sha256="4991003919aac8045b515cd9cd641d88fc1f886087e5d669f9e2d91b7e6d5b3d")
     version("1.1.7", sha256="b712499e9bf4b79c319b176de4450acfcd28c5edd2406bf8aac640f31db5e796")
 
     depends_on("c", type="build")
