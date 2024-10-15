@@ -9,3 +9,7 @@
 /packages/pqxx*/ @bramveenboer
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
+/packages/oskar/ @saeid.aliei
+/packages/py-oskar/ @saeid.aliei
+/package/sdp-pfl/ @saeid.aliei
+/package/py-sdp-pfl/ @saeid.aliei
