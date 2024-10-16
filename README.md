@@ -15,8 +15,8 @@ The above command will clone Spack in the directory you have created beforehand 
 
 Clone this repository and add it to `spack`:
 ```
-git clone https://git.astron.nl/RD/schaap-spack.git
-spack repo add ./schaap-spack
+git clone https://gitlab.com/ska-telescope/sdp/ska-sdp-spack.git
+spack repo add ./ska-sdp-spack
 ```
 
 After this initial setup, you could run `spack install wsclean`, as this will install `wsclean` and all its dependencies.
