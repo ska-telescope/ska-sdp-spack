@@ -5,6 +5,7 @@ stages:
   - versioning
   - prepare
   - build
+  - package
   - publish
   - pages
 
@@ -76,16 +77,16 @@ prepare-spackubuntu:
     - spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
     # Ignore absent buildcache by adding "|| true"
     - spack buildcache update-index gitlab-mirror || true
-    - spack concretize
-    # Install some packages, one by one, and update the buildcache. In case the
-    # CI job times out, the next run will be faster as it uses the buildcache.
-    - |
-      for package in cfitsio fftw git gsl python py-numpy; do
-        spack install --use-cache --no-check-signature $package
-        spack buildcache push --unsigned --update-index gitlab-mirror $package
-      done
-    - spack install --use-cache --no-check-signature
-    - spack buildcache push --unsigned --update-index gitlab-mirror
+    #- spack concretize
+    ## Install some packages, one by one, and update the buildcache. In case the
+    ## CI job times out, the next run will be faster as it uses the buildcache.
+    #- |
+    #  for package in cfitsio fftw git gsl python py-numpy; do
+    #    spack install --use-cache --no-check-signature $package
+    #    spack buildcache push --unsigned --update-index gitlab-mirror $package
+    #  done
+    #- spack install --use-cache --no-check-signature
+    #- spack buildcache push --unsigned --update-index gitlab-mirror
   # Retry on timeout, the buildcache should make retries faster.
   retry:
     max: 1
@@ -100,6 +101,48 @@ build-ubuntu:
   needs: ["versioning", "prepare-spackubuntu"]
   image: ${IMAGE_UBUNTU}
   extends: .build
+  after_script:
+    - . /opt/spack/share/spack/setup-env.sh
+    - mkdir images
+    - cd os && spack containerize > ../images/Dockerfile
+  artifacts:
+    paths:
+      - images/Dockerfile
+
+create-image:
+  stage: package
+  image: docker:stable
+  needs: ["build-ubuntu"]
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    # Add ska-sdp-spack repository and GitLab package mirror to Dockerfile.
+    - cd images
+    - |
+      cat > Dockerfile.additions <<END
+      ADD . /opt/ska-sdp-spack
+      RUN spack repo add /opt/ska-sdp-spack
+      RUN spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache \
+      && spack buildcache update-index gitlab-mirror
+      END
+    - sed -i "/FROM spack/r Dockerfile.additions" Dockerfile
+    - sed -i "s=spack install =spack install --no-check-signature =" Dockerfile
+    - cat Dockerfile | sed 's/--oci-password .* gitlab-mirror /--oci-password <hidden> gitlab-mirror /'
+    - cd $CI_PROJECT_DIR
+    - IMAGE_TAG=$CI_COMMIT_TAG
+    - if [ -z "$IMAGE_TAG" ]; then IMAGE_TAG=$CI_COMMIT_BRANCH; fi
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/ska-sdp-spack:$IMAGE_TAG
+    - docker build --tag $DOCKER_IMAGE -f container/Dockerfile .
+    - docker push $DOCKER_IMAGE
+  services:
+    - docker:stable-dind
+  rules:
+    - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+      allow_failure: false
+    - when: manual
+      allow_failure: true
+
 
 include:
   - project: "ska-telescope/templates-repository"
