@@ -10,3 +10,9 @@ spack:
   view: false
   concretizer:
     unify: true
+  container:
+    format: docker
+    images:
+      os: "ubuntu:22.04"
+      spack: 0.21.0
+    strip: true
