@@ -115,6 +115,7 @@ create-dockerfile:
     - mkdir -p images/ska-sdp-spack
     - (cd os && spack containerize > ../images/ska-sdp-spack/Dockerfile)
     - cd images/ska-sdp-spack
+    # Add ska-sdp-spack repo and the GitLab buildcache.
     - |
       cat > Dockerfile.additions <<END
       COPY . /opt/ska-sdp-spack
@@ -123,7 +124,10 @@ create-dockerfile:
       && spack buildcache update-index gitlab-mirror
       END
     - sed -i "/FROM spack/r Dockerfile.additions" Dockerfile
+    # --no-check-signature is needed for the GitLab buildcache.
     - sed -i "s=spack install =spack install --no-check-signature =" Dockerfile
+    # Use ska-base image instead of plain ubuntu 22.04 image.
+    - sed -i "s=FROM ubuntu:22.04=FROM artefact.skao.int/ska-base:0.1.0=" Dockerfile
   artifacts:
     paths:
       - images/ska-sdp-spack/Dockerfile
@@ -152,6 +156,7 @@ oci-image-build:
   variables:
     OCI_IMAGE_BUILD_CONTEXT: $CI_PROJECT_DIR
 
+# TODO(AST-1586) : Enable these jobs, too.
 # oci-image-publish:
 #   rules:
 #     - when: always
