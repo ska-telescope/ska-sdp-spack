@@ -150,7 +150,8 @@ oci-image-lint:
     - when: always
 
 oci-image-build:
-  needs: ["create-dockerfile","oci-image-lint"]
+  # The dependency on build-ubuntu ensures that the buildcache has all packages.
+  needs: ["create-dockerfile","oci-image-lint","build-ubuntu"]
   rules:
     - when: always
   variables:
