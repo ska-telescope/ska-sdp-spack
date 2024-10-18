@@ -72,9 +72,6 @@ prepare-spackubuntu:
     - spack repo add .
     - spack env create sdp
     - spack env activate sdp
-    - GCC_VERSION=$(gcc --version | head -n 1)
-    - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
-    - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
     - cp os/spack.yaml /opt/spack/var/spack/environments/sdp/spack.yaml
     - spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
     # Ignore absent buildcache by adding "|| true"
