@@ -4,9 +4,11 @@ variables:
 stages:
   - versioning
   - prepare
+  - lint
   - build
   - package
   - publish
+  - scan
   - pages
 
 default:
@@ -101,48 +103,30 @@ build-ubuntu:
   needs: ["versioning", "prepare-spackubuntu"]
   image: ${IMAGE_UBUNTU}
   extends: .build
-  after_script:
-    - . /opt/spack/share/spack/setup-env.sh
-    - mkdir images
-    - cd os && spack containerize > ../images/Dockerfile
-  artifacts:
-    paths:
-      - images/Dockerfile
 
-create-image:
-  stage: package
-  image: docker:stable
-  needs: ["build-ubuntu"]
-  before_script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+# Creates a Dockerfile for building an image containing the Spack tools.
+# The {OCI_PASSWORD} still needs to be replaced in the generated Dockerfile.
+create-dockerfile:
+  stage: prepare
+  needs: ["versioning", "prepare-spackubuntu"]
+  image: ${IMAGE_UBUNTU}
   script:
-    # Add ska-sdp-spack repository and GitLab package mirror to Dockerfile.
-    - cd images
+    - . /opt/spack/share/spack/setup-env.sh
+    - mkdir -p images/ska-sdp-spack
+    - (cd os && spack containerize > ../images/ska-sdp-spack/Dockerfile)
+    - cd images/ska-sdp-spack
     - |
       cat > Dockerfile.additions <<END
-      ADD . /opt/ska-sdp-spack
+      COPY . /opt/ska-sdp-spack
       RUN spack repo add /opt/ska-sdp-spack
-      RUN spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache \
+      RUN spack mirror add --oci-username $CI_REGISTRY_USER --oci-password {OCI_PASSWORD} gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache \
       && spack buildcache update-index gitlab-mirror
       END
     - sed -i "/FROM spack/r Dockerfile.additions" Dockerfile
     - sed -i "s=spack install =spack install --no-check-signature =" Dockerfile
-    - cat Dockerfile | sed 's/--oci-password .* gitlab-mirror /--oci-password <hidden> gitlab-mirror /'
-    - cd $CI_PROJECT_DIR
-    - IMAGE_TAG=$CI_COMMIT_TAG
-    - if [ -z "$IMAGE_TAG" ]; then IMAGE_TAG=$CI_COMMIT_BRANCH; fi
-    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/ska-sdp-spack:$IMAGE_TAG
-    - docker build --tag $DOCKER_IMAGE -f container/Dockerfile .
-    - docker push $DOCKER_IMAGE
-  services:
-    - docker:stable-dind
-  rules:
-    - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: always
-      allow_failure: false
-    - when: manual
-      allow_failure: true
-
+  artifacts:
+    paths:
+      - images/ska-sdp-spack/Dockerfile
 
 include:
   - project: "ska-telescope/templates-repository"
@@ -150,4 +134,28 @@ include:
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
   - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/oci-image.gitlab-ci.yml"
+  - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/release.gitlab-ci.yml"
+
+# Override some parts of the oci jobs, since the template jobs assume that
+# the Dockerfile exists in the repository.
+oci-image-lint:
+  needs: ["create-dockerfile"]
+  rules:
+    - when: always
+
+oci-image-build:
+  needs: ["create-dockerfile","oci-image-lint"]
+  rules:
+    - when: always
+  variables:
+    OCI_IMAGE_BUILD_CONTEXT: $CI_PROJECT_DIR
+
+# oci-image-publish:
+#   rules:
+#     - when: always
+#
+# oci-image-scan:
+#   rules:
+#     - when: always
