@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.2, Oktober 21, 2024
+
+- Build OCI image containing all ska-sdp-spack tools on CI.
+
 ## 0.0.1, September 13, 2024
 
 - Initial release
