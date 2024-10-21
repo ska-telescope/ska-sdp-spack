@@ -142,26 +142,22 @@ include:
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/release.gitlab-ci.yml"
 
-# Override some parts of the oci jobs, since the template jobs assume that
-# the Dockerfile exists in the repository.
+# Override some parts of the oci jobs, so they use the Dockerfile from the
+# create-dockerfile job instead of the dummy Dockerfile in images/ska-sdp-spack.
 oci-image-lint:
   needs: ["create-dockerfile"]
-  rules:
-    - when: always
 
 oci-image-build:
   # The dependency on build-ubuntu ensures that the buildcache has all packages.
   needs: ["create-dockerfile","oci-image-lint","build-ubuntu"]
-  rules:
-    - when: always
   variables:
     OCI_IMAGE_BUILD_CONTEXT: $CI_PROJECT_DIR
 
 # TODO(AST-1586) : Enable these jobs, too.
-# oci-image-publish:
-#   rules:
-#     - when: always
-#
-# oci-image-scan:
-#   rules:
-#     - when: always
+oci-image-publish:
+  rules:
+    - when: never
+
+oci-image-scan:
+  rules:
+    - when: never
