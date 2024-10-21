@@ -16,3 +16,7 @@ spack:
       os: "ubuntu:22.04"
       spack: 0.21.0
     strip: true
+    os_packages:
+      final:
+        - libgfortran5
+        - libgomp1
