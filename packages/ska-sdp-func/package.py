@@ -6,12 +6,12 @@
 from spack.package import *
 
 
-class SdpPfl(CMakePackage):
+class SkaSdpFunc(CMakePackage):
     """SDP Processing Function Library is a collection of high-performance data processing utility functions 
     for the Square Kilometre Array."""
 
     homepage = "https://gitlab.com/ska-telescope/sdp/ska-sdp-func"
-    url = "https://gitlab.com/ska-telescope/sdp/ska-sdp-func/-/archive/1.1.7/ska-sdp-func-1.1.7.tar.gz"
+    url = "https://gitlab.com/ska-telescope/sdp/ska-sdp-func/-/archive/1.2.0/ska-sdp-func-1.2.0.tar.gz"
     git = "https://gitlab.com/ska-telescope/sdp/ska-sdp-func"
 
     # maintainers("saliei")
