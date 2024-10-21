@@ -152,12 +152,3 @@ oci-image-build:
   needs: ["create-dockerfile","oci-image-lint","build-ubuntu"]
   variables:
     OCI_IMAGE_BUILD_CONTEXT: $CI_PROJECT_DIR
-
-# TODO(AST-1586) : Enable these jobs, too.
-oci-image-publish:
-  rules:
-    - when: never
-
-oci-image-scan:
-  rules:
-    - when: never
