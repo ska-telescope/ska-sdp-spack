@@ -14,7 +14,7 @@ class PyCasacore(PythonPackage):
     version('3.4.0', sha256='f654781292308de70c037981f5f7f5aeb02cf980a6f1367d1c294e7b4fca42ce')
 
     depends_on('py-setuptools', type='build')
-    depends_on('casacore+python+data')
+    depends_on('casacore+python')
     depends_on('cfitsio')
     depends_on('boost+python')
 
