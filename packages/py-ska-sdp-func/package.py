@@ -32,7 +32,7 @@ class PySkaSdpFunc(PythonPackage):
     variant("mkl", default=False, description="Build with Intel MKL support")
 
     depends_on("py-setuptools", type="build")
-    depends_on("sdp-pfl", type=("build", "link"))
+    depends_on("ska-sdp-func", type=("build", "link"))
     depends_on("py-pytest", type="test")
 
     depends_on("cuda@7.0.0:", when="+cuda")
