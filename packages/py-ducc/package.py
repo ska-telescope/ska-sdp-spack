@@ -21,6 +21,7 @@ class PyDucc(PythonPackage):
     version("develop-0.35.0", branch="ducc0", preferred=True)
     version("develop-0.34.0", branch="ducc0")
 
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cmake", type="build")
 
