@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.2, October 23, 2024
+
+- Ensure that OCI image is no longer marked 'dirty'.
+
 ## 0.0.1, October 21, 2024
 
 - Initial release

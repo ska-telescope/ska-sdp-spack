@@ -112,7 +112,6 @@ create-dockerfile:
   image: ${IMAGE_UBUNTU}
   script:
     - . /opt/spack/share/spack/setup-env.sh
-    - mkdir -p images/ska-sdp-spack
     - (cd os && spack containerize > ../images/ska-sdp-spack/Dockerfile)
     - cd images/ska-sdp-spack
     # Add ska-sdp-spack repo and the GitLab buildcache.
@@ -149,8 +148,9 @@ include:
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/release.gitlab-ci.yml"
 
-# Override some parts of the oci jobs, so they use the Dockerfile from the
-# create-dockerfile job instead of the dummy Dockerfile in images/ska-sdp-spack.
+# Override some parts of the oci jobs:
+# - Make them use the Dockerfile from the create-dockerfile job.
+# - Override the Dockerfile detection rules, since CI creates it on the fly.
 oci-image-lint:
   needs: ["create-dockerfile"]
 
