@@ -75,8 +75,8 @@ class Casacore(CMakePackage):
     conflicts("~threads", when="+openmp")
 
     patch("gcc13.patch", when="%gcc@13:")
+    patch("boost.patch", when="@:3.6.0")
     patch("intelLLVM.patch", when="%oneapi")
-    patch("boost.patch")
 
     def cmake_args(self):
         args = []
