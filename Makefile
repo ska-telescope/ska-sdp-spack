@@ -11,3 +11,14 @@ set-registry-password:
 oci-pre-lint: set-registry-password
 
 oci-pre-build: set-registry-password
+
+oci-post-build:
+# These Smoke tests run DP3 and wsclean using the created image.
+# Use the same tag as ociImageBuild
+	@if [[ "$(CAR_OCI_REGISTRY_HOST)" == registry.gitlab.com* ]] || [[ -z "$(CAR_OCI_REGISTRY_HOST)" ]]; then \
+		OCI_TAG=$(VERSION)-dev.c$(CI_COMMIT_SHORT_SHA); \
+	else \
+		OCI_TAG=$(VERSION); \
+	fi; \
+	$(OCI_BUILDER) run --rm -t $(OCI_IMAGE):$${OCI_TAG} DP3 -v && \
+	$(OCI_BUILDER) run --rm -t $(OCI_IMAGE):$${OCI_TAG} wsclean -version
