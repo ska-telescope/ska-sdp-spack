@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
+import os
 
 
 class PyDucc(PythonPackage):
@@ -17,9 +18,9 @@ class PyDucc(PythonPackage):
 
     license("Affero General Public License v1.0")
 
-    version("develop-0.34.0", branch="ducc0", preferred=True)
+    version("develop-0.35.0", branch="ducc0", preferred=True)
+    version("develop-0.34.0", branch="ducc0")
 
-    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cmake", type="build")
 
@@ -28,7 +29,7 @@ class PyDucc(PythonPackage):
     depends_on("py-pybind11", type="build")
     depends_on("py-numpy@1.17.0:", type="build")
 
-    depends_on("ducc@develop-0.34.0:", type=("build", "link"))
+    depends_on("ducc", type=("build", "link"))
 
     @property
     @llnl.util.lang.memoized
@@ -43,4 +44,8 @@ class PyDucc(PythonPackage):
         cmake_args = []
         cmake_args.append("-DDUCC_USE_THREADS=True")
         env.set("CMAKE_ARGS", " ".join(cmake_args))
+        # a hack to overcome setuptools bug in not correctly
+        # recognizing correct C++ Intel compiler.
+        if "%oneapi" in self.spec:
+            env.set("CC", os.environ.get("CXX"))
 
