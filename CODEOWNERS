@@ -11,7 +11,7 @@
 /packages/rum/ @bramveenboer
 /packages/oskar/ @saeid.aliei
 /packages/py-oskar/ @saeid.aliei
-/package/sdp-pfl/ @saeid.aliei
-/package/py-sdp-pfl/ @saeid.aliei
+/package/ska-sdp-func/ @saeid.aliei
+/package/py-ska-sdp-func/ @saeid.aliei
 /package/ducc/ @saeid.aliei
 /package/py-ducc/ @saeid.aliei
