@@ -126,6 +126,13 @@ create-dockerfile:
     - sed -i "/FROM spack/r Dockerfile.additions" Dockerfile
     # --no-check-signature is needed for the GitLab buildcache.
     - sed -i "s=spack install =spack install --no-check-signature =" Dockerfile
+    # Verify that Spack creates an Ubuntu 22.04 image.
+    # (If spack.yaml changes, you need to update this part as well.)
+    - |
+      if ! grep -q "FROM ubuntu:22.04" Dockerfile; then
+        echo Spack target image does not match container:images:os setting in spack.yaml.
+        exit 1
+      fi
     # Use ska-base image instead of plain ubuntu 22.04 image.
     - sed -i "s=FROM ubuntu:22.04=FROM artefact.skao.int/ska-base:0.1.0=" Dockerfile
   artifacts:
