@@ -4,8 +4,11 @@ variables:
 stages:
   - versioning
   - prepare
+  - lint
   - build
+  - package
   - publish
+  - scan
   - pages
 
 default:
@@ -72,9 +75,6 @@ prepare-spackubuntu:
     - spack repo add .
     - spack env create sdp
     - spack env activate sdp
-    - GCC_VERSION=$(gcc --version | head -n 1)
-    - GCC_VERSION=$(echo $GCC_VERSION | sed 's=gcc (.*) \([0-9\.]*\).*=\1=')
-    - sed -i s/GCC_VERSION/$GCC_VERSION/ os/spack.yaml
     - cp os/spack.yaml /opt/spack/var/spack/environments/sdp/spack.yaml
     - spack mirror add --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
     # Ignore absent buildcache by adding "|| true"
@@ -104,10 +104,58 @@ build-ubuntu:
   image: ${IMAGE_UBUNTU}
   extends: .build
 
+# Creates a Dockerfile for building an image containing the Spack tools.
+# The {OCI_PASSWORD} still needs to be replaced in the generated Dockerfile.
+create-dockerfile:
+  stage: prepare
+  needs: ["versioning", "prepare-spackubuntu"]
+  image: ${IMAGE_UBUNTU}
+  script:
+    - . /opt/spack/share/spack/setup-env.sh
+    - (cd os && spack containerize > ../images/ska-sdp-spack/Dockerfile)
+    - cd images/ska-sdp-spack
+    # Add ska-sdp-spack repo and the GitLab buildcache.
+    - |
+      cat > Dockerfile.additions <<END
+      COPY . /opt/ska-sdp-spack
+      RUN spack repo add /opt/ska-sdp-spack
+      RUN spack mirror add --oci-username $CI_REGISTRY_USER --oci-password {OCI_PASSWORD} gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache \
+      && spack buildcache update-index gitlab-mirror
+      END
+    - sed -i "/FROM spack/r Dockerfile.additions" Dockerfile
+    # --no-check-signature is needed for the GitLab buildcache.
+    - sed -i "s=spack install =spack install --no-check-signature =" Dockerfile
+    # Verify that Spack creates an Ubuntu 22.04 image.
+    # (If spack.yaml changes, you need to update this part as well.)
+    - |
+      if ! grep -q "FROM ubuntu:22.04" Dockerfile; then
+        echo Spack target image does not match container:images:os setting in spack.yaml.
+        exit 1
+      fi
+    # Use ska-base image instead of plain ubuntu 22.04 image.
+    - sed -i "s=FROM ubuntu:22.04=FROM artefact.skao.int/ska-base:0.1.0=" Dockerfile
+  artifacts:
+    paths:
+      - images/ska-sdp-spack/Dockerfile
+
 include:
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/docs.gitlab-ci.yml"
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
   - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/oci-image.gitlab-ci.yml"
+  - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/release.gitlab-ci.yml"
+
+# Override some parts of the oci jobs:
+# - Make them use the Dockerfile from the create-dockerfile job.
+# - Override the Dockerfile detection rules, since CI creates it on the fly.
+oci-image-lint:
+  needs: ["create-dockerfile"]
+
+oci-image-build:
+  # The dependency on build-ubuntu ensures that the buildcache has all packages.
+  needs: ["create-dockerfile","oci-image-lint","build-ubuntu"]
+  variables:
+    OCI_IMAGE_BUILD_CONTEXT: $CI_PROJECT_DIR

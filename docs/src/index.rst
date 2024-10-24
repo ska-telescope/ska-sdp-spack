@@ -27,6 +27,13 @@ SKA-SDP-SPACK
 
    README.md
 
+
 .. COMMUNITY SECTION ==================================================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Releases
+
+   CHANGELOG.md
 
 ..
