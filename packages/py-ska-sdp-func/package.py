@@ -55,15 +55,14 @@ class PySkaSdpFunc(PythonPackage):
 
         env.set("CMAKE_ARGS", " ".join(cmake_args))
 
-	@property
-	@llnl.util.lang.memoized
-	def _output_version(self):
-		spec_vers_str = str(self.spec.version.up_to(3))
-		if "develop" in spec_vers_str:
-			# Remove 'develop-' from the version in spack
-			spec_vers_str = spec_vers_str.partition("-")[2]
-		return spec_vers_str
-
+    @property
+    @llnl.util.lang.memoized
+    def _output_version(self):
+        spec_vers_str = str(self.spec.version.up_to(3))
+        if "develop" in spec_vers_str:
+            # Remove 'develop-' from the version in spack
+            spec_vers_str = spec_vers_str.partition("-")[2]
+        return spec_vers_str
 
 	def test(self):
 		pytest("-V")
