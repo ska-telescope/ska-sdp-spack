@@ -64,5 +64,5 @@ class PySkaSdpFunc(PythonPackage):
             spec_vers_str = spec_vers_str.partition("-")[2]
         return spec_vers_str
 
-	def test(self):
-		pytest("-V")
+    def test(self):
+        pytest("-V")
