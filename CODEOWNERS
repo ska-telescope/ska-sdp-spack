@@ -3,15 +3,11 @@
 
 # Overrides for specific packages
 /packages/dal2/ @bramveenboer
+/packages/ducc/ @saeid.aliei
 /packages/hipfft-cuda/ @bramveenboer
 /packages/idg/ @mnijhuis-tos @bramveenboer
 /packages/pmt/ @bramveenboer
 /packages/pqxx*/ @bramveenboer
+/packages/py-ducc/ @saeid.aliei
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
-/packages/oskar/ @saeid.aliei
-/packages/py-oskar/ @saeid.aliei
-/package/ska-sdp-func/ @saeid.aliei
-/package/py-ska-sdp-func/ @saeid.aliei
-/package/ducc/ @saeid.aliei
-/package/py-ducc/ @saeid.aliei
