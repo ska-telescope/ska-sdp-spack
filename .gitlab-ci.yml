@@ -108,12 +108,15 @@ build-full:
   stage: build
   image: ${IMAGE_UBUNTU}
   script:
-    - . /opt/spack/share/spack/setup-env.sh
+    - git clone --depth=2 --branch=releases/v0.23 https://github.com/spack/spack.git spack-v0.23
+    - . spack-v0.23/share/spack/setup-env.sh
+    - spack bootstrap now
     - spack env activate ./env/full
-    - spack mirror add --autopush --oci-username $CI_REGISTRY_USER --oci-password $CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
-    - spack buildcache update-index gitlab-mirror || true    
+    - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror oci://$CI_REGISTRY_IMAGE/spack-buildcache
     # Should push to buildcache automatically via --autopush above
-    - spack install
+    - spack buildcache keys --install --trust
+    - spack install --use-cache --no-check-signature
+    - spack buildcache push --unsigned --update-index gitlab-mirror
 
 # Creates a Dockerfile for building an image containing the Spack tools.
 # The {OCI_PASSWORD} still needs to be replaced in the generated Dockerfile.
