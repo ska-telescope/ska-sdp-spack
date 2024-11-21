@@ -38,6 +38,5 @@ class Pmt(CMakePackage):
     def setup_run_environment(self, env):
         spec = self.spec
         if ('+python') in spec:
-            import re
-            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python"))
+            python_version = self.spec.dependencies('python')[0].version
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}.{}".format(python_version[0], python_version[1]), 'site-packages'))
