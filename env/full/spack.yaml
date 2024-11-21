@@ -2,8 +2,13 @@ spack:
   specs:
   - matrix:
     # Install all ska-sdp-spack packages that currently build successfully
-    - [aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum, casacore,
-      dp3, dysco, pqxx, py-casacore, wsclean]
+    - [
+        aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum,
+        casacore@3.6.1,
+        dp3, dysco@1.2, 
+        py-casacore@3.6.1,
+        wsclean@3.4 
+    ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
     # We target the x86_64_v3 platform (i.e. AVX2 support including FMA, but not AVX512)
@@ -12,7 +17,7 @@ spack:
   view: false
   # For the moment we unify - likely will need to fall back to when_possible later
   concretizer:
-    unify: true
+    unify: when_possible
   # Use ska_sdp_spack package repository
   repos:
   - ../..
