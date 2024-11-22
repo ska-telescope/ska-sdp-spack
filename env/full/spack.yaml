@@ -6,7 +6,7 @@ spack:
         aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum,
         casacore@3.6.1,
         dp3, dysco@1.2, 
-        py-casacore@3.6.1,
+        # py-casacore@3.6.1,
         wsclean@3.4 
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
