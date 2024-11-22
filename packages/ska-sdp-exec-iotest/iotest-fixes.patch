@@ -1,0 +1,11 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9a6544a..865b37c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -236,3 +236,6 @@ if(BUILD_TESTING)
+      add_test(coverage_xml gcovr -r ../ . --exclude kernels --xml -o ${COV_DIR}/code-coverage.xml)
+    endif()
+ endif()
++
++install(TARGETS iotest)
++
