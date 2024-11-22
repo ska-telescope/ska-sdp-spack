@@ -11,12 +11,14 @@ class PyOskar(PythonPackage):
 
     homepage = "https://github.com/OxfordSKA/OSKAR"
     url = "https://github.com/OxfordSKA/OSKAR/archive/refs/tags/2.8.3.tar.gz"
+    git = "https://github.com/OxfordSKA/OSKAR"
 
     # maintainers("saliei", "fdulwich")
 
     license("BSD-3-Clause")
 
-    version("2.8.3", sha256="828fe0ff72019bec3b6fa10a3928f9aa2aa1a5c6a4a8d5643364cfd6ddd50fac", preferred=True)
+    version("develop-2.8.3", branch="master", preferred=True)
+    version("2.8.3", sha256="828fe0ff72019bec3b6fa10a3928f9aa2aa1a5c6a4a8d5643364cfd6ddd50fac")
     version("2.8.2", sha256="f28ae5afc85f28df1636820cc97bb833fd53cff517c3bf0c27500a71bb66c4e3")
     version("2.8.1", sha256="218c841726d4dd376565a3ddfa967ef0c7e2b0a0779611a54307f4b4ab975ed5")
     version("2.8.0", sha256="2fdaf1d4a06bcb66ee580a4baf084bd3187dfa123b4ee036a5c9328184b1d606")
@@ -39,3 +41,12 @@ class PyOskar(PythonPackage):
         oskar_prefix = self.spec["oskar"].prefix
         env.set("OSKAR_INC_DIR", join_path(oskar_prefix, "include"))
         env.set("OSKAR_LIB_DIR", join_path(oskar_prefix, "lib"))
+
+    @property
+    @llnl.util.lang.memoized
+    def _output_version(self):
+        sepc_vers_str = str(self.spec.version.up_to(3))
+        if "develop" in spec_vers_str:
+            # Remove 'develop-' from the output version in spack
+            spec_vers_str = spec_vers_str.partition("-")[2]
+        return spec_vers_str
