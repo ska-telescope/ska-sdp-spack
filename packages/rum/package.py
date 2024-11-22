@@ -28,5 +28,5 @@ class Rum(CMakePackage):
     def setup_run_environment(self, env):
         spec = self.spec
         if ('+python') in spec:
-            python_version = self.spec.dependencies('python')[0].version
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}.{}".format(python_version[0], python_version[1]), 'site-packages'))
+            python_version = self.spec.dependencies('python')[0].version.up_to(2)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, f"python{python_version}", 'site-packages'))
