@@ -1,0 +1,9 @@
+--- spack-src/tables/Dysco/tests/testdyscostman.cc
++++ spack-src/tables/Dysco/tests/testdyscostman.cc
+@@ -1,5 +1,6 @@
+ #include <boost/test/unit_test.hpp>
+ #include <boost/filesystem/operations.hpp>
++#include <boost/filesystem.hpp>
+ 
+ #include <casacore/tables/Tables/ArrayColumn.h>
+ #include <casacore/tables/Tables/Table.h>

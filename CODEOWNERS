@@ -3,9 +3,11 @@
 
 # Overrides for specific packages
 /packages/dal2/ @bramveenboer
+/packages/ducc/ @saeid.aliei
 /packages/hipfft-cuda/ @bramveenboer
 /packages/idg/ @mnijhuis-tos @bramveenboer
 /packages/pmt/ @bramveenboer
 /packages/pqxx*/ @bramveenboer
+/packages/py-ducc/ @saeid.aliei
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
