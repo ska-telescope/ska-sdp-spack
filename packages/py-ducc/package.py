@@ -45,8 +45,3 @@ class PyDucc(PythonPackage):
         cmake_args = []
         cmake_args.append("-DDUCC_USE_THREADS=True")
         env.set("CMAKE_ARGS", " ".join(cmake_args))
-        # a hack to overcome setuptools bug in not correctly
-        # recognizing correct C++ Intel compiler.
-        if "%oneapi" in self.spec:
-            env.set("CC", os.environ.get("CXX"))
-
