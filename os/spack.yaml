@@ -7,6 +7,14 @@ spack:
     - wsclean@3.4+python
     - dp3@6.0
     - dysco@1.2
+    - casacore
+    - py-casacore
+    - oskar
+    - py-oskar
+    - ducc
+    - py-ducc
+    - ska-sdp-func
+    - py-ska-sdp-func
   view: false
   concretizer:
     unify: true
