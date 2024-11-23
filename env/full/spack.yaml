@@ -28,4 +28,6 @@ spack:
   # Use official Spack build cache. In the future we will likely want to replace this
   # by the SKA CAR in some fashion
   mirrors:
+    gitlab-mirror:
+      url: oci://registry.gitlab.com/ska-telescope/sdp/ska-sdp-spack/spack-buildcache
     v0.23.0: https://binaries.spack.io/v0.23.0
