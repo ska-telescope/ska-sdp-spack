@@ -63,6 +63,5 @@ class Dp3(CMakePackage):
         env.set("OPENBLAS_NUM_THREADS", "1")
         spec = self.spec
         if ('+python') in spec:
-            import re
-            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
+            major, minor = str(spec["python"].version).split(".")[:2]
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, f"python{major}.{minor}", 'site-packages'))
