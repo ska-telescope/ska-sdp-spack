@@ -39,6 +39,7 @@ class Everybeam(CMakePackage):
     depends_on('python', when='+python')
     depends_on('cmake@3.18.6', when='@0.2.0')
     depends_on('git')
+    depends_on('wget')
 
     def cmake_args(self):
         spec = self.spec
