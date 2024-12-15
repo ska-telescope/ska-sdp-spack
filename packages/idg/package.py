@@ -14,11 +14,11 @@ class Idg(CMakePackage):
     homepage = "https://idg.readthedocs.io"
     git      = "https://git.astron.nl/RD/idg.git"
 
-    version('0.8.1', commit='0.8.1', submodules=True)
-    version('1.0.0', commit='1.0.0', submodules=True)
-    version('1.1.0', commit='1.1.0', submodules=True)
-    version('1.2.0', commit='1.2.0', submodules=True)
     version('latest', branch='master', preferred=True)
+    version('1.2.0', commit='1.2.0', submodules=True)
+    version('1.1.0', commit='1.1.0', submodules=True)
+    version('1.0.0', commit='1.0.0', submodules=True)
+    version('0.8.1', commit='0.8.1', submodules=True)
 
     variant('cuda', default=False, description='Enable CUDA support')
     variant('debug-information', default=False, description='Enable debug information')
@@ -29,7 +29,7 @@ class Idg(CMakePackage):
     depends_on('openblas')
     depends_on('cuda', when='+cuda')
     depends_on('python', when='+python')
-    depends_on('git')
+    depends_on("pkg-config", type="build")
 
     def cmake_args(self):
         spec = self.spec
