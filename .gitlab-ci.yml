@@ -104,6 +104,32 @@ build-ubuntu:
   image: ${IMAGE_UBUNTU}
   extends: .build
 
+build-full:
+  stage: build
+  image: ${IMAGE_UBUNTU}
+  script:
+    - git clone --depth=2 --branch=releases/v0.23 https://github.com/spack/spack.git spack-v0.23
+    - . spack-v0.23/share/spack/setup-env.sh
+    - apt update && apt install -y pkg-config
+    - spack bootstrap now
+    - spack env activate ./env/full
+    - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror-push oci://$CI_REGISTRY_IMAGE/spack-buildcache
+    # Should push to buildcache automatically via --autopush above
+    - spack install --use-cache
+    - spack buildcache push --unsigned --update-index gitlab-mirror-push
+
+deploy-full-aws:
+  stage: publish
+  dependencies: []
+  tags: 
+    - aws-deploy
+  script:
+    - spack -e env/full install --cache-only --only-concrete
+  # Access control
+  environment:
+    name:  aws-dp-modules
+  when: manual
+
 # Creates a Dockerfile for building an image containing the Spack tools.
 # The {OCI_PASSWORD} still needs to be replaced in the generated Dockerfile.
 create-dockerfile:
