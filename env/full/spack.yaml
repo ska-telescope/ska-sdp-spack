@@ -3,11 +3,33 @@ spack:
   - matrix:
     # Install all ska-sdp-spack packages that currently build successfully
     - [
-        aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum,
+
+        # Astron libraries and applications
+        aoflagger,
+        dal2,
+        ducc,
+        everybeam,
+        idg,
+        pmt,
+        rum,
         casacore@3.6.1,
-        dp3, dysco@1.2, 
-        # py-casacore@3.6.1,
-        wsclean@3.4 
+        py-casacore@develop-3.6.0,
+        dp3@6.1,
+        dysco@1.2,
+        wsclean@3.4,
+
+        # SKA libraries
+        py-ska-telmodel@1.19.7,
+        py-ska-sdp-datamodels@0.3.3,
+        py-ska-sdp-func-python@0.5.1,
+
+        # Important Python dependencies (mainly Astropy & SciPy)
+        py-scipy@1.14.1,
+        py-reproject@0.14.1,
+        py-photutils@1.5.0,
+        py-astropy@6.1.0,
+        py-ducc@develop-0.35.0,
+
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
@@ -25,8 +47,7 @@ spack:
   modules:
     default:
       enable: [tcl]
-  # Use official Spack build cache. In the future we will likely want to replace this
-  # by the SKA CAR in some fashion
+  # Use official Spack and SKA build caches (the latter is on GitLab right now)
   mirrors:
     gitlab-mirror:
       url: oci://registry.gitlab.com/ska-telescope/sdp/ska-sdp-spack/spack-buildcache
