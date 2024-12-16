@@ -20,7 +20,7 @@ class HipfftCuda(CMakePackage):
 
     maintainers = ['arjun-raj-kuppala', 'srekolam']
 
-    version('master', branch='master')
+    version('master', branch='master', preferred=True)
 
     version('4.3.1', sha256='429cfd40415856da8f5c2c321b612800d6826ee121df5a4e6d1596cad5b51727')
     version('4.3.0', sha256='6e52e0eb5b2a13adaf317fe5b20b3e059589aabf2af87e4c67cb1022b861ba84')
