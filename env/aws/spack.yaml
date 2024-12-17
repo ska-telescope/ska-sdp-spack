@@ -28,4 +28,7 @@ spack:
   mirrors:
     gitlab-mirror:
       url: oci://registry.gitlab.com/ska-telescope/sdp/ska-sdp-spack/spack-buildcache
-    v0.23.0: https://binaries.spack.io/v0.23.0
+      signed: false  # FIXME: Eventually SKA CI should sign builds
+    v0.23.0:
+      url: https://binaries.spack.io/v0.23.0
+      signed: false  # FIXME: Once the Spack build cache publishes its keys, install them and remove
