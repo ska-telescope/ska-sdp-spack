@@ -6,7 +6,6 @@ spack:
         aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum,
         casacore@3.6.1,
         dp3, dysco@1.2, 
-        # py-casacore@3.6.1,
         wsclean@3.4 
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
@@ -15,7 +14,7 @@ spack:
     - [platform=linux os=ubuntu22.04 target=x86_64_v3]
   # We do not need a view, should use either "spack load" or module files
   view: false
-  # For the moment we unify - likely will need to fall back to when_possible later
+  # Unify where possible - we will have multiple versions of packages (e.g. cfitsio)
   concretizer:
     unify: when_possible
   # Use ska_sdp_spack package repository
@@ -25,8 +24,7 @@ spack:
   modules:
     default:
       enable: [tcl]
-  # Use official Spack build cache. In the future we will likely want to replace this
-  # by the SKA CAR in some fashion
+  # Use official Spack build cache as well as SKA GitLab repository.
   mirrors:
     gitlab-mirror:
       url: oci://registry.gitlab.com/ska-telescope/sdp/ska-sdp-spack/spack-buildcache
