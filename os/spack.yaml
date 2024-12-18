@@ -20,3 +20,6 @@ spack:
       final:
         - libgfortran5
         - libgomp1
+  # Use ska_sdp_spack package repository
+  repos:
+  - ..
