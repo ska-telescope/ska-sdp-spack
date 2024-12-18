@@ -30,6 +30,9 @@ spack:
         py-astropy@6.1.0,
         py-ducc@develop-0.35.0,
 
+        # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
+        python@3.10,
+
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
