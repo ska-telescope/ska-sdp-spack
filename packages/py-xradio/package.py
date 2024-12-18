@@ -4,6 +4,14 @@ import os
 import glob
 
 class PyXradio(PythonPackage):
+    """
+    XRADIO (Xarray Radio Astronomy Data I/O) makes working with
+    radio astronomy data in Python simple, efficient, and fun!
+
+    Currently, XRADIO implements a draft of the Measurement Set v4.0.0
+    schema, designed for storing radio interferometer and single-dish
+    telescope data for offline processing.
+    """
 
     homepage = "https://github.com/casangi/xradio"
     git = "https://github.com/casangi/xradio.git"
@@ -11,14 +19,17 @@ class PyXradio(PythonPackage):
     license("BSD-3-Clause", checked_by="scpmw")
 
     version('0.0.45', commit='98f313c470900b69eb3d0f5d13904f268f1ea700')
+    version('0.0.41', commit='c06a549949e34ff75656d422f8e6bd7a73069918')
     version('0.0.40', commit='1b08a6bb41223fe2b6a860e1648d1758d2874859')
     version('latest', branch='main')
+
+    variant("numba", default=True, description="Add numba kernels")
 
     depends_on('py-astropy',type=("build", "run"))
     depends_on('py-dask',type=("build", "run"))
     depends_on('py-distributed',type=("build", "run"))
     depends_on('py-toolviper@0.0.2:',type=("build", "run"))
-    # depends_on('py-numba@0.57.0:',type=("build", "run"))
+    depends_on('py-numba@0.57.0:',type=("build", "run"), when="+numba")
     depends_on('py-numpy',type=("build", "run"))
     depends_on('py-s3fs@2024:',type=("build", "run"))
     depends_on('py-scipy',type=("build", "run"))

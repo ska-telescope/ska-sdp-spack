@@ -43,4 +43,5 @@ class PyReproject(PythonPackage):
     depends_on("py-scipy@1.1:", type=("build", "run"))
     depends_on("py-astropy-healpix@1.0:", type=("build", "run"), when="@0.10:")
     depends_on("py-astropy-healpix@0.2:", type=("build", "run"))
-    depends_on("py-dask@2021.8:", type=("build", "run"))
+    # Undocumented dependency
+    depends_on("py-dask@2021.8:", type=("build", "run"), when="@0.11:")

@@ -7,18 +7,14 @@ class PyYaml(PythonPackage):
     """PyYAML is a YAML parser and emitter for Python."""
 
     # Git repository for py-yaml
-    git = "https://github.com/yaml/pyyaml.git"
+    homepage = "https://github.com/yaml/pyyaml"
+    pypi = "pyyaml/pyyaml-6.0.2.tar.gz"
 
-    # Use the most recent release version as the default
+    version("6.0.2", sha256="d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e")
     version("main", branch="main")
 
-    # If you need specific versions, you can add them here like this:
-    # version("6.0", tag="6.0")
-
     # Define dependencies
-    depends_on("py-setuptools", type="build")
+    depends_on("python", type=("build", "run"))
+    depends_on("py-wheel", type="build")
     depends_on("py-cython", type="build")
-
-    def build_args(self, spec, prefix):
-        args = []
-        return args
+    depends_on("py-cython@3.0:", type="build", when="^python@3.13:")

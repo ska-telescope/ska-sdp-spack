@@ -11,3 +11,21 @@
 /packages/py-ducc/ @saeid.aliei
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
+/packages/py-astroplan/ @scpmw
+/packages/py-astropy-healpix/ @scpmw
+/packages/aoflagger/package.py
+/packages/dp3/ @scpmw
+/packages/py-astroplan/ @scpmw
+/packages/py-astropy-healpix/ @scpmw
+/packages/py-extension-helpers/ @scpmw
+/packages/py-pyerfa/ @scpmw
+/packages/py-reproject/ @scpmw
+/packages/py-ska-sdp-datamodels/ @scpmw
+/packages/py-ska-sdp-distributed-self-cal-prototype/ @scpmw
+/packages/py-ska-sdp-exec-swiftly/ @scpmw
+/packages/py-ska-sdp-func-python/ @scpmw
+/packages/py-ska-sdp-func/ @scpmw
+/packages/py-ska-telmodel/ @scpmw
+/packages/py-toolviper/ @scpmw
+/packages/py-xradio/ @scpmw
+/packages/py-yaml/ @scpmw

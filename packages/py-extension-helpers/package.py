@@ -7,6 +7,7 @@
 from spack.package import *
 
 
+# Deprecated, but still required for building Cython bits on multiple Astropy libraries.
 class PyExtensionHelpers(PythonPackage):
     """The extension-helpers package includes convenience helpers to
     assist with building Python packages with compiled C/Cython
@@ -25,3 +26,6 @@ class PyExtensionHelpers(PythonPackage):
 
     depends_on("python@3.6:", type=("build", "run"))
     depends_on("py-setuptools@30.3:", type="build")
+    depends_on("py-setuptools@43.0:", type="build", when="@1:")
+    depends_on("py-setuptools-scm@6.2:", type="build", when="@1:")
+    depends_on("py-tomli@1:", type=("build", "run"), when="@1.1.1:")

@@ -1,7 +1,3 @@
-# Copyright 2013-2024 Lawrence Livermore National Security, LLC and other
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
 import os
@@ -18,12 +14,19 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
     version('0.1.0', commit='v0.1.0', submodules=True)
     version('latest', branch='main', submodules=True, preferred=True)
 
-    depends_on("python", type=("build", "run"))
-    depends_on('py-tomlkit', type=("build", "run"))
-    depends_on('py-yaml', type=("build", "run"))
-    depends_on("py-numpy", type=("build", "run"))
-    depends_on("py-dask", type=("build", "run"))
-    depends_on("py-poetry-core", type=("build", "run"))
-    depends_on("py-xarray", type=("build", "run"))
+    depends_on("python@3.10:", type=("build", "run"))
+    depends_on('py-yaml@6.0.2:', type=("build", "run"))
+    depends_on('py-zarr@2.16.1:', type=("build", "run"))
+    depends_on('py-matplotlib@3.8.3:', type=("build", "run"))
+    depends_on('py-xradio@0.0.41', type=("build", "run"))
+    # depends_on('py-pylru@1.2.1:', type=("build", "run")) # TODO: Not Spack-ified yet!
+    depends_on("py-numpy@1.25:", type=("build", "run"))
+    depends_on("py-dask@2024.7:", type=("build", "run"))
+    depends_on("py-distributed@2024.7:", type=("build", "run"))
+    depends_on("py-poetry-core", type="build")
+    depends_on("py-xarray@2023.10.1:", type=("build", "run"))
     depends_on("py-astropy@6:", type=("build", "run"))
     depends_on("py-ska-sdp-exec-swiftly", type=("build", "run"))
+    depends_on("py-ska-sdp-func@1.2.0:", type=("build", "run"))
+    depends_on("py-ska-sdp-func-python@0.5.1:", type=("build", "run"))
+    depends_on("py-ska-sdp-datamodels@0.3.0:", type=("build", "run"))
