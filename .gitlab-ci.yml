@@ -1,5 +1,6 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  SPACK_VERSION: v0.23.0
 
 stages:
   - versioning
@@ -23,8 +24,8 @@ versioning:
   script:
     # Unshallowing ensures that 'git log' works
     - git fetch --unshallow
-    - echo IMAGE_ROCKYLINUX=${CI_REGISTRY_IMAGE}/rockylinux:$(git log -n 1 --pretty=format:%H -- os/rockylinux.dockerfile) > versions.env
-    - echo IMAGE_UBUNTU=${CI_REGISTRY_IMAGE}/ubuntu:$(git log -n 1 --pretty=format:%H -- os/ubuntu.dockerfile) >> versions.env
+    - echo IMAGE_ROCKYLINUX=${CI_REGISTRY_IMAGE}/rockylinux:$(git log -n 1 --pretty=format:%H -- os/rockylinux.dockerfile)-${SPACK_VERSION} > versions.env
+    - echo IMAGE_UBUNTU=${CI_REGISTRY_IMAGE}/ubuntu:$(git log -n 1 --pretty=format:%H -- os/ubuntu.dockerfile)-${SPACK_VERSION} >> versions.env
     - cat versions.env
   artifacts:
     reports:
@@ -48,7 +49,9 @@ versioning:
         else
           DOCKER_CACHE_PARAMETERS=""
         fi
-        docker build $DOCKER_BUILD_ARG ${DOCKER_CACHE_PARAMETERS} --tag $DOCKER_IMAGE -f $DOCKER_FILE .
+        docker build $DOCKER_BUILD_ARG ${DOCKER_CACHE_PARAMETERS} \
+            --build-arg SPACK_VERSION=${SPACK_VERSION} \
+            --tag $DOCKER_IMAGE -f $DOCKER_FILE .
         docker push $DOCKER_IMAGE
       fi
   services:
@@ -108,8 +111,8 @@ build-aws:
   stage: build
   image: ${IMAGE_UBUNTU}
   script:
-    - git clone --depth=2 --branch=releases/v0.23 https://github.com/spack/spack.git spack-v0.23
-    - . spack-v0.23/share/spack/setup-env.sh
+    - git clone --depth=2 --branch=${SPACK_VERSION} https://github.com/spack/spack.git spack-${SPACK_VERSION}
+    - . spack-${SPACK_VERSION}/share/spack/setup-env.sh
     - spack bootstrap now
     - spack env activate ./env/aws
     - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror-push oci://$CI_REGISTRY_IMAGE/spack-buildcache
