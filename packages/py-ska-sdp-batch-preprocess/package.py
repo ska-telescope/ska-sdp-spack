@@ -21,10 +21,10 @@ class SkaSDPBatchPreprocessDev(PythonPackage):
     version("0.1.0", sha256="fe2856f4559fe132499aa12957af65fa22a2426c77d80c245eae54b7e5a85ab7")
 
     depends_on("python@3.8:", type=("build", "run"))
+    depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
+
     depends_on("py-poetry", type="build")
 	depends_on("py-poetry-core", type="build")
-    depends_on("py-pip", type="build")
-    depends_on("python-venv", type="run")
 
     # Development dependencies - only if dev variant is enabled
     variant("dev", default=False, description="Install development dependencies")
