@@ -1,9 +1,4 @@
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
 from spack import *
-
 
 class Everybeam(CMakePackage):
     """The EveryBeam library is a library that provides the antenna response
@@ -26,6 +21,7 @@ class Everybeam(CMakePackage):
     version('0.5.4', commit='v0.5.4', submodules=True)
     version('0.5.5', commit='v0.5.5', submodules=True)
     version('0.6.0', commit='v0.6.0', submodules=True)
+    version('0.6.1', commit='v0.6.1', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('debug-information', default=False, description='Enable debug information')
