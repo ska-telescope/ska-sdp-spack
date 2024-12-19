@@ -4,7 +4,7 @@ spack:
 # - RAC-28: Build 'rum' on CI, too.
 # - AST-1481: Add +cuda to wsclean build.
 # - Build other packages (hipfft-cuda, pmt, pqxx, qpid, ...) on CI, too.
-    - wsclean@3.4+python
+    - wsclean@3.5+python
     - dp3@6.1
     - dysco@1.2
   view: false
