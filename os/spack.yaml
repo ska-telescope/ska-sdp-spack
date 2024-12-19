@@ -14,7 +14,7 @@ spack:
     format: docker
     images:
       os: "ubuntu:22.04"
-      spack: 0.21.0
+      spack: 0.23.0
     strip: true
     os_packages:
       final:
