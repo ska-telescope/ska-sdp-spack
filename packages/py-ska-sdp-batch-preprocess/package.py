@@ -41,7 +41,8 @@ class SkaSDPBatchPreprocessDev(PythonPackage):
     # Documentation dependencies - only if docs variant is enabled
     variant('docs', default=False, description='Install documentation dependencies')
     depends_on('py-sphinx@7.0.0:', type=('build', 'run'), when='+docs')
-    depends_on('py-ska-ser-sphinx-theme@0.2.0:', type=('build', 'run'), when='+docs')
+    # TODO: needs developing
+    # depends_on('py-ska-ser-sphinx-theme@0.2.0:', type=('build', 'run'), when='+docs')
     depends_on('py-recommonmark@0.7.1:', type=('build', 'run'), when='+docs')
 
     def setup_build_environment(self, env):
