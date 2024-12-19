@@ -30,7 +30,8 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     variant("dev", default=False, description="Install development dependencies")
     depends_on("py-black@22.3.0:", type=("build", "run"), when="+dev")
     depends_on("py-pylint@2.8.2:", type=("build", "run"), when="+dev")
-    depends_on("py-pylint-junit@0.3.2:", type=("build", "run"), when="+dev")
+    # TODO: needs developing
+    # depends_on("py-pylint-junit@0.3.2:", type=("build", "run"), when="+dev")
     depends_on("py-pytest@8.3.2:", type=("build", "run"), when="+dev")
     depends_on("py-pytest-cov@2.10.1:", type=("build", "run"), when="+dev")
     depends_on("py-isort@5.6.4:", type=("build", "run"), when="+dev")
