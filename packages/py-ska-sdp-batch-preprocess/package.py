@@ -1,7 +1,7 @@
 # Copyright (c) 2024, The Spack Project Developers
 from spack.package import *
 
-class SkaSDPBatchPreprocessDev(PythonPackage):
+class PySkaSdpBatchPreprocess(PythonPackage):
     """The Batch Preprocessing Pipeline prepares visibility data in MSv2 format 
 	before they can be sent off for self-calibration and imaging. The stages in
     typical order of run include: Static flagging, Dynamic flagging,
@@ -24,7 +24,7 @@ class SkaSDPBatchPreprocessDev(PythonPackage):
     depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
 
     depends_on("py-poetry", type="build")
-	depends_on("py-poetry-core", type="build")
+    depends_on("py-poetry-core", type="build")
 
     # Development dependencies - only if dev variant is enabled
     variant("dev", default=False, description="Install development dependencies")
