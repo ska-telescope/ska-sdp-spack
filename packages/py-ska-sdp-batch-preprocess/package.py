@@ -1,9 +1,14 @@
-# Copyright (c) 2024, The Spack Project Developers
+# Copyright 2013-2024 Lawrence Livermore National Security, LLC and other
+# Spack Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
 from spack.package import *
+
 
 class PySkaSdpBatchPreprocess(PythonPackage):
     """The Batch Preprocessing Pipeline prepares visibility data in MSv2 format 
-	before they can be sent off for self-calibration and imaging. The stages in
+    before they can be sent off for self-calibration and imaging. The stages in
     typical order of run include: Static flagging, Dynamic flagging,
     Application of calibration solutions, and Averaging of the data."""
 
