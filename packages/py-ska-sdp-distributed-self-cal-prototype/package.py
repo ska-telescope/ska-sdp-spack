@@ -23,6 +23,7 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
     # depends_on('py-pylru@1.2.1:', type=("build", "run")) # TODO: Not Spack-ified yet!
     depends_on("py-numpy@1.25:", type=("build", "run"))
     depends_on("py-dask@2024.7:", type=("build", "run"))
+    # 2024.7 is enough, to my knowledge not actually using any newer features
     depends_on("py-distributed@2024.7:", type=("build", "run"))
     depends_on("py-poetry-core", type="build")
     depends_on("py-xarray@2023.10.1:", type=("build", "run"))
