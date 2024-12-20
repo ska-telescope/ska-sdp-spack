@@ -28,8 +28,8 @@ class Dp3(CMakePackage):
     depends_on('aoflagger@3.4.0', when='@6.0:')
     depends_on('aoflagger@3.2.0', when='@5.3:5.4')
     depends_on('aoflagger@3.1.0', when='@5.0:5.2')
-    depends_on('everybeam@0.6.0', when='@latest')
-    depends_on('everybeam@0.6.0', when='@6.1')
+    depends_on('everybeam@0.6', when='@latest')
+    depends_on('everybeam@0.6', when='@6.1')
     depends_on('everybeam@0.5.3', when='@6.0')
     depends_on('everybeam@0.4.0', when='@5.4')
     depends_on('everybeam@0.3.0', when='@5.3')
@@ -63,6 +63,5 @@ class Dp3(CMakePackage):
         env.set("OPENBLAS_NUM_THREADS", "1")
         spec = self.spec
         if ('+python') in spec:
-            import re
-            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
+            python_version = self.spec.dependencies('python')[0].version.up_to(2)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, f"python{python_version}", 'site-packages'))

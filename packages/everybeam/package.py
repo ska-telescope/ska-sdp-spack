@@ -1,9 +1,4 @@
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
 from spack import *
-
 
 class Everybeam(CMakePackage):
     """The EveryBeam library is a library that provides the antenna response
@@ -26,6 +21,7 @@ class Everybeam(CMakePackage):
     version('0.5.4', commit='v0.5.4', submodules=True)
     version('0.5.5', commit='v0.5.5', submodules=True)
     version('0.6.0', commit='v0.6.0', submodules=True)
+    version('0.6.1', commit='v0.6.1', submodules=True)
     version('latest', branch='master', submodules=True)
 
     variant('debug-information', default=False, description='Enable debug information')
@@ -39,6 +35,7 @@ class Everybeam(CMakePackage):
     depends_on('python', when='+python')
     depends_on('cmake@3.18.6', when='@0.2.0')
     depends_on('git')
+    depends_on('wget')
 
     def cmake_args(self):
         spec = self.spec
@@ -52,6 +49,5 @@ class Everybeam(CMakePackage):
     def setup_run_environment(self, env):
         spec = self.spec
         if ('+python') in spec:
-            import re
-            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
+            python_version = self.spec.dependencies('python')[0].version.up_to(2)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, f"python{python_version}", 'site-packages'))

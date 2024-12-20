@@ -30,6 +30,7 @@ class Idg(CMakePackage):
     depends_on('cuda', when='+cuda')
     depends_on('python', when='+python')
     depends_on('git')
+    depends_on('pkgconfig')
 
     def cmake_args(self):
         spec = self.spec
@@ -48,6 +49,5 @@ class Idg(CMakePackage):
         spec = self.spec
         if ('+python') in spec:
             env.prepend_path('PATH', join_path(self.prefix.bin, 'examples', 'python'))
-            import re
-            python_version = re.search(r'python@=([\d]+.[\d]+)', str(self.spec)).group(1)
-            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, "python{}".format(python_version), 'site-packages'))
+            python_version = self.spec.dependencies('python')[0].version.up_to(2)
+            env.prepend_path('PYTHONPATH', join_path(self.prefix.lib, f"python{python_version}", 'site-packages'))
