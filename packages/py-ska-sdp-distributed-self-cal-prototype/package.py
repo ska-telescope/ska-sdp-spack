@@ -26,7 +26,7 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
     depends_on("py-poetry-core", type="build")
     depends_on("py-xarray@2023.10.1:", type=("build", "run"))
     depends_on("py-astropy@6:", type=("build", "run"))
-    depends_on("py-ska-sdp-exec-swiftly", type=("build", "run"))
+    depends_on("py-ska-sdp-exec-swiftly@1.0.0:", type=("build", "run"))
     depends_on("py-ska-sdp-func@1.2.0:", type=("build", "run"))
     depends_on("py-ska-sdp-func-python@0.5.1:", type=("build", "run"))
     depends_on("py-ska-sdp-datamodels@0.3.0:", type=("build", "run"))

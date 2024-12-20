@@ -28,7 +28,7 @@ class PyPyerfa(PythonPackage):
 
     depends_on("c", type="build")  # generated
 
-    # From setup.cfg
+    # From setup.cfg (versions before 2.0.1.5)
     depends_on("python@3.7:", type=("build", "run"))
     depends_on("py-numpy@2:", when="@2.0.1.3:", type=("build", "run"))
     depends_on("py-numpy@1.25:2", when="@2.0.1.1:2.0.1.2", type=("build", "run"))

@@ -16,7 +16,7 @@ spack:
         py-casacore@develop-3.6.0,
         dp3@6.1,
         dysco@1.2,
-        wsclean@3.4,
+        wsclean@3.5,
 
         # SKA libraries
         py-ska-telmodel@1.19.7,
