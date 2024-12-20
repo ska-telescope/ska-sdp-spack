@@ -12,6 +12,7 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
     maintainers("milhazes", "sstansill", "max_m17", "mmacleod_za", "gemmadanks")
 
     version('0.1.0', commit='v0.1.0', submodules=True)
+    version('0.2.0', commit='v0.2.0', submodules=True)
     version('latest', branch='main', submodules=True, preferred=True)
 
     depends_on("python@3.10:", type=("build", "run"))
