@@ -37,7 +37,9 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     depends_on("py-pylint@2.8.2:", type=("build", "run"), when="+dev")
     # TODO: needs developing
     # depends_on("py-pylint-junit@0.3.2:", type=("build", "run"), when="+dev")
-    depends_on("py-pytest@8.3.2:", type=("build", "run"), when="+dev")
+    # NOTE: in the pyproject.toml the version is 8.3.2: but the most 
+    # recent version in spack builtin repo is 8.2.1, we use 8.0.0:
+    depends_on("py-pytest@8.0.0:", type=("build", "run"), when="+dev")
     depends_on("py-pytest-cov@2.10.1:", type=("build", "run"), when="+dev")
     depends_on("py-isort@5.6.4:", type=("build", "run"), when="+dev")
     depends_on("py-flake8@3.9.2:", type=("build", "run"), when="+dev")
