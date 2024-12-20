@@ -29,7 +29,9 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     # TODO: detemine which packages are actually needed for build-time or run-time
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-astropy@6.1.0:", type=("build", "run"))
-    depends_on("py-distributed@2024.11.2:", type=("build", "run"))
+    # NOTE: in the pyproject.toml the version is 2024.11.2: but the most
+    # recent version in spack builtin repo is 2024.7.1 which is used here
+    depends_on("py-distributed@2024.7.1:", type=("build", "run"))
     depends_on("everybeam@0.6.1:", type=("build", "run"))
     depends_on("py-nbmake@1.4.1:", type=("build", "run"))
     depends_on("py-nbqa@1.7.0:", type=("build", "run"))
@@ -56,9 +58,11 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     # depends_on("py-pytest-json@0.4.0:", type="build")
     # TODO: needs developing
     # depends_on("py-pytest-json-report@1.5.0:", type="build")
-    depends_on("py-pytest-cov@6.0.0:", type="build")
+    # NOTE: in the pyproject.toml the version is 6.0.0: but the most
+    # recent version in spack builtin repo is 4.0.0 which is used here
+    depends_on("py-pytest-cov@4.0.0:", type="build")
     depends_on("py-pylint@3.3.1:", type="build")
-    depends_on("py-poetry@1.0.0:", type="build")
+    depends_on("py-poetry", type="build")
     depends_on("py-poetry-core", type="build")
 
     # Development dependencies - only if dev variant is enabled
