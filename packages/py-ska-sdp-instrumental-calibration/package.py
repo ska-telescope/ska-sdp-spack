@@ -38,7 +38,8 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     depends_on("py-matplotlib@3.9.1:", type=("build", "run"))
     depends_on("py-recommonmark@0.7.1:", type=("build", "run"))
     depends_on("py-ska-sdp-datamodels@0.3.2:", type=("build", "run"))
-    depends_on("py-python-casacore@3.5.0:", type=("build", "run"))
+    # TODO: still hasn't merged to main
+    # depends_on("py-python-casacore@3.5.0:", type=("build", "run"))
     depends_on("ska-sdp-func@1.2.0:", type=("build", "run"))
     # TODO: still hasn't merged to main
     # depends_on("py-ska-sdp-func-python@0.5.1:", type=("build", "run"))
