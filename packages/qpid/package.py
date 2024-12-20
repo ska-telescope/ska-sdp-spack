@@ -1,8 +1,4 @@
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
-from spack import *
+from spack.package import *
 
 
 class Qpid(CMakePackage):
@@ -28,4 +24,3 @@ class Qpid(CMakePackage):
             self.define('ENABLE_WARNING_ERROR', False),
         ]
         return args
-
