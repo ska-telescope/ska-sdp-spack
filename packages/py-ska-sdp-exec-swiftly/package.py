@@ -20,3 +20,4 @@ class PySkaSdpExecSwiftly(PythonPackage):
     depends_on('py-h5py@3.10:', type=("build", "run"))
     depends_on("py-pandas@2.2:", type=("build", "run"))
     depends_on("py-ska-sdp-func@1.0.1:", type=("build", "run"))
+    # Some dependencies omitted, assumed to be just for notebooks

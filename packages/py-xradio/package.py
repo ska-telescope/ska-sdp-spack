@@ -23,6 +23,11 @@ class PyXradio(PythonPackage):
     version('0.0.40', commit='v0.0.40')
     version('latest', branch='main')
 
+    # TODO: These dependencies are likely incorrect - xradio is still
+    # in a fairly experimental development phase, and dependencies are
+    # likely going to be revised significantly soon (Source: JW claimed
+    # at the review we'd go down to 4 dependencies!)
+
     variant("numba", default=True, description="Add numba kernels")
 
     depends_on('py-astropy',type=("build", "run"))
