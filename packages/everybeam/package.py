@@ -1,4 +1,4 @@
-from spack import *
+from spack.package import *
 
 class Everybeam(CMakePackage):
     """The EveryBeam library is a library that provides the antenna response

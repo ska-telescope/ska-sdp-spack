@@ -1,9 +1,4 @@
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
-from spack import *
-import os
+from spack.package import *
 
 
 class PyCasacore(PythonPackage):
@@ -44,5 +39,3 @@ class PyCasacore(PythonPackage):
             # Remove 'develop-' from the version in spack
             spec_vers_str = spec_vers_str.partition("-")[2]
         return spec_vers_str
-
-

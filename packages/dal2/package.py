@@ -1,8 +1,4 @@
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
-from spack import *
+from spack.package import *
 
 
 class Dal2(CMakePackage):
@@ -29,4 +25,3 @@ class Dal2(CMakePackage):
             self.define('PYTHON_BINDINGS', '+python' in spec),
         ]
         return args
-
