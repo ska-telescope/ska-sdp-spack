@@ -6,6 +6,7 @@ stages:
   - prepare
   - lint
   - build
+  - test
   - package
   - publish
   - scan
