@@ -18,8 +18,8 @@ class PyXradio(PythonPackage):
 
     license("BSD-3-Clause", checked_by="scpmw")
 
-    version('0.0.45', commit='98f313c470900b69eb3d0f5d13904f268f1ea700')
     version('0.0.45', commit='v0.0.45')
+    version('0.0.41', commit='v0.0.41')
     version('0.0.40', commit='v0.0.40')
     version('latest', branch='main')
 
