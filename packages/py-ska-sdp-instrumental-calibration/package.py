@@ -64,7 +64,6 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     depends_on("py-pygments@2.15.1:", type=("build", "run"), when="+dev")
     depends_on("py-pylint@3.3.1:", type=("build", "run"), when="+dev")
     depends_on("py-pytest@8.3.3:", type=("build", "run"), when="+dev")
-    depends_on("py-pytest-cov@6.0.0:", type=("build", "run"), when="+dev")
     depends_on("py-pytest-pylint@0.21.0:", type=("build", "run"), when="+dev")
     depends_on("py-python-dotenv@0.5.1:", type=("build", "run"), when="+dev")
     depends_on("py-setuptools@68.0.0:", type=("build", "run"), when="+dev")
@@ -81,11 +80,6 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     # depends_on("py-sphinx-autobuild-typehints@2.1.0:", type=("build", "run"), when="+docs")
     depends_on("py-sphinxcontrib-websupport@1.2.4:", type=("build", "run"), when="+docs")
     depends_on("py-recommonmark@0.7.1:", type=("build", "run"), when="+docs")
-    depends_on("py-numpy@1.25.4:", type=("build", "run"), when="+docs")
-    depends_on("py-ska-sdp-datamodels@0.3.2:", type=("build", "run"), when="+docs")
-    depends_on("py-ska-sdp-func-python@0.5.1:", type=("build", "run"), when="+docs")
-    depends_on("py-xarray@2024.7.0:", type=("build", "run"))
-    depends_on("everybeam@0.6.1:", type=("build", "run"))
 
     def setup_build_environment(self, env):
         env.set("POETRY_SOURCE_AUTH_SKAO", '')
