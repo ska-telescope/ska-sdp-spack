@@ -1,6 +1,9 @@
 # Default owner(s)
 * @mnijhuis-tos
 
+# Default owner(s) for Python packages
+/packages/py-*/ @scpmw
+
 # Overrides for specific packages
 /packages/dal2/ @bramveenboer
 /packages/ducc/ @saeid.aliei
