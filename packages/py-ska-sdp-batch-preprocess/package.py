@@ -45,30 +45,30 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     depends_on("py-build@0.10.0:", type=("build", "run"), when="+dev")
 
     # Documentation dependencies - only if docs variant is enabled
-    variant('docs', default=False, description='Install documentation dependencies')
-    depends_on('py-sphinx@7.0.0:', type=('build', 'run'), when='+docs')
+    variant("docs", default=False, description="Install documentation dependencies")
+    depends_on("py-sphinx@7.0.0:", type=("build", "run"), when="+docs")
     # TODO: needs developing
-    # depends_on('py-ska-ser-sphinx-theme@0.2.0:', type=('build', 'run'), when='+docs')
-    depends_on('py-recommonmark@0.7.1:', type=('build', 'run'), when='+docs')
+    # depends_on("py-ska-ser-sphinx-theme@0.2.0:", type=("build", "run"), when="+docs")
+    depends_on("py-recommonmark@0.7.1:", type=("build", "run"), when="+docs")
 
     def setup_build_environment(self, env):
-        env.set('POETRY_SOURCE_AUTH_SKAO', '')
-        env.set('POETRY_REPOSITORIES_SKAO_URL', 'https://artefact.skao.int/repository/pypi-internal/simple')
+        env.set("POETRY_SOURCE_AUTH_SKAO", '')
+        env.set("POETRY_REPOSITORIES_SKAO_URL", "https://artefact.skao.int/repository/pypi-internal/simple")
 
     def install(self, spec, prefix):
-        poetry = which('poetry')
-        poetry('config', 'virtualenvs.create', 'false')
-        poetry('install', '--no-dev', '--no-interaction')
+        poetry = which("poetry")
+        poetry("config", "virtualenvs.create", "false")
+        poetry("install", "--no-dev", "--no-interaction")
         
-        if '+dev' in spec:
-            poetry('install', '--with', 'dev', '--no-interaction')
-        if '+docs' in spec:
-            poetry('install', '--with', 'docs', '--no-interaction')
+        if "+dev" in spec:
+            poetry("install", "--with", "dev", "--no-interaction")
+        if "+docs" in spec:
+            poetry("install", "--with", "docs", "--no-interaction")
         
         super().install(spec, prefix)
 
     def build_args(self, spec, prefix):
-        return ['--no-deps']
+        return ["--no-deps"]
 
     @property
     @llnl.util.lang.memoized
@@ -76,5 +76,5 @@ class PySkaSdpBatchPreprocess(PythonPackage):
         spec_vers_str = str(self.spec.version.up_to(3))
         if "develop" in spec_vers_str:
             # Remove 'develop-' from the version in spack
-            spec_vers_str = spec_vers_str.partition("-")[2]
+            spec_vers_str = spec_vers_str.partition('-')[2]
         return spec_vers_str
