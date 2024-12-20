@@ -17,7 +17,8 @@ class PySkaSdpFuncPython(PythonPackage):
     depends_on('py-astroplan@0.10:', type=("build", "run"))
     depends_on('py-ducc@0.35:', type=("build", "run"))
     depends_on("py-numpy@1.26:", type=("build", "run"))
-    depends_on("py-photutils@1.12:", type=("build", "run"))
+    # Newest version in spack, seems okay according to unit tests
+    depends_on("py-photutils@1.5:", type=("build", "run"))
     depends_on("py-scipy@1.14:", type=("build", "run"))
     depends_on("py-xarray@2024.7:", type=("build", "run"))
     depends_on("py-reproject@0.14:", type=("build", "run"))
