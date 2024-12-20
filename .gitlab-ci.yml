@@ -105,6 +105,9 @@ build-aws:
     - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror-push oci://$CI_REGISTRY_IMAGE/spack-buildcache
     # Should push to buildcache automatically via --autopush above
     - spack install --use-cache
+  artifacts:
+    paths:
+      - env/aws/spack.lock
 
 deploy-aws:
   stage: publish
