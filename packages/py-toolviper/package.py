@@ -14,7 +14,7 @@ class PyToolviper(PythonPackage):
 
     license("BSD-3-Clause", checked_by="scpmw")
 
-    version('0.0.2', commit='28fb90de58a307f5526c7873c8f2238b201b0640')
+    version('0.0.2', commit='v0.0.2')
     version('develop', branch='main')
 
     # TODO: These dependencies are likely incorrect and/or not enough
