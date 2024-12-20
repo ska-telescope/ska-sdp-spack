@@ -3,10 +3,36 @@ spack:
   - matrix:
     # Install all ska-sdp-spack packages that currently build successfully
     - [
-        aoflagger, dal2, ducc, everybeam, idg, pmt, py-ducc, rum,
+
+        # Astron libraries and applications
+        aoflagger,
+        dal2,
+        ducc,
+        everybeam,
+        idg,
+        pmt,
+        rum,
         casacore@3.6.1,
-        dp3, dysco@1.2, 
-        wsclean@3.4 
+        py-casacore@develop-3.6.0,
+        dp3@6.1,
+        dysco@1.2,
+        wsclean@3.5,
+
+        # SKA libraries
+        py-ska-telmodel@1.19.7,
+        py-ska-sdp-datamodels@0.3.3,
+        py-ska-sdp-func-python@0.5.1,
+
+        # Important Python dependencies (mainly Astropy & SciPy)
+        py-scipy@1.14.1,
+        py-reproject@0.14.1,
+        py-photutils@1.5.0,
+        py-astropy@6.1.0,
+        py-ducc@develop-0.35.0,
+
+        # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
+        python@3.10,
+
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
@@ -14,7 +40,7 @@ spack:
     - [platform=linux os=ubuntu22.04 target=x86_64_v3]
   # We do not need a view, should use either "spack load" or module files
   view: false
-  # Unify where possible - we will have multiple versions of packages (e.g. cfitsio)
+  # For the moment we unify - likely will need to fall back to when_possible later
   concretizer:
     unify: when_possible
   # Use ska_sdp_spack package repository
