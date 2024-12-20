@@ -1,5 +1,10 @@
+PYTHON_SRC = packages/wsclean/package.py
+PYTHON_LINT_TARGET = $(PYTHON_SRC)
+PYTHON_SWITCHES_FOR_PYLINT = --disable=import-error,missing-module-docstring,missing-function-docstring
+
 -include .make/base.mk
 -include .make/oci.mk
+-include .make/python.mk
 
 set-registry-password:
 	@if [ -z "$(CI)" ]; then \
