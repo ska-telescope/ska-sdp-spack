@@ -27,18 +27,24 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     version("0.1.1", sha256="401134881d027c01afb3675432fae881421663790579c96651e276d79acffaeb")
 
     # TODO: detemine which packages are actually needed for build-time or run-time
-    depends_on("python@3.10:", type=("build", "run"))
+    #depends_on("python@3.10:", type=("build", "run"))
+    depends_on("python", type=("build", "run"))
+    #depends_on("py-poetry", type="build")
+    depends_on("py-poetry-core", type="build")
+
     depends_on("py-astropy@6.1.0:", type=("build", "run"))
     # NOTE: in the pyproject.toml the version is 2024.11.2: but the most
     # recent version in spack builtin repo is 2024.7.1 which is used here
     depends_on("py-distributed@2024.7.1:", type=("build", "run"))
     depends_on("everybeam@0.6.1:", type=("build", "run"))
     depends_on("py-nbmake@1.4.1:", type=("build", "run"))
-    depends_on("py-nbqa@1.7.0:", type=("build", "run"))
+    #depends_on("py-nbqa@1.7.0:", type=("build", "run"))
+    depends_on("py-nbqa@1.6.3:", type=("build", "run"))
     depends_on("py-numpy@1.25.4:", type=("build", "run"))
     depends_on("py-jsonschema@4.18.4:", type=("build", "run"))
     depends_on("py-matplotlib@3.9.1:", type=("build", "run"))
-    depends_on("py-recommonmark@0.7.1:", type=("build", "run"))
+    #depends_on("py-recommonmark@0.7.1:", type=("build", "run"))
+    depends_on("py-recommonmark@0.6.0:", type=("build", "run"))
     # TODO: still hasn't merged to main
     # depends_on("py-ska-sdp-datamodels@0.3.2:", type=("build", "run"))
     # TODO: still hasn't merged to main
@@ -51,8 +57,10 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     # depends_on("py-pylance@0.5.9:", type=("build", "run"))
     depends_on("py-xarray@2024.7.0:", type=("build", "run"))
     depends_on("py-isort@5.6.4:", type="build")
-    depends_on("py-flake8@7.1.0:", type="build")
-    depends_on("py-black@24.10.0:", type="build")
+    #depends_on("py-flake8@7.1.0:", type="build")
+    depends_on("py-flake8@6.1.0:", type="build")
+    #depends_on("py-black@24.10.0:", type="build")
+    depends_on("py-black@22.3.0:", type="build")
     depends_on("py-setuptools-scm@7.1.0:", type="build")
     # TODO: needs developing
     # depends_on("py-pytest-json@0.4.0:", type="build")
@@ -61,33 +69,41 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     # NOTE: in the pyproject.toml the version is 6.0.0: but the most
     # recent version in spack builtin repo is 4.0.0 which is used here
     depends_on("py-pytest-cov@4.0.0:", type="build")
-    depends_on("py-pylint@3.3.1:", type="build")
-    depends_on("py-poetry", type="build")
-    depends_on("py-poetry-core", type="build")
+    #depends_on("py-pylint@3.3.1:", type="build")
+    depends_on("py-pylint@2.16.2:", type="build")
 
     # Development dependencies - only if dev variant is enabled
     variant("dev", default=False, description="Install development dependencies")
-    depends_on("py-docutils@0.21.2:", type=("build", "run"), when="+dev")
+    #depends_on("py-docutils@0.21.2:", type=("build", "run"), when="+dev")
+    depends_on("py-docutils@0.20.1:", type=("build", "run"), when="+dev")
     depends_on("py-markupsafe@0.21.2:", type=("build", "run"), when="+dev")
     depends_on("py-pygments@2.15.1:", type=("build", "run"), when="+dev")
-    depends_on("py-pylint@3.3.1:", type=("build", "run"), when="+dev")
-    depends_on("py-pytest@8.3.3:", type=("build", "run"), when="+dev")
+    #depends_on("py-pytest@8.3.3:", type=("build", "run"), when="+dev")
+    depends_on("py-pytest@7.4.4:", type=("build", "run"), when="+dev")
+    #depends_on("py-pytest", type=("build", "run"), when="+dev")
     depends_on("py-pytest-pylint@0.21.0:", type=("build", "run"), when="+dev")
+    #depends_on("py-pytest-pylint", type=("build", "run"), when="+dev")
     depends_on("py-python-dotenv@0.5.1:", type=("build", "run"), when="+dev")
-    depends_on("py-setuptools@68.0.0:", type=("build", "run"), when="+dev")
+    #depends_on("py-python-dotenv", type=("build", "run"), when="+dev")
+    #depends_on("py-setuptools@68.0.0:", type=("build", "run"), when="+dev")
+    depends_on("py-setuptools@62.3.2:", type=("build", "run"), when="+dev")
+    #depends_on("py-setuptools", type=("build", "run"), when="+dev")
     depends_on("py-pipdeptree@2.10.2:", type=("build", "run"), when="+dev")
+    #depends_on("py-pipdeptree", type=("build", "run"), when="+dev")
     # TODO: needs developing
     # depends_on("py-pylint-junit@0.3.2:", type=("build", "run"), when="+dev")
 
     variant("docs", default=False, description="Install documentation dependencies")
-    depends_on("py-sphinx@8.1.0:", type=("build", "run"), when="+docs")
-    depends_on("py-sphinx-rtd-theme@3.0.1:", type=("build", "run"), when="+docs")
+    #depends_on("py-sphinx@8.1.0:", type=("build", "run"), when="+docs")
+    depends_on("py-sphinx", type=("build", "run"), when="+docs")
+    #depends_on("py-sphinx-rtd-theme@3.0.1:", type=("build", "run"), when="+docs")
+    depends_on("py-sphinx-rtd-theme", type=("build", "run"), when="+docs")
     # TODO: needs developing
     # depends_on("py-sphinx-autobuild@2021.3.14:", type=("build", "run"), when="+docs")
     # TODO: needs developing
     # depends_on("py-sphinx-autobuild-typehints@2.1.0:", type=("build", "run"), when="+docs")
-    depends_on("py-sphinxcontrib-websupport@1.2.4:", type=("build", "run"), when="+docs")
-    depends_on("py-recommonmark@0.7.1:", type=("build", "run"), when="+docs")
+    #depends_on("py-sphinxcontrib-websupport@1.2.4:", type=("build", "run"), when="+docs")
+    depends_on("py-sphinxcontrib-websupport@1.1.2:", type=("build", "run"), when="+docs")
 
     def setup_build_environment(self, env):
         env.set("POETRY_SOURCE_AUTH_SKAO", '')
