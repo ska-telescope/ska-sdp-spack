@@ -30,7 +30,7 @@ class Idg(CMakePackage):
     depends_on('cuda', when='+cuda')
     depends_on('python', when='+python')
     depends_on('git')
-    depends_on('pkgconfig')
+    depends_on('pkg-config')
 
     def cmake_args(self):
         spec = self.spec
