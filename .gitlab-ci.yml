@@ -114,7 +114,7 @@ build-aws:
 deploy-aws:
   stage: publish
   dependencies: []
-  tags: 
+  tags:
     - aws-deploy
   script:
     - spack -e env/aws install --cache-only --only-concrete
@@ -170,6 +170,8 @@ include:
     file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/oci-image.gitlab-ci.yml"
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/python-lint.gitlab-ci.yml"
   - project: "ska-telescope/templates-repository"
     file: "gitlab-ci/includes/release.gitlab-ci.yml"
 
