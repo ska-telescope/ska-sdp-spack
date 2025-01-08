@@ -1,7 +1,7 @@
 from spack.package import *
 
 
-class PyCasacore(PythonPackage):
+class PyPythonCasacore(PythonPackage):
     """Python-casacore is a set of Python bindings for casacore, a c++ library used in radio astronomy."""
 
     homepage = "https://github.com/casacore/python-casacore"
@@ -12,7 +12,7 @@ class PyCasacore(PythonPackage):
 
     license("LPGL-3.0")
 
-    version("develop-3.6.0", branch="master", preferred=True)
+    version("latest", branch="master", preferred=True)
     version("3.6.1", sha256="48ca6e8d09d2e822c2bf5286247362d1dfe6d99acbb381676c4b16574959bc03")
     version("3.5.2", sha256="ad70c8e08893eec928b3e38c099bda8863f5aa9d099fd00694ad2b0d48eba08f")
     version("3.5.1", sha256="a577233c7311f64a8048180ee82d6946fee16e0dce2976eb516784a32d8b9133")
