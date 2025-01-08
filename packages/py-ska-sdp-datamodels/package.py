@@ -22,4 +22,4 @@ class PySkaSdpDatamodels(PythonPackage):
     depends_on("py-msgpack@1.0:", type=("build", "run"))
     depends_on("py-msgpack-numpy@0.4:", type=("build", "run"))
     depends_on("py-ska-telmodel@1.19:", type=("build", "run"))
-    depends_on("py-casacore@3.5:", type=("build", "run"))
+    depends_on("py-python-casacore@3.5:", type=("build", "run"))

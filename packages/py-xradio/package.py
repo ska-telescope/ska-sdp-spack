@@ -41,7 +41,7 @@ class PyXradio(PythonPackage):
     depends_on('py-xarray',type=("build", "run"))
     depends_on('py-zarr',type=("build", "run"))
     depends_on('py-pyarrow',type=("build", "run"))
-    depends_on('py-casacore@3.6.1:',type=("build", "run"))
+    depends_on('py-python-casacore@3.6.1:',type=("build", "run"))
     depends_on('py-typing-extensions',type=("build", "run"))
     depends_on('py-typeguard', type=("build", "run"))
 

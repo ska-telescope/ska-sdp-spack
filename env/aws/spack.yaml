@@ -13,7 +13,7 @@ spack:
         pmt,
         rum,
         casacore@3.6.1,
-        py-casacore@develop-3.6.0,
+        py-python-casacore@latest,
         dp3@6.1,
         dysco@1.2,
         wsclean@3.5,
