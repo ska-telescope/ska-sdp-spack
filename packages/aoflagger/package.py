@@ -27,6 +27,7 @@ class Aoflagger(CMakePackage):
     depends_on('lua')
     depends_on('cairo')
     depends_on('git')
+    depends_on('python')
 
     def cmake_args(self):
         spec = self.spec
