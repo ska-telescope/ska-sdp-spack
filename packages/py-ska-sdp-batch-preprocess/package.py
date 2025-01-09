@@ -16,12 +16,10 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     license("BSD 3-Clause")
 
     version("latest", branch="main", preferred=True)
-    version("1.0.1", sha256="782fd15ea6fc64eead5968a0e3a543049ef1154f67ff8648e41f98d1b77d7243")
-    version("1.0.0", sha256="c82bbb865d6321d25b6ded96b9bdd956b07273214f7e592b67ec3ac0f4f2c919")
-    version("0.1.0", sha256="fe2856f4559fe132499aa12957af65fa22a2426c77d80c245eae54b7e5a85ab7")
 
-    depends_on("python@3.8:", type=("build", "run"))
+    depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
+    depends_on("py-jsonschema@4.4.0:", type=("build", "run"))
 
     depends_on("py-poetry", type="build")
     depends_on("py-poetry-core", type="build")
