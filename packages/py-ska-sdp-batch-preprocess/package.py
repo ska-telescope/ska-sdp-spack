@@ -1,4 +1,4 @@
-from spack.package import *
+from spack.package import PythonPackage
 
 
 class PySkaSdpBatchPreprocess(PythonPackage):
@@ -11,7 +11,7 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     url = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-batch-preprocess/-/archive/1.0.1/ska-sdp-batch-preprocess-1.0.1.tar.gz"
     git = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-batch-preprocess/"
 
-    # maintainers("saliei", "vmorello")
+    maintainers("saliei", "vmorello")
 
     license("BSD 3-Clause")
 
