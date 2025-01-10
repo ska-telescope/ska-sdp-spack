@@ -34,7 +34,7 @@ spack:
         python@3.10,
 
         # Benchmark tools
-        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl+papi+python~rocm~viewer
+        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer
 
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
