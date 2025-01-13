@@ -5,7 +5,7 @@ spack:
 # - AST-1481: Add +cuda to wsclean build.
 # - Build other packages (hipfft-cuda, pmt, pqxx, qpid, ...) on CI, too.
     - wsclean@3.5+python
-    - dp3@6.1
+    - dp3@6.2.1
     - dysco@1.2
   view: false
   concretizer:
