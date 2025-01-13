@@ -109,14 +109,15 @@ build-aws:
     - spack install --use-cache
     # fail if env/aws/spack.lock was changed
     - if ! git diff --quiet env/aws/spack.lock; then
-         echo "===============================================================================";
-         echo "The env/aws/spack.lock file changed after 'spack install', which means that it";
-         echo "did not implement spack.lock correctly (either because of new specs or changes";
-         echo "in packages). In either case, check whether the concretisation above makes sense,";
-         echo "and if so commit the spack.lock generated from this CI job:";
+         echo "";
+         echo -e "\e[31m=================================================================================\e[0m";
+         echo -e "\e[31mThe env/aws/spack.lock file changed after 'spack install', which means that it\e[0m";
+         echo -e "\e[31mdid not implement all specs from spack.yaml. Check whether the concretisation above";
+         echo -e "\e[31mmakes sense, and if so commit the spack.lock generated from this CI job:\e[0m";
          echo "";
          echo "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/raw/env/aws/spack.lock";
-         echo "===============================================================================";
+         echo -e "\e[31m=================================================================================\e[0m";
+         echo "";
          exit 1;
       fi
   artifacts:
