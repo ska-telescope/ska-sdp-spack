@@ -1,5 +1,9 @@
 PYTHON_LINT_TARGET = packages/aoflagger/package.py packages/wsclean/package.py packages/py-*/
-PYTHON_SWITCHES_FOR_PYLINT = --disable=import-error,missing-module-docstring,missing-function-docstring,too-few-public-methods
+PYTHON_SWITCHES_FOR_PYLINT = --disable=missing-module-docstring,missing-function-docstring,too-few-public-methods
+
+# The spack package actually gets installed into site-packages/lib/spack, so we need to
+# add this to the PYTHONPATH. Slightly hacky, but works for the moment.
+PYTHON_RUNNER = PYTHONPATH=`python -c 'import lib.spack; print(lib.spack.__path__[0])'` python -m
 
 -include .make/base.mk
 -include .make/oci.mk
@@ -26,3 +30,4 @@ oci-post-build:
 	fi; \
 	$(OCI_BUILDER) run --rm -t $(OCI_IMAGE):$${OCI_TAG} DP3 -v && \
 	$(OCI_BUILDER) run --rm -t $(OCI_IMAGE):$${OCI_TAG} wsclean -version
+
