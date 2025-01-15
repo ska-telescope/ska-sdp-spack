@@ -1,5 +1,5 @@
 import llnl.util.lang
-from spack.package import PythonPackage, depends_on, pytest, variant, version
+from spack.package import PythonPackage, depends_on, variant, version
 
 
 class PySkaSdpFunc(PythonPackage):
@@ -92,5 +92,6 @@ class PySkaSdpFunc(PythonPackage):
             spec_vers_str = spec_vers_str.partition("-")[2]
         return spec_vers_str
 
-    def test(self):
-        pytest("-V")
+    # Disabled - not sure where "pytest" would come from?
+    # def test(self):
+    #    pytest("-V")
