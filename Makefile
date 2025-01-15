@@ -1,4 +1,4 @@
-PYTHON_LINT_TARGET = packages/aoflagger/package.py packages/wsclean/package.py
+PYTHON_LINT_TARGET = packages/aoflagger/package.py packages/wsclean/package.py packages/py-*/
 PYTHON_SWITCHES_FOR_PYLINT = --disable=import-error,missing-module-docstring,missing-function-docstring,too-few-public-methods
 
 -include .make/base.mk
