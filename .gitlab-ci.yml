@@ -105,9 +105,13 @@ build-aws:
     - spack env activate ./env/aws
     - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror-push oci://$CI_REGISTRY_IMAGE/spack-buildcache
     - spack config add "config:install_tree:padded_length:128"
-    # Should push to buildcache automatically via --autopush above
+    # Concretise to update spack.lock if needed
+    - spack concretise
+    - spack spec
+    # Install concretised specs. Should push to buildcache automatically via --autopush above
     - spack install --use-cache
-    # fail if env/aws/spack.lock was changed
+    # Fail if env/aws/spack.lock was changed by "spack concretise". We do this after "spack install"
+    # so we are sure that the concretisation actually works.
     - if ! git diff --quiet env/aws/spack.lock; then
          echo "";
          echo -e "\e[31m=================================================================================\e[0m";
