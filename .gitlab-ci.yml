@@ -105,11 +105,29 @@ build-aws:
     - spack env activate ./env/aws
     - spack mirror add --autopush --unsigned --oci-username $CI_REGISTRY_USER --oci-password-variable CI_REGISTRY_PASSWORD gitlab-mirror-push oci://$CI_REGISTRY_IMAGE/spack-buildcache
     - spack config add "config:install_tree:padded_length:128"
-    # Should push to buildcache automatically via --autopush above
+    # Concretise to update spack.lock if needed
+    - spack concretise
+    - spack spec
+    # Install concretised specs. Should push to buildcache automatically via --autopush above
     - spack install --use-cache
+    # Fail if env/aws/spack.lock was changed by "spack concretise". We do this after "spack install"
+    # so we are sure that the concretisation actually works.
+    - if ! git diff --quiet env/aws/spack.lock; then
+         echo "";
+         echo -e "\e[31m=================================================================================\e[0m";
+         echo -e "\e[31mThe env/aws/spack.lock file changed after 'spack install', which means that it\e[0m";
+         echo -e "\e[31mdid not implement all specs from spack.yaml. Check whether the concretisation above";
+         echo -e "\e[31mmakes sense, and if so commit the spack.lock generated from this CI job:\e[0m";
+         echo "";
+         echo "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/raw/env/aws/spack.lock";
+         echo -e "\e[31m=================================================================================\e[0m";
+         echo "";
+         exit 1;
+      fi
   artifacts:
     paths:
       - env/aws/spack.lock
+    when: always
 
 deploy-aws:
   stage: publish
