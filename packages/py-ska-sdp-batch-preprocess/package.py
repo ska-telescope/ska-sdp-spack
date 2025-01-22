@@ -20,21 +20,5 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
     depends_on("py-jsonschema@4.4.0:", type=("build", "run"))
+    depends_on("dp3@6.0:", type=("build", "run"))
 
-    depends_on("py-poetry", type="build")
-    depends_on("py-poetry-core", type="build")
-
-
-    def setup_build_environment(self, env):
-        env.set("POETRY_SOURCE_AUTH_SKAO", '')
-        env.set("POETRY_REPOSITORIES_SKAO_URL", "https://artefact.skao.int/repository/pypi-internal/simple")
-
-    def install(self, spec, prefix):
-        poetry = which("poetry")
-        poetry("config", "virtualenvs.create", "false")
-        poetry("install", "--no-dev", "--no-interaction")
-        
-        super().install(spec, prefix)
-
-    def build_args(self, spec, prefix):
-        return ["--no-deps"]
