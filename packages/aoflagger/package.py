@@ -13,11 +13,6 @@ class Aoflagger(CMakePackage):
     version("3.4.0", commit="v3.4.0", submodules=True)
     version("latest", branch="master", submodules=True)
 
-    variant(
-        "debug-information",
-        default=False,
-        description="Enable debug information",
-    )
     variant("gui", default=False, description="Build rfigui and aoqplot tools")
 
     depends_on("casacore+data")
@@ -37,6 +32,4 @@ class Aoflagger(CMakePackage):
         args = [
             self.define("ENABLE_GUI", "+gui" in spec),
         ]
-        if "+debug-information" in spec:
-            args.append(self.define("CMAKE_CXX_FLAGS", "-g"))
         return args
