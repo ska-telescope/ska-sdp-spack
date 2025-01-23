@@ -31,7 +31,6 @@ class Casacore(CMakePackage):
     depends_on("cmake@3.7.1:", type="build")
 
     variant("adios2", default=False, description="Build ADIOS2 support")
-    variant('debug-information', default=False, description='Enable debug information')
     variant("dysco", default=True, when="@3.5.0:", description="Build Dysco storage manager")
     variant("fftpack", default=False, description="Build FFTPack")
     variant("hdf5", default=False, description="Build HDF5 support")
@@ -111,9 +110,6 @@ class Casacore(CMakePackage):
             args.extend(["-DBUILD_PYTHON=NO", "-DBUILD_PYTHON3=YES"])
         else:
             args.extend(["-DBUILD_PYTHON=YES", "-DBUILD_PYTHON3=NO"])
-
-        if '+debug-information' in spec:
-            args.append(self.define('CMAKE_CXX_FLAGS', "-g"))
 
         args.append("-DBUILD_TESTING=OFF")
         return args
