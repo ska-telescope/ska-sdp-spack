@@ -17,7 +17,7 @@ class Dp3(CMakePackage):
     version('6.0', commit='v6.0', submodules=True)
     version('6.1', commit='v6.1', submodules=True)
     version('6.2.1', commit='v6.2.1', submodules=True)
-    version('latest', branch='master', submodules=True)
+    version('latest', branch='master', submodules=True, no_cache=True)
 
     variant('python', default=True, description='Enable Python support')
 
@@ -39,16 +39,6 @@ class Dp3(CMakePackage):
     depends_on('gsl')
     depends_on('git')
     depends_on('python', when='+python')
-    variant('debug-information', default=False, description='Enable debug information')
-
-    def cmake_args(self):
-        spec = self.spec
-        args = []
-        if '+debug-information' in spec:
-            args = [
-                self.define('CMAKE_CXX_FLAGS', "-g")
-            ]
-        return args
 
     def setup_build_environment(self, env):
         print(self.spec.version)
