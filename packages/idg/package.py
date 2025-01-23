@@ -17,7 +17,6 @@ class Idg(CMakePackage):
     version('latest', branch='master', preferred=True)
 
     variant('cuda', default=False, description='Enable CUDA support')
-    variant('debug-information', default=False, description='Enable debug information')
     variant('python', default=False, description='Enable Python support')
     variant('report', default=False, description='Enable performance reporting')
 
@@ -36,8 +35,6 @@ class Idg(CMakePackage):
             self.define('BUILD_WITH_PYTHON', '+python' in spec),
             self.define('PERFORMANCE_REPORT', '+report' in spec),
         ]
-        if '+debug-information' in spec:
-            args.append(self.define('CMAKE_CXX_FLAGS', "-g"))
         return args
 
     def setup_run_environment(self, env):
