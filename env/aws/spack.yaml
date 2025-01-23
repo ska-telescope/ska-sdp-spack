@@ -37,8 +37,7 @@ spack:
         hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
 
         # Monitoring tools
-        dool@latest,
-        py-ska-sdp-benchmark-monitor@0.1.0
+        py-ska-sdp-benchmark-monitor@main
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
