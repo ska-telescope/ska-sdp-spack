@@ -22,28 +22,23 @@ class PyCasacore(PythonPackage):
     version("develop-3.6.0", branch="master")
     version(
         "3.6.1",
-        sha256="48ca6e8d09d2e822c2bf5286247362d"
-        "1dfe6d99acbb381676c4b16574959bc03",
+        sha256="48ca6e8d09d2e822c2bf5286247362d1dfe6d99acbb381676c4b16574959bc03",
     )
     version(
         "3.5.2",
-        sha256="ad70c8e08893eec928b3e38c099bda8"
-        "863f5aa9d099fd00694ad2b0d48eba08f",
+        sha256="ad70c8e08893eec928b3e38c099bda8863f5aa9d099fd00694ad2b0d48eba08f",
     )
     version(
         "3.5.1",
-        sha256="a577233c7311f64a8048180ee82d694"
-        "6fee16e0dce2976eb516784a32d8b9133",
+        sha256="a577233c7311f64a8048180ee82d6946fee16e0dce2976eb516784a32d8b9133",
     )
     version(
         "3.5.0",
-        sha256="47ac85d47051074d64415414212c8c2"
-        "cfcb49a2037f5c3d78f71ab5b162d1e8b",
+        sha256="47ac85d47051074d64415414212c8c2cfcb49a2037f5c3d78f71ab5b162d1e8b",
     )
     version(
         "3.4.0",
-        sha256="f654781292308de70c037981f5f7f5a"
-        "eb02cf980a6f1367d1c294e7b4fca42ce",
+        sha256="f654781292308de70c037981f5f7f5aeb02cf980a6f1367d1c294e7b4fca42ce",
     )
 
     depends_on("c", type="build")

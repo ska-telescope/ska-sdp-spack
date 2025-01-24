@@ -18,9 +18,7 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
     )
 
     license("BSD-3-Clause", checked_by="sstansill")
-    maintainers(
-        "milhazes", "sstansill", "max_m17", "mmacleod_za", "gemmadanks"
-    )
+    maintainers("milhazes", "sstansill", "max_m17", "mmacleod_za", "gemmadanks")
 
     version("0.1.0", commit="v0.1.0", submodules=True)
     version("0.2.0", commit="v0.2.0", submodules=True)

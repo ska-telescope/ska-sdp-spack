@@ -25,28 +25,23 @@ class PyReproject(PythonPackage):
 
     version(
         "0.14.1",
-        sha256="53c8ea279b8b557f33a1e430af5e053c"
-        "d747002440e072bae6ad9302d46be579",
+        sha256="53c8ea279b8b557f33a1e430af5e053cd747002440e072bae6ad9302d46be579",
     )
     version(
         "0.11.0",
-        sha256="37184a807c15a5e214564c44a541399f"
-        "6ceffcb6b1ac624935022d1b31c5075c",
+        sha256="37184a807c15a5e214564c44a541399f6ceffcb6b1ac624935022d1b31c5075c",
     )
     version(
         "0.10.0",
-        sha256="38ac4f3ca71556b11550647c65aa619f"
-        "bbabf473aea9029af609cca3645040c1",
+        sha256="38ac4f3ca71556b11550647c65aa619fbbabf473aea9029af609cca3645040c1",
     )
     version(
         "0.9",
-        sha256="ce18c8e0c8e5095f734749cd72cb3e0b"
-        "7e8265763f8a61ac6a57ca30669c7e2d",
+        sha256="ce18c8e0c8e5095f734749cd72cb3e0b7e8265763f8a61ac6a57ca30669c7e2d",
     )
     version(
         "0.7.1",
-        sha256="95c0fa49e6b4e36455b91fa09ad1b71b"
-        "230c990ad91d948af67ea3509a1a4ccb",
+        sha256="95c0fa49e6b4e36455b91fa09ad1b71b230c990ad91d948af67ea3509a1a4ccb",
     )
 
     depends_on("c", type="build")  # generated

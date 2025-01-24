@@ -5,6 +5,8 @@ PYTHON_SWITCHES_FOR_PYLINT = --disable=missing-module-docstring,missing-function
 # add this to the PYTHONPATH. Slightly hacky, but works for the moment.
 PYTHON_RUNNER = PYTHONPATH=`python -c 'import lib.spack; print(lib.spack.__path__[0])'` python -m
 
+PYTHON_LINE_LENGTH = 82
+
 -include .make/base.mk
 -include .make/oci.mk
 -include .make/python.mk

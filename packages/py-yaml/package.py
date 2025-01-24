@@ -12,8 +12,7 @@ class PyYaml(PythonPackage):
 
     version(
         "6.0.2",
-        sha256="d584d9ec91ad65861cc08d42e834324e"
-        "f890a082e591037abe114850ff7bbc3e",
+        sha256="d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e",
     )
     version("main", branch="main")
 

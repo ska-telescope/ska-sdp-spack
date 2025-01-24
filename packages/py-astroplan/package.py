@@ -20,8 +20,7 @@ class PyAstroplan(PythonPackage):
 
     version(
         "0.10.1",
-        sha256="39d97c3377e1630abff3a94d8c956980"
-        "f77a3e809e27a0376dd7d30abe3b6959",
+        sha256="39d97c3377e1630abff3a94d8c956980f77a3e809e27a0376dd7d30abe3b6959",
     )
 
     depends_on("py-numpy@1.17:", type=("build", "run"))
