@@ -7,9 +7,9 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
-spack = {url = "https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz"}
 
 [tool.poetry.group.dev.dependencies]
+spack = {url = "https://github.com/spack/spack/releases/download/v0.23.0/spack-0.23.0.tar.gz"}
 isort = "^5.13.2"
 black = "^24.10.0"
 flake8 = "^7.1.1"
