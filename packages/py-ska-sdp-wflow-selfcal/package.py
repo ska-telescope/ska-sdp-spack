@@ -18,8 +18,9 @@ class PySkaSdpWflowSelfcal(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version("latest", branch="main", preferred=True)
-    version("0.3.0", branch="0.3.0")
+    version("latest", branch="main")
+    version("0.3.0", commit="0.3.0")
+    version("0.3.1", branch="0.3.1", preferred=True)
 
     # Basic Python dependencies.
     depends_on("python@3.9:", type=("build", "run"))
@@ -30,7 +31,9 @@ class PySkaSdpWflowSelfcal(PythonPackage):
     depends_on("wsclean@latest", type="run", when="@latest")
 
     # Releases use fixed versions of DP3 and WSClean.
+    depends_on("dp3@6.3", type="run", when="@0.3.1")
     depends_on("dp3@6.2.1", type="run", when="@0.3.0")
+    depends_on("wsclean@3.5.1", type="run", when="@0.3.1")
     depends_on("wsclean@3.5", type="run", when="@0.3.0")
 
     # Other dependencies, which correspond to the project's pyproject.toml.

@@ -8,7 +8,7 @@ spack:
         aoflagger,
         dal2,
         ducc,
-        everybeam,
+        everybeam@0.7.0,
         idg,
         pmt,
         rum,
@@ -16,7 +16,7 @@ spack:
         py-casacore@develop-3.6.0,
         dp3@6.3,
         dysco@1.2,
-        wsclean@3.5,
+        wsclean@3.5.1,
 
         # SKA libraries
         py-ska-telmodel@1.19.7,
