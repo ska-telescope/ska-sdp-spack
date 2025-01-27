@@ -1,6 +1,6 @@
 from spack import *
 
-class Benchmon(PythonPackage):
+class PySkaSdpBenchmarkMonitor(PythonPackage):
     """BenchMon is a monitoring tool designed to collect 
     hardware and software context as well as measure benchmark runs. 
     """
@@ -9,8 +9,8 @@ class Benchmon(PythonPackage):
     git      = "https://gitlab.com/ska-telescope/sdp/ska-sdp-benchmark-monitor.git"
 
     # versions
-    version('develop-0.1.0', branch='scoop-352',commit='a6b2c099b0fad638ec7d57e7fc0433062797d70b')
-    version('latest',branch='master') 
+    version('0.1.0', branch='scoop-352',commit='a6b2c099b0fad638ec7d57e7fc0433062797d70b',preferred=True)
+    version('latest',branch='main') 
 
     depends_on('python', type=('build', 'run'))
     depends_on('py-psutil', type='run')
