@@ -22,7 +22,7 @@ class Everybeam(CMakePackage):
     version('0.5.5', commit='v0.5.5', submodules=True)
     version('0.6.0', commit='v0.6.0', submodules=True)
     version('0.6.1', commit='v0.6.1', submodules=True)
-    version('0.7.0', commit='v0.7.0', submodules=True)
+    version('0.7.0', commit='v0.7.0', submodules=True, preferred=True)
     version('latest', branch='master', submodules=True)
 
     variant('python', default=True, description='Enable Python support')
