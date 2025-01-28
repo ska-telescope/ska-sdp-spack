@@ -1,4 +1,10 @@
-from spack.package import PythonPackage
+from spack.package import (  # pylint: disable=redefined-builtin
+    PythonPackage,
+    depends_on,
+    license,
+    maintainers,
+    version,
+)
 
 
 class PySkaSdpBatchPreprocess(PythonPackage):
@@ -35,4 +41,3 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     depends_on("py-jsonschema@4.4.0:", type=("build", "run"))
     depends_on("py-h5py@3.7.0:", type=("build", "run"))
     depends_on("dp3@6.0:", type=("build", "run"))
-
