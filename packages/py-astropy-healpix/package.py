@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack.package import *
+from spack.package import PythonPackage, depends_on, version
 
 
 class PyAstropyHealpix(PythonPackage):
@@ -19,9 +19,18 @@ class PyAstropyHealpix(PythonPackage):
 
     license("BSD-3-Clause")
 
-    version("1.0.3", sha256="de5d2a7ec97b167045066971f25a150d1e4061f07159be23649634db36e79746")
-    version("1.0.2", sha256="056fa6ed9396bedc771d374d877cde83d9460a3f62a78fe05dbf9ba03940323a")
-    version("0.5", sha256="5ae15da796a840f221fb83e25de791e827b6921bc21a365d99bc1a59c7c0cdad")
+    version(
+        "1.0.3",
+        sha256="de5d2a7ec97b167045066971f25a150d1e4061f07159be23649634db36e79746",
+    )
+    version(
+        "1.0.2",
+        sha256="056fa6ed9396bedc771d374d877cde83d9460a3f62a78fe05dbf9ba03940323a",
+    )
+    version(
+        "0.5",
+        sha256="5ae15da796a840f221fb83e25de791e827b6921bc21a365d99bc1a59c7c0cdad",
+    )
 
     depends_on("c", type="build")  # generated
 
