@@ -1,6 +1,6 @@
 # Spack package for the Python YAML parser (PyYAML)
 
-from spack.package import *
+from spack.package import PythonPackage, depends_on, version
 
 
 class PyYaml(PythonPackage):
@@ -10,7 +10,10 @@ class PyYaml(PythonPackage):
     homepage = "https://github.com/yaml/pyyaml"
     pypi = "pyyaml/pyyaml-6.0.2.tar.gz"
 
-    version("6.0.2", sha256="d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e")
+    version(
+        "6.0.2",
+        sha256="d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e",
+    )
     version("main", branch="main")
 
     # Define dependencies

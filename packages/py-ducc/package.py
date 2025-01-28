@@ -1,5 +1,7 @@
-from spack.package import *
 import os
+
+import llnl.util.lang
+from spack.package import PythonPackage, depends_on, version
 
 
 class PyDucc(PythonPackage):
