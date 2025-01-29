@@ -1,4 +1,3 @@
-import llnl.util.lang
 from spack.package import PythonPackage, depends_on, variant, version
 
 class PyPing3(PythonPackage):
