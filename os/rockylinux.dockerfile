@@ -13,4 +13,6 @@ LABEL OS_VERSION="rockylinux:8"
 RUN sed -i "16i\    parallel = False" /opt/spack/var/spack/repos/builtin/packages/cfitsio/package.py
 
 # Configure Spack compiler.
-RUN . /opt/rh/gcc-toolset-10/enable && /opt/spack/bin/spack compiler find
+RUN . /opt/rh/gcc-toolset-10/enable && \
+    /opt/spack/bin/spack compiler find && \
+    /opt/spack/bin/spack compiler remove gcc@8.5.0
