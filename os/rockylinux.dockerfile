@@ -1,6 +1,6 @@
 FROM rockylinux:8
 
-RUN yum install -y file gcc-toolset-10 git xz && \
+RUN yum install -y bzip2 file gcc-toolset-10 git patch xz && \
     yum -y clean all && \
     rm -rf /var/cache
 
