@@ -1,4 +1,4 @@
-from spack import *
+from spack.package import PythonPackage, depends_on, version
 
 class PySkaSdpBenchmarkMonitor(PythonPackage):
     """BenchMon is a monitoring tool designed to collect 
