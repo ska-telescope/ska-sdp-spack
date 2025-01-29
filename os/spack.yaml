@@ -9,7 +9,7 @@ spack:
         wsclean@3.5+python, dp3@6.2.1, dysco@1.2,
         hdf5@:1.14.4~mpi, fftw~mpi
       ]
-    # Fix the target, since GitLab runners may have different architectures.
+    # Fixate the target, since GitLab runners may have different architectures.
     - [ target=x86_64_v3 ]
   view: false
   concretizer:
