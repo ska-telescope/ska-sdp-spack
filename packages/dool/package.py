@@ -1,4 +1,4 @@
-from spack import *
+from spack.package import PythonPackage, depends_on, version
 
 class Dool(Package):
     """Dool is a command-line tool for monitoring various aspects of your Linux 
