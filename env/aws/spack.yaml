@@ -14,7 +14,7 @@ spack:
         rum,
         casacore@3.6.1,
         py-casacore@develop-3.6.0,
-        dp3@6.1,
+        dp3@6.3,
         dysco@1.2,
         wsclean@3.5,
 
