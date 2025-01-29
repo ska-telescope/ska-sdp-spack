@@ -9,8 +9,7 @@ class PySkaSdpBenchmarkMonitor(PythonPackage):
     git      = "https://gitlab.com/ska-telescope/sdp/ska-sdp-benchmark-monitor.git"
 
     # versions
-    version('0.1.0', branch='scoop-352',commit='a6b2c099b0fad638ec7d57e7fc0433062797d70b',preferred=True)
-    version('latest',branch='main') 
+    version('latest',branch='main',preferred=True) 
 
     depends_on('python', type=('build', 'run'))
     depends_on('py-psutil', type='run')
