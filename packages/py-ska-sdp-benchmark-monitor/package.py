@@ -1,10 +1,10 @@
 from spack.package import PythonPackage, depends_on, version
 
 class PySkaSdpBenchmarkMonitor(PythonPackage):
-    """BenchMon is a monitoring tool designed to collect 
-    hardware and software context as well as measure benchmark runs. 
+    """BenchMon is a monitoring tool designed to collect
+    hardware and software context as well as measure benchmark runs.
     """
-
+    
     homepage = "https://gitlab.com/ska-telescope/sdp/ska-sdp-benchmark-monitor"
     git      = "https://gitlab.com/ska-telescope/sdp/ska-sdp-benchmark-monitor.git"
 
