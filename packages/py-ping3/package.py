@@ -1,4 +1,5 @@
-from spack.package import PythonPackage, depends_on, version
+import llnl.util.lang
+from spack.package import PythonPackage, depends_on, variant, version
 
 class PyPing3(PythonPackage):
     """Ping3 is a pure Python 3 implementation of ICMP ping."""
