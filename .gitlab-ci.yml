@@ -5,6 +5,7 @@ variables:
 stages:
   - versioning
   - prepare
+  - lint
   - build
   - package
   - publish
