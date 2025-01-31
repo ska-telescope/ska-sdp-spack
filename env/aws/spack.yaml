@@ -8,7 +8,7 @@ spack:
         aoflagger,
         dal2,
         ducc,
-        everybeam,
+        everybeam@0.7.0,
         idg,
         pmt,
         rum,
@@ -16,7 +16,7 @@ spack:
         py-casacore@develop-3.6.0,
         dp3@6.3,
         dysco@1.2,
-        wsclean@3.5,
+        wsclean@3.5.1,
 
         # SKA libraries
         py-ska-telmodel@1.19.7,
@@ -45,7 +45,7 @@ spack:
   view: false
   # For the moment we unify - likely will need to fall back to when_possible later
   concretizer:
-    unify: when_possible
+    unify: true
   # Use ska_sdp_spack package repository
   repos:
   - ../..
