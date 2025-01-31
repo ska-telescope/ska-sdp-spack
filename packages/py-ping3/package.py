@@ -1,6 +1,4 @@
-import spack.build_systems.autotools
-from spack.package import *
-#from spack.package import PythonPackage, depends_on, version
+from spack.package import PythonPackage, depends_on, version
 
 
 class PyPing3(PythonPackage):
