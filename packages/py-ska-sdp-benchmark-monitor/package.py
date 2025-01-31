@@ -11,6 +11,7 @@ class PySkaSdpBenchmarkMonitor(PythonPackage):
 
     # versions
     version("latest", branch="main", preferred=True)
+    version("0.1.0", branch="scoop-352-update-setup-scripts")
 
     depends_on("python", type=("build", "run"))
     depends_on("py-psutil", type="run")
