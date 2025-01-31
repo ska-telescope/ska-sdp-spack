@@ -1,5 +1,6 @@
 from spack.package import PythonPackage
 
+
 class PySkaSdpBenchmarkMonitor(PythonPackage):
     """BenchMon is a monitoring tool designed to collect
     hardware and software context as well as measure benchmark runs.
