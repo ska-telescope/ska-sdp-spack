@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, maintainers, version, license, depends_on, which
+from spack.package import PythonPackage, depends_on, maintainers, version
 
 
 class PySkaSdpWflowSelfcal(PythonPackage):

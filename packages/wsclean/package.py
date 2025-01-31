@@ -16,13 +16,17 @@ class Wsclean(CMakePackage):
     version("3.3", commit="v3.3", submodules=True)
     version("3.4", commit="v3.4", submodules=True)
     version("3.5", commit="v3.5", submodules=True)
-    version( # master branch at 2025-01-27
+    version(  # master branch at 2025-01-27
         "3.5.1",
         commit="d7d89fddf472ffac05a2fa1820ec7d0027da38ee",
         submodules=True,
         preferred=True,
     )
-    version("latest", branch="master", submodules=True,)
+    version(
+        "latest",
+        branch="master",
+        submodules=True,
+    )
 
     variant("python", default=False, description="Enable Python support")
     variant("cuda", default=False, description="Enable CUDA support")

@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, maintainers, version, license, depends_on
+from spack.package import PythonPackage, depends_on, maintainers, version
 
 
 class PyLosoto(PythonPackage):
@@ -11,7 +11,10 @@ class PyLosoto(PythonPackage):
 
     license("GPLv3", checked_by="mnijhuis-tos")
 
-    version("2.4.4", sha256="94372a12b743b408353ae54ff4a6a479f790f9f7616aecf64db2eebbe87c0b89")
+    version(
+        "2.4.4",
+        sha256="94372a12b743b408353ae54ff4a6a479f790f9f7616aecf64db2eebbe87c0b89",
+    )
 
     depends_on("python@3", type=("build", "run"))
     depends_on("py-setuptools", type="build")

@@ -1,4 +1,4 @@
-from spack.package import *
+from spack.package import PythonPackage, depends_on, maintainers, variant, version
 
 
 class PyBdsf(PythonPackage):
@@ -11,9 +11,16 @@ class PyBdsf(PythonPackage):
     maintainers("mnijhuis-tos")
     license("GPLv3", checked_by="mnijhuis-tos")
 
-    version("1.12.0", sha256="1ec301d7f98dd9dcc51245a793b63fa6a341f6378fea45907e06c6a453b6940a")
+    version(
+        "1.12.0",
+        sha256="1ec301d7f98dd9dcc51245a793b63fa6a341f6378fea45907e06c6a453b6940a",
+    )
 
-    variant("rap", default=False, description="Support reading 'rap' images using CasaCore.")
+    variant(
+        "rap",
+        default=False,
+        description="Support reading 'rap' images using CasaCore.",
+    )
 
     depends_on("python@3.8:3.12", type="build")
     depends_on("py-setuptools@:64", type="build")
