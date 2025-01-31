@@ -45,7 +45,7 @@ spack:
   view: false
   # For the moment we unify - likely will need to fall back to when_possible later
   concretizer:
-    unify: when_possible
+    unify: true
   # Use ska_sdp_spack package repository
   repos:
   - ../..
