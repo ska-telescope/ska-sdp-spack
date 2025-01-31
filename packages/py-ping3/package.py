@@ -1,8 +1,9 @@
-from spack.package import PythonPackage, depends_on, version
+from spack.package import PythonPackage,depends_on,version
 
 class PyPing3(PythonPackage):
-    """Ping3 is a pure Python 3 implementation of ICMP ping."""
-
+    """
+    Ping3 is a pure Python 3 implementation of ICMP ping.
+    """
     homepage = "https://github.com/kyan001/ping3"
     url = "https://files.pythonhosted.org/packages/source/p/ping3/ping3-4.0.3.tar.gz"
 
