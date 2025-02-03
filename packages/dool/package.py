@@ -16,3 +16,10 @@ class Dool(PythonPackage):
     depends_on("py-setuptools", type="build")
     depends_on("py-wheel", type="build")
     depends_on("py-build", type="build")
+
+    @run_after("install")
+    def manual_install(self):
+        """Exécute install.py manuellement après l'installation"""
+        python = self.spec["python"].command
+        install_script = self.stage.source_path + "/install.py"
+        python(install_script, "--prefix", self.prefix)
