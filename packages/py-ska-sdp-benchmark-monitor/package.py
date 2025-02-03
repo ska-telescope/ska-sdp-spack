@@ -1,7 +1,7 @@
-from spack.package import Package, depends_on, version
+from spack.package import PythonPackage, depends_on, version
 
 
-class PySkaSdpBenchmarkMonitor(Package):
+class PySkaSdpBenchmarkMonitor(PythonPackage):
     """BenchMon is a monitoring tool designed to collect
     hardware and software context as well as measure benchmark runs.
     """
@@ -17,3 +17,4 @@ class PySkaSdpBenchmarkMonitor(Package):
     depends_on("py-ping3", type="run")
     depends_on("py-numpy", type="run")
     depends_on("py-matplotlib", type="run")
+    depends_on("py-setuptools", type="build")
