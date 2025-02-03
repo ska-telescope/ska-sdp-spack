@@ -14,3 +14,5 @@ class Dool(PythonPackage):
     version("latest", branch="master", preferred=True)
 
     depends_on("py-setuptools", type="build")
+    depends_on("py-wheel", type="build")
+    depends_on("py-build", type="build")
