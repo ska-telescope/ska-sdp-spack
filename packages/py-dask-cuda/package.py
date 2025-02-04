@@ -31,6 +31,7 @@ class PyDaskCuda(PythonPackage):
     depends_on("python", type=("build", "run"))
     depends_on("py-setuptools", type="build")
     depends_on("py-rapids-build-backend", type="build")
+    depends_on("py-rapids-dependency-file-generator", type="build")
 
     depends_on("py-dask", type=("build", "run"))
     depends_on("py-click", type=("build", "run"))
