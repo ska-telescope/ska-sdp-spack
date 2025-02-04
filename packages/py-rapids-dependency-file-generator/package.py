@@ -20,5 +20,5 @@ class PyRapidsDependencyFileGenerator(PythonPackage):
     depends_on("py-setuptools", type="build")
 
     depends_on("py-pyyaml", type=("build", "run"))
-    depends_on("py-jsonschema", type=("build", "run"))
+    depends_on("py-jsonschema@3.0.0:", type=("build", "run"))
     depends_on("py-tomlkit", type=("build", "run"))
