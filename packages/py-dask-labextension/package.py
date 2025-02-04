@@ -10,6 +10,10 @@ class PyDaskLabextension(PythonPackage):
     git = "https://github.com/dask/dask-labextension"
     url = "https://github.com/dask/dask-labextension/archive/refs/tags/7.0.0.tar.gz"
 
+    maintainers("saliei")
+
+    license("BSD-3-Clause")
+
     version("latest", branch="main")
     version("7.0.0", sha256="efd58cade518d8c95a94b2176f428b84a1acdeada575ac5389ee753c65c0a5bd")
     version("6.1.0", sha256="82d133a734071e0e75516c12de795a3a196a04148052922cb90e4a0b8e48e013")
