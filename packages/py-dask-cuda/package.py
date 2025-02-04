@@ -29,6 +29,9 @@ class PyDaskCuda(PythonPackage):
     version("24.02.00", sha256="6cdfe600c6cdd2a3fb82d6a58dd2acfed2c82f4b32b2ab5611d2cc9292fd2f2a")
 
     depends_on("python", type=("build", "run"))
+    depends_on("py-setuptools", type="build")
+    depends_on("py-rapids-build-backend", type="build")
+
     depends_on("py-dask", type=("build", "run"))
     depends_on("py-click", type=("build", "run"))
     depends_on("py-numba", type=("build", "run"))
@@ -36,7 +39,6 @@ class PyDaskCuda(PythonPackage):
     depends_on("py-pandas", type=("build", "run"))
     depends_on("py-pynvml", type=("build", "run"))
     depends_on("py-zict", type=("build", "run"))
-    depends_on("py-setuptools", type="build")
 
     @property
     @llnl.util.lang.memoized
