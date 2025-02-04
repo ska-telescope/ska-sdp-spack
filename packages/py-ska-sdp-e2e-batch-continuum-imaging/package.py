@@ -10,8 +10,11 @@ from spack.package import (  # pylint: disable=redefined-builtin
 class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     """SKA SDP End-to-End Batch Continuum Imaging."""
 
-    homepage = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-e2e-batch-continuum-imaging"
-    git = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-e2e-batch-continuum-imaging"
+    homepage = (
+        "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/"
+        + "ska-sdp-e2e-batch-continuum-imaging"
+    )
+    git = homepage
 
     maintainers("nimalan", "justin")
 
@@ -21,3 +24,4 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     version("latest", branch="main")
 
     depends_on("python@3.10", type=("build", "run"))
+    depends_on("py-poetry-core", type="build")
