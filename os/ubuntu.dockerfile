@@ -8,7 +8,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /var/apt/cache
 
 SHELL ["/bin/bash", "-c"]
-ARG SPACK_VERSION=v0.21.0
+ARG SPACK_VERSION=v0.23.0
 RUN git clone --depth=1 --branch=${SPACK_VERSION} https://github.com/spack/spack.git /opt/spack
 LABEL SPACK_VERSION=${SPACK_VERSION}
 LABEL OS_VERSION="ubuntu:22.04"

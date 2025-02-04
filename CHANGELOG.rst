@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming release
+- Enable Python linting for this repository.
+- Update various package versions.
+- Add various SKAO Python packages.
+- Add AWS environment including deployment via CI to AWS cluster.
+
 ## 0.0.2, October 23, 2024
 
 - Ensure that OCI image is no longer marked 'dirty'.

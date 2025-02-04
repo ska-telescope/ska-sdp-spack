@@ -16,7 +16,17 @@ class Wsclean(CMakePackage):
     version("3.3", commit="v3.3", submodules=True)
     version("3.4", commit="v3.4", submodules=True)
     version("3.5", commit="v3.5", submodules=True)
-    version("latest", branch="master", submodules=True, preferred=True)
+    version(  # master branch at 2025-01-27
+        "3.5.1",
+        commit="d7d89fddf472ffac05a2fa1820ec7d0027da38ee",
+        submodules=True,
+        preferred=True,
+    )
+    version(
+        "latest",
+        branch="master",
+        submodules=True,
+    )
 
     variant("python", default=False, description="Enable Python support")
     variant("cuda", default=False, description="Enable CUDA support")
@@ -30,8 +40,9 @@ class Wsclean(CMakePackage):
     depends_on("everybeam@0.4.0", when="@3.2")
     depends_on("everybeam@0.5.1", when="@3.3")
     depends_on("everybeam@0.5.3", when="@3.4")
-    depends_on("everybeam@0.6", when="@3.5")
-    depends_on("everybeam@0.6", when="@latest")
+    depends_on("everybeam@0.6:0.7", when="@3.5")
+    depends_on("everybeam@0.6:0.7", when="@3.6")
+    depends_on("everybeam@0.6:0.7", when="@latest")
     depends_on("dp3@6.1:,latest", when="@latest")
     depends_on("idg@1.0.0", when="@3.1")
     depends_on("idg@1.1.0", when="@3.2")
