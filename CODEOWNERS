@@ -16,6 +16,5 @@
 /packages/rum/ @bramveenboer
 /packages/py-ska-sdp-batch-preprocess/ @saliei @vmorello
 /packages/py-dask-cuda/ @saliei
-/packages/py-dask-labextension/ @saliei
 /packages/py-rapids-dependency-file-generator/ @saliei
 /packages/py-rapids-build-backend/ @saliei
