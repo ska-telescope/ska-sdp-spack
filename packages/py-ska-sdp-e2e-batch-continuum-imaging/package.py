@@ -20,8 +20,8 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version("0.1.0", commit="618168aee1aea8e991063fd2cdd079cda03505ef")
-    version("latest", branch="main")
+    version("0.1.0", tag="0.1.0")
+    version("main", branch="main")
 
     depends_on("python@3.10", type=("build", "run"))
     depends_on("py-poetry-core", type="build")
