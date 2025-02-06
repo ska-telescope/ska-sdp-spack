@@ -30,6 +30,9 @@ class Wsclean(CMakePackage):
 
     variant("python", default=False, description="Enable Python support")
     variant("cuda", default=False, description="Enable CUDA support")
+    # Note: Using "~mpi" does not always disable building wsclean-mp. If a
+    # dependency of WSClean uses MPI, CMake will detect MPI and enable it.
+    variant("mpi", default=True, description="Enable MPI support")
 
     depends_on("hdf5+cxx+threadsafe")
     depends_on("fftw")
@@ -56,6 +59,7 @@ class Wsclean(CMakePackage):
     depends_on("gsl")
     depends_on("git")
     depends_on("python")
+    depends_on("mpi", when="+mpi")
 
     def setup_build_environment(self, env):
         env.set("OPENBLAS_NUM_THREADS", "1")
