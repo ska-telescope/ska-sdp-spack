@@ -1,10 +1,4 @@
-from spack.package import (  # pylint: disable=redefined-builtin
-    PythonPackage,
-    depends_on,
-    license,
-    maintainers,
-    version,
-)
+from spack.package import PythonPackage, depends_on, license, maintainers, version
 
 
 class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
