@@ -34,8 +34,15 @@ spack:
         python@3.10,
 
         # Benchmark tools
-        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer
+        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
 
+        # Build MPI applications against OpenMPI 4.1.x, since it's also
+        # natively installed on AWS. (By default, Spack uses mpich.)
+        # Do NOT use 'schedulers=slurm', since Spack will then install SLURM,
+        # which may give conflicts with the standard SLURM installation.
+        # With 'schedulers=auto', OpenMPI will still detect and use SLURM
+        # environment variables.
+        openmpi@4.1 schedulers=auto,
     ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
