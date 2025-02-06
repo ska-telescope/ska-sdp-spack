@@ -7,7 +7,7 @@ spack:
 # - Build other packages (hipfft-cuda, pmt, pqxx, qpid, ...) on CI, too.
     - [
         wsclean@3.5.1+python, dp3@6.3, everybeam@0.7.0, dysco@1.2,
-        hdf5@:1.14.4~mpi, fftw~mpi
+        hdf5@:1.14.4~mpi, fftw~mpi,
       ]
     # Fixate the target, since GitLab runners may have different architectures.
     - [ target=x86_64_v3 ]

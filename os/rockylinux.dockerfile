@@ -1,6 +1,6 @@
 FROM rockylinux:8
 
-RUN yum install -y bzip2 file findutils gcc-toolset-10 git patch xz && \
+RUN yum install -y bzip2 file findutils gcc-toolset-10 git patch python3 xz && \
     yum -y clean all && \
     rm -rf /var/cache
 
