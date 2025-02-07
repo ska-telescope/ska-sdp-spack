@@ -18,7 +18,8 @@ class Dp3(CMakePackage):
     version('6.1', commit='v6.1', submodules=True)
     version('6.2.1', commit='v6.2.1', submodules=True)
     version('6.3', commit='v6.3', submodules=True, preferred=True)
-    version('latest', branch='master', submodules=True, no_cache=True)
+    version('latest', branch='master', submodules=True, no_cache=True, deprecated=True)
+    version('master', branch='master', submodules=True, no_cache=True)
 
     variant('python', default=True, description='Enable Python support')
 
@@ -44,7 +45,7 @@ class Dp3(CMakePackage):
 
     def setup_build_environment(self, env):
         print(self.spec.version)
-        if (self.spec.satisfies('@latest') or
+        if (self.spec.satisfies('@latest') or self.spec.satisfies('@master') or
            int(str(self.spec.version.joined)) >= 52):
             env.set("OPENBLAS_NUM_THREADS", "1")
 

@@ -8,7 +8,8 @@ class Dysco(CMakePackage):
     git      = "https://github.com/aroffringa/dysco.git"
 
     version('1.2', commit='v1.2', submodules=True)
-    version('latest', branch='master', submodules=True, preferred=True)
+    version('latest', branch='master', submodules=True, no_cache=True, deprecated=True)
+    version('master', branch='master', submodules=True, no_cache=True)
 
     depends_on('boost+date_time+program_options')
     depends_on('casacore')

@@ -22,7 +22,10 @@ class PySkaSdpDistributedSelfCalPrototype(PythonPackage):
 
     version("0.1.0", commit="v0.1.0", submodules=True)
     version("0.2.0", commit="v0.2.0", submodules=True)
-    version("latest", branch="main", submodules=True, preferred=True)
+    version(
+        "latest", branch="main", no_cache=True, submodules=True, deprecated=True
+    )
+    version("main", branch="main", no_cache=True, submodules=True)
 
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-yaml@6.0.2:", type=("build", "run"))
