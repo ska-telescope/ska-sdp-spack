@@ -1,5 +1,7 @@
 import os
 
+import llnl.util.lang
+
 from spack.package import PythonPackage
 
 
