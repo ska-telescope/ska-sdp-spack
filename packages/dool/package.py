@@ -14,8 +14,8 @@ class Dool(Package):
     git = "https://github.com/scottchiefbaker/dool.git"
 
     # versions
-    version("1.3.4", tag="v1.3.4", preferred=True)
-    version("master", branch="master")
+    version("1.3.4", tag="v1.3.4")
+    version("master", branch="master", no_cache=True)
 
     # Apply patch for running dool on nodes without hyperthreading
     patch("fix_dool_cpufreq.patch", when="@1.3.4")
