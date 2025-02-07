@@ -7,7 +7,8 @@ class Dal2(CMakePackage):
 
     git      = "https://git.astron.nl/ro/dal2"
 
-    version('latest', branch='master')
+    version('latest', no_cache=True, branch='master', deprecated=True)
+    version('master', no_cache=True, branch='master')
     version('v3.3.2', commit='778747d6d5406f08f0669b94ed6c4f67abb5c5a9')
 
     variant('python', default=False, description='Generate python bindings')
@@ -17,6 +18,7 @@ class Dal2(CMakePackage):
     depends_on('python', when='+python')
 
     patch("cxx11.patch", when="@latest")
+    patch("cxx11.patch", when="@master")
     patch("cxx11.patch", when="@v3.3.2")
 
     def cmake_args(self):

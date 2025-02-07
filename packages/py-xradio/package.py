@@ -19,7 +19,7 @@ class PyXradio(PythonPackage):
     version("0.0.45", commit="v0.0.45")
     version("0.0.41", commit="v0.0.41")
     version("0.0.40", commit="v0.0.40")
-    version("latest", branch="main")
+    version("main", no_cache=True, branch="main")
 
     # These dependencies are likely incorrect - xradio is still
     # in a fairly experimental development phase, and dependencies are

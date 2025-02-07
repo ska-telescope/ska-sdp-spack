@@ -7,7 +7,8 @@ class Pmt(CMakePackage):
     homepage = "https://git.astron.nl/RD/pmt"
     git      = "https://git.astron.nl/RD/pmt"
 
-    version('latest', branch='master', preferred=True)
+    version('latest', branch='master', no_cache=True, deprecated=True)
+    version('master', branch='master', no_cache=True)
 
     variant('arduino', default=False, description='Enable Arduino support')
     variant('likwid', default=False, description='Enable Likwid support')
