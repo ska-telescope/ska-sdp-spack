@@ -1,5 +1,6 @@
 from spack.package import PythonPackage
 
+
 class PyRapidsDependencyFileGenerator(PythonPackage):
     """
     rapids-dependency-file-generator is a Python CLI tool 

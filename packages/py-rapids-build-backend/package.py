@@ -1,5 +1,6 @@
 from spack.package import PythonPackage
 
+
 class PyRapidsBuildBackend(PythonPackage):
     """
     rapids-build-backend is an adapter around PEP517 builders that provides 
