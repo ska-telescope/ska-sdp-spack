@@ -15,7 +15,7 @@ class PyPing3(PythonPackage):
         sha256="372a5c26c6aeebf5da310df7660ee6204146edc46f1bad19e349ae57cadb1d94",
     )
     version(
-        "develop",
+        "main",
         branch="main",
         git="https://github.com/jarhainx/python-ping3.git",
     )
