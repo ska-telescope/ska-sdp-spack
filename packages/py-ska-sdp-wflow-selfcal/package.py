@@ -7,10 +7,8 @@ class PySkaSdpWflowSelfcal(PythonPackage):
     calibration using DP3 and imaging using WSClean.
     """
 
-    homepage = (
-        "https://gitlab.com/ska-telescope/sdp/\
+    homepage = "https://gitlab.com/ska-telescope/sdp/\
         science-pipeline-workflows/ska-sdp-wflow-selfcal"
-    )
     url = homepage + "/-/archive/0.3.0/ska-sdp-wflow-selfcal-0.3.0.tar.bz2"
     git = homepage
 
