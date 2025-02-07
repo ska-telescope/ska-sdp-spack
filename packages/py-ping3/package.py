@@ -18,6 +18,7 @@ class PyPing3(PythonPackage):
         "main",
         branch="main",
         git="https://github.com/jarhainx/python-ping3.git",
+        no_cache=True,
     )
 
     depends_on("python@3.6:", type=("build", "run"))
