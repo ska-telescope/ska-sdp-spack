@@ -1,5 +1,4 @@
-import llnl.util.lang
-from spack.package import PythonPackage, depends_on, version
+from spack.package import PythonPackage
 
 
 class PyCasacore(PythonPackage):
@@ -15,7 +14,7 @@ class PyCasacore(PythonPackage):
     )
     git = "https://github.com/casacore/python-casacore"
 
-    # maintainers("saliei")
+    maintainers("saliei")
 
     license("LPGL-3.0")
 
