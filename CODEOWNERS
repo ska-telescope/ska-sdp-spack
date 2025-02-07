@@ -15,3 +15,4 @@
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
 /packages/py-ska-sdp-batch-preprocess/ @saliei @vmorello
+/packages/py-ska-sdp-e2e-batch-continuum-imaging @nimalan-m @t3pleni9
