@@ -14,9 +14,12 @@ class Dool(Package):
     git = "https://github.com/scottchiefbaker/dool.git"
 
     # versions
-    version("latest", branch="master", preferred=True)
+    version("1.3.4", tag="v1.3.4", preferred=True)
+    version("master", branch="master")
 
-    
+    # Apply patch for running dool on nodes without hyperthreading
+    patch("fix_dool_cpufreq.patch", when="@1.3.4")
+
     depends_on("python", type=("run"))
 
     def install(self, spec, prefix):
@@ -26,7 +29,6 @@ class Dool(Package):
         bin_dir = os.path.join(prefix, "bin")
         plugin_dir = os.path.join(bin_dir, "plugins")
 
-        
         os.makedirs(bin_dir, exist_ok=True)
         os.makedirs(plugin_dir, exist_ok=True)
 
@@ -38,9 +40,3 @@ class Dool(Package):
         for plugin in os.listdir("plugins"):
             shutil.copy(os.path.join("plugins", plugin), plugin_dir)
             os.chmod(os.path.join(plugin_dir, plugin), 0o644)
-
-        # Include the patch for running dool on nodes without hyperthreading: dool_cpufreq.py
-        src = os.path.join(os.path.dirname(__file__), "dool_cpufreq.py") 
-        dest = os.path.join(plugin_dir, "dool_cpufreq.py")
-        shutil.copy(src, dest)
-        os.chmod(dest, 0o644) 
