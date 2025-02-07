@@ -18,3 +18,4 @@
 /packages/py-dask-cuda/ @saliei
 /packages/py-rapids-dependency-file-generator/ @saliei
 /packages/py-rapids-build-backend/ @saliei
+/packages/py-ska-sdp-e2e-batch-continuum-imaging @nimalan-m @t3pleni9
