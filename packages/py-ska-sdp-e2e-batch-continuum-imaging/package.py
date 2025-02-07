@@ -10,7 +10,7 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     )
     git = homepage
 
-    maintainers("nimalan", "justin")
+    maintainers("nimalan-m", "t3pleni9")
 
     license("BSD 3-Clause")
 
