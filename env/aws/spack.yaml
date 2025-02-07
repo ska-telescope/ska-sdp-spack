@@ -2,44 +2,11 @@ spack:
   specs:
   - matrix:
     # Install all ska-sdp-spack packages that currently build successfully
-    - [
-
-        # Astron libraries and applications
-        aoflagger,
-        dal2,
-        ducc,
-        everybeam@0.7.0,
-        idg,
-        pmt,
-        rum,
-        casacore@3.6.1,
-        py-casacore@develop-3.6.0,
-        dp3@6.3,
-        dysco@1.2,
-        wsclean@3.5.1,
-
-        # SKA libraries
-        py-ska-telmodel@1.19.7,
-        py-ska-sdp-datamodels@0.3.3,
-        py-ska-sdp-func-python@0.5.1,
-
-        # Important Python dependencies (mainly Astropy & SciPy)
-        py-scipy@1.14.1,
-        py-reproject@0.14.1,
-        py-photutils@1.5.0,
-        py-astropy@6.1.0,
-        py-ducc@develop-0.35.0,
-
-        # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
-        python@3.10,
-
-        # Benchmark tools
-        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
-
-        # Monitoring tools
-        dool@latest,
-        py-ska-sdp-benchmark-monitor@latest
-    ]
+    - [aoflagger, dal2, ducc, everybeam@0.7.0, idg, pmt, rum, casacore@3.6.1, py-casacore@develop-3.6.0,
+      dp3@6.3, dysco@1.2, wsclean@3.5.1, py-ska-telmodel@1.19.7, py-ska-sdp-datamodels@0.3.3,
+      py-ska-sdp-func-python@0.5.1, py-scipy@1.14.1, py-reproject@0.14.1, py-photutils@1.5.0,
+      py-astropy@6.1.0, py-ducc@develop-0.35.0, python@3.10, hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
+      py-ska-sdp-benchmark-monitor@latest]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
     # We target the x86_64_v3 platform (i.e. AVX2 support including FMA, but not AVX512)
@@ -56,6 +23,10 @@ spack:
   modules:
     default:
       enable: [tcl]
+      lmod:
+        core_compilers:
+        - gcc@=11.4.0
+        - gcc@=12.3.0
   # Use official Spack build cache as well as SKA GitLab repository.
   mirrors:
     gitlab-mirror:
@@ -64,3 +35,30 @@ spack:
     v0.23.0:
       url: https://binaries.spack.io/v0.23.0
       signed: false  # FIXME: Once the Spack build cache publishes its keys, install them and remove
+  compilers:
+  - compiler:
+      spec: gcc@=11.4.0
+      paths:
+        cc: /usr/bin/gcc
+        cxx: /usr/bin/g++
+        f77: /usr/bin/gfortran
+        fc: /usr/bin/gfortran
+      flags: {}
+      operating_system: ubuntu22.04
+      target: x86_64
+      modules: []
+      environment: {}
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@=12.3.0
+      paths:
+        cc: /usr/bin/gcc-12
+        cxx: null
+        f77: null
+        fc: null
+      flags: {}
+      operating_system: ubuntu22.04
+      target: x86_64
+      modules: []
+      environment: {}
+      extra_rpaths: []

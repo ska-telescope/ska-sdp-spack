@@ -17,4 +17,6 @@ class PySkaSdpBenchmarkMonitor(PythonPackage):
     depends_on("py-ping3", type="run")
     depends_on("py-numpy", type="run")
     depends_on("py-matplotlib", type="run")
+    depends_on("py-requests", type="run")
     depends_on("py-setuptools", type="build")
+    depends_on("dool@latest", type="run")
