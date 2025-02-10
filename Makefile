@@ -1,5 +1,4 @@
-PYTHON_LINT_TARGET = packages/aoflagger/package.py packages/wsclean/package.py packages/py-*/
-PYTHON_SWITCHES_FOR_PYLINT = --disable=missing-module-docstring,missing-function-docstring,too-few-public-methods
+PYTHON_LINT_TARGET = packages/aoflagger/package.py packages/wsclean/package.py packages/py-*/*.py
 
 # The spack package actually gets installed into site-packages/lib/spack, so we need to
 # add this to the PYTHONPATH. Slightly hacky, but works for the moment.

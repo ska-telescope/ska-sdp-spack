@@ -1,5 +1,6 @@
 import llnl.util.lang
-from spack.package import PythonPackage, depends_on, variant, version
+
+from spack.package import PythonPackage
 
 
 class PySkaSdpFunc(PythonPackage):
