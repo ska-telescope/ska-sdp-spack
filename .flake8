@@ -1,3 +1,7 @@
 [flake8]
+<<<<<<< HEAD
 max-line-length = 82
+=======
+# undefined-name
+>>>>>>> main
 ignore = F821
