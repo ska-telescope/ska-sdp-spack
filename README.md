@@ -21,13 +21,13 @@ spack compiler find
 # spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
 ```
 
-3. Clone and add the SKA SDP repository:
+2. Clone and add the SKA SDP repository:
 ```bash
 git clone https://gitlab.com/ska-telescope/sdp/ska-sdp-spack.git
 spack repo add ./ska-sdp-spack
 ```
 
-4. Proceed with installing packages:
+3. Proceed with installing packages, e.g:
 ```bash
 # Install WSClean with default configuration
 spack install wsclean
@@ -36,7 +36,7 @@ spack install wsclean
 spack install dp3
 ```
 
-Note that we could have also created a Spack environment and then installed packages:
+- Note that we could have also created a Spack environment and then installed packages:
 ```bash
 # Add sdp spack environment
 spack env create sdp
@@ -46,13 +46,13 @@ spack concretize
 spack install -v
 ```
 
-Please consult [official spack documentation](https://spack.readthedocs.io/en/latest/features.html) 
+Please consult [official Spack documentation](https://spack.readthedocs.io/en/latest/features.html) 
 on different commands and subcommand flags.
 
 ## Version Management
 
 ### Spack Version Control
-It is **critical** to maintain consistent Spack versions across your development environment, 
+It is important to maintain consistent Spack versions across your development environment, 
 especially after Spack updated its builtin concretizer. Different Spack versions may select 
 different default package versions. For example:
 - Spack v0.17.1 defaults to `cuda@11.5.0`
