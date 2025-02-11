@@ -1,10 +1,4 @@
-from spack.package import (  # pylint: disable=redefined-builtin
-    PythonPackage,
-    depends_on,
-    license,
-    maintainers,
-    version,
-)
+from spack.package import PythonPackage
 
 
 class PySkaSdpBatchPreprocess(PythonPackage):
@@ -36,6 +30,7 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     version("2.1.1", commit="0754ad2ca1fa67978ba30af8a38f03189e158c1f")
 
     depends_on("python@3.10:", type=("build", "run"))
+    depends_on("py-poetry-core", type="build")
     depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
     depends_on("py-jsonschema@4.4.0:", type=("build", "run"))
     depends_on("py-h5py@3.7.0:", type=("build", "run"))
