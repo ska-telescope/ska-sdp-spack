@@ -1,39 +1,140 @@
-# Initial setup
-First, create a folder (change `<prefix>` with a name of your choice) and change directory it:
+# SKA SDP Spack Repository
 
-```
-mkdir <prefix>
-cd <prefix>
+This repository contains Spack package definitions for the Square Kilometre Array (SKA) Science Data Processor (SDP) software stack and its dependencies.
+
+## Prerequisites
+
+- Git
+- Python 3.10 or later
+- Compiler suite (e.g. GCC, or Intel OneAPI, etc.)
+
+## Quick Start
+
+1. Install Spack (skip if already installed):
+```bash
+# mind the branch, here is set to the latest release version,
+# different spack version may result in different package resolutions.
+git clone --depth=2 --branch=releases/v0.23 https://github.com/spack/spack.git
+source spack/share/spack/setup-env.sh
+spack compiler find
+# if desired add cache mirrors to speedup package installations
+# spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
 ```
 
-If `spack` is already installed, you can skip cloning it (**remember** to source its environment):
-```
-git clone https://github.com/spack/spack.git
-source ./spack/share/spack/setup-env.sh
-```
-The above command will clone Spack in the directory you have created beforehand (you can clone it in a different directory).
-
-Clone this repository and add it to `spack`:
-```
+3. Clone and add the SKA SDP repository:
+```bash
 git clone https://gitlab.com/ska-telescope/sdp/ska-sdp-spack.git
 spack repo add ./ska-sdp-spack
 ```
 
-After this initial setup, you could run `spack install wsclean`, as this will install `wsclean` and all its dependencies.
+4. Proceed with installing packages:
+```bash
+# Install WSClean with default configuration
+spack install wsclean
 
-Next, you could install `dp3` separately (which also installs `aoflagger` as a dependency): `spack install dp3`.
-
-# Additional notes
-- It is crucial to fix the Spack version to have identical software versions. Different Spack versions will have different preferred versions of packages, e.g Spack v0.17.1 will install `cuda@11.5.0`, while the latest Spack version may install `cuda@11.6.1`. For more information on how to deploy WSClean and IDG using Spack, see the [wiki](https://git.astron.nl/RD/schaap-spack/-/wikis/Reproducible-SW-environment-with-Spack).
-- The steps mentioned above will install the latest version (master branch) on WSClean and IDG. If you want to install the latest stable release. Check the ones available with `spack info <module_name>`, where `<module_name>`, can be `wsclean` or `idg`.
-For example:
-```
-spack install wsclean@3.0.1 ^idg@0.8.1
+# Install DP3 (includes aoflagger)
+spack install dp3
 ```
 
-- On certain systems, some specific package versions (for instance for CUDA) may cause issues. A workaround is to use another (older) version, e.g.:
+Note that we could have also created a Spack environment and then installed packages:
+```bash
+# Add sdp spack environment
+spack env create sdp
+spack env activate -p sdp
+spack add dp3 
+spack concretize 
+spack install -v
 ```
+
+Please consult [official spack documentation](https://spack.readthedocs.io/en/latest/features.html) 
+on different commands and subcommand flags.
+
+## Version Management
+
+### Spack Version Control
+It is **critical** to maintain consistent Spack versions across your development environment, 
+especially after Spack updated its builtin concretizer. Different Spack versions may select 
+different default package versions. For example:
+- Spack v0.17.1 defaults to `cuda@11.5.0`
+- Later versions may default to newer CUDA versions
+
+### Package Version Specification
+
+To install specific versions of packages:
+```bash
+# Install specific WSClean and IDG versions
+spack install wsclean@3.5.1 ^idg@0.8.1
+
+# Check available versions
+spack info wsclean
+spack info idg
+```
+
+## Common Configurations
+
+### CUDA Support
+If you encounter CUDA compatibility issues, you can specify an older CUDA version:
+```bash
+# Install with specific CUDA version
 spack install cuda@10.0.130
 spack install idg ^cuda@10.0.130
 spack install wsclean ^cuda@10.0.130
 ```
+
+### Default Environment
+A default environment configuration is provided in `spack.yaml`. This includes:
+- Standard Python packages (Astropy, SciPy)
+- Radio astronomy tools (WSClean, DP3, AOFlagger)
+- SKA-specific packages
+
+To use the default environment:
+```bash
+spack env create sdp spack.yaml
+spack env activate -p sdp
+spack install
+```
+
+## Package List
+
+Key packages available in this repository:
+
+### Radio Astronomy Tools
+- WSClean: Advanced radio astronomy imaging.
+- DP3: Data processing pipeline.
+- AOFlagger: RFI flagging.
+- Casacore: Radio astronomy data processing library.
+
+### SKA Packages
+- py-ska-telmodel
+- py-ska-sdp-datamodels
+- py-ska-sdp-func-python
+
+## Troubleshooting
+
+### Common Issues
+
+1. Build Failures
+   - Check system dependencies.
+   - Verify compiler compatibility.
+   - Review build logs in `~/.spack/var/spack/builds/`.
+
+2. Version Conflicts
+   - Use `spack spec -I` to inspect dependency resolution.
+   - Consider using `spack concretize --force` for testing.
+
+### Getting Help
+
+- Report issues on the [GitLab repository](https://gitlab.com/ska-telescope/sdp/ska-sdp-spack/-/issues)
+- Consult the [Spack documentation](https://spack.readthedocs.io/)
+- Check the [SKA Developer Portal](https://developer.skao.int)
+
+## Contributing
+
+1. Create a feature branch
+2. Submit a merge request
+
+Please follow the [SKA coding guidelines](https://developer.skao.int/en/latest/tools/codeguides.html).
+
+## License
+
+This project is licensed under the BSD 3-Clause "New" or "Revised" License - see the [LICENSE](LICENSE) file for details.
