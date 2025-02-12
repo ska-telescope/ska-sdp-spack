@@ -94,21 +94,6 @@ spack env activate -p sdp
 spack install
 ```
 
-## Package List
-
-Key packages available in this repository:
-
-### Radio Astronomy Tools
-- WSClean: Advanced radio astronomy imaging.
-- DP3: Data processing pipeline.
-- AOFlagger: RFI flagging.
-- Casacore: Radio astronomy data processing library.
-
-### SKA Packages
-- py-ska-telmodel
-- py-ska-sdp-datamodels
-- py-ska-sdp-func-python
-
 ## Troubleshooting
 
 ### Common Issues
