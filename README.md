@@ -18,7 +18,7 @@ git clone --depth=2 --branch=releases/v0.23 https://github.com/spack/spack.git
 source spack/share/spack/setup-env.sh
 spack compiler find
 # if desired add cache mirrors to speedup package installations
-# spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
+spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
 ```
 
 2. Clone and add the SKA SDP repository:
@@ -67,7 +67,6 @@ spack install wsclean@3.5.1 ^idg@0.8.1
 
 # Check available versions
 spack info wsclean
-spack info idg
 ```
 
 ## Common Configurations
