@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, depends_on, maintainers, version
+from spack.package import PythonPackage
 
 
 class PySkaSdpWflowSelfcal(PythonPackage):
@@ -16,9 +16,9 @@ class PySkaSdpWflowSelfcal(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version("latest", branch="main")
+    version("main", branch="main")
+    version("0.3.1", branch="0.3.1")
     version("0.3.0", commit="0.3.0")
-    version("0.3.1", branch="0.3.1", preferred=True)
 
     # Basic Python dependencies.
     depends_on("python@3.9:", type=("build", "run"))
@@ -37,7 +37,7 @@ class PySkaSdpWflowSelfcal(PythonPackage):
     # Other dependencies, which correspond to the project's pyproject.toml.
     depends_on("py-astropy@5.2.2:", type="run")
     depends_on("py-losoto@2.4.2:", type="run")
-    depends_on("py-lsmtool@1.6", type="run")
+    depends_on("py-lsmtool@1.6.2:", type="run")
     depends_on("py-h5py@3.8.0:", type="run")
     depends_on("py-shapely@2.0.1:", type="run")
     depends_on("py-bdsf@1.10.2:", type="run")

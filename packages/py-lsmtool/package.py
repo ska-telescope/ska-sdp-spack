@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, depends_on, maintainers, version
+from spack.package import PythonPackage
 
 
 class PyLsmtool(PythonPackage):
@@ -11,6 +11,7 @@ class PyLsmtool(PythonPackage):
     maintainers("mnijhuis-tos")
     license("GPLv3", checked_by="mnijhuis-tos")
 
+    version("1.6.2", commit="v1.6.2")
     version(
         "1.6.post1",
         sha256="84736672881107d1b607074d14a598b63509d5d66d1c9b4e436f9ae1a57c33a3",
@@ -27,7 +28,8 @@ class PyLsmtool(PythonPackage):
     depends_on("cmake@3.15:", type="build")
     depends_on("ninja@1.5:", type="build")
 
-    depends_on("py-numpy@1", type="run")
+    depends_on("py-numpy", type="run", when="@1.6.2:")
+    depends_on("py-numpy@1", type="run", when="@:1.6.1")
     depends_on("py-scipy@0.11:", type="run")
     depends_on("py-matplotlib@0.99:", type="run")
     depends_on("py-astropy@3.2:", type="run")
