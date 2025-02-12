@@ -33,7 +33,7 @@ spack repo add ./ska-sdp-spack
 spack install wsclean
 
 # Install DP3 (includes aoflagger)
-spack install dp3
+spack install dp3@6.3
 ```
 
 - Note that we could have also created a Spack environment and then installed packages:
@@ -77,8 +77,8 @@ If you encounter CUDA compatibility issues, you can specify an older CUDA versio
 ```bash
 # Install with specific CUDA version
 spack install cuda@10.0.130
+# Install idg with the specific version of CUDA
 spack install idg ^cuda@10.0.130
-spack install wsclean ^cuda@10.0.130
 ```
 
 ### Default Environment
@@ -99,9 +99,10 @@ spack install
 ### Common Issues
 
 1. Build Failures
-   - Check system dependencies.
-   - Verify compiler compatibility.
+   - Check system dependencies. System dependencies such as `glibc` version and/or CPU architecture may result in unsuccessful compilation.  
+   - Verify compiler compatibility. Some software may not be designed to be compiled with specific compiler, e.g. Intel OneAPI compiler suite.
    - Review build logs in `~/.spack/var/spack/builds/`.
+   - Build with debugging and verbose mode enabled: `spack -d install -v`.
 
 2. Version Conflicts
    - Use `spack spec -I` to inspect dependency resolution.
