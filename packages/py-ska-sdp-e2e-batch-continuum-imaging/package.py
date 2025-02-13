@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, depends_on, maintainers, version
+from spack.package import *
 
 
 class PySkaSdpE2eBatchContinuumImaging(PythonPackage):

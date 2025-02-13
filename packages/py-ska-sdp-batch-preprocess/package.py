@@ -1,4 +1,4 @@
-from spack.package import PythonPackage
+from spack.package import *
 
 
 class PySkaSdpBatchPreprocess(PythonPackage):

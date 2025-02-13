@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, depends_on, variant, version
+from spack.package import *
 
 
 class PyXradio(PythonPackage):

@@ -1,6 +1,6 @@
 import llnl.util.lang
 
-from spack.package import PythonPackage
+from spack.package import *
 
 
 class PyDaskCuda(PythonPackage):

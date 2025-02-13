@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack.package import PythonPackage, depends_on, version
+from spack.package import *
 
 
 # Deprecated, but still required for building Cython bits on multiple

@@ -1,6 +1,6 @@
 # Spack package for the Python YAML parser (PyYAML)
 
-from spack.package import PythonPackage, depends_on, version
+from spack.package import *
 
 
 class PyYaml(PythonPackage):
