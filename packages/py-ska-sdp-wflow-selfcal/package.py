@@ -9,7 +9,7 @@ class PySkaSdpWflowSelfcal(PythonPackage):
 
     homepage = (
         "https://gitlab.com/ska-telescope/sdp/"
-        + "science-pipeline-workflows/ska-sdp-wflow-selfcal"
+        "science-pipeline-workflows/ska-sdp-wflow-selfcal"
     )
     url = homepage + "/-/archive/0.3.0/ska-sdp-wflow-selfcal-0.3.0.tar.bz2"
     git = homepage
