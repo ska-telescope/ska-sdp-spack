@@ -17,7 +17,7 @@ class PySkaSdpFunc(PythonPackage):
     )
     git = "https://gitlab.com/ska-telescope/sdp/ska-sdp-func"
 
-    # maintainers("saliei")
+    maintainers("saliei")
 
     license("BSD-3-Clause")
 
@@ -56,7 +56,7 @@ class PySkaSdpFunc(PythonPackage):
 
     depends_on("py-setuptools", type="build")
     depends_on("py-pytest", type="test")
-    depends_on("py-numpy", type="run")
+    depends_on("py-numpy@1.26:", type="run")
 
     depends_on("cuda@7.0.0:", when="+cuda")
     depends_on("intel-oneapi-mkl@2021.1.1:", when="+mkl")

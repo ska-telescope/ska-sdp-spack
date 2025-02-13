@@ -1,4 +1,4 @@
-from spack.package import PythonPackage, depends_on, version
+from spack.package import PythonPackage
 
 
 class PySkaSdpFuncPython(PythonPackage):
@@ -28,7 +28,7 @@ class PySkaSdpFuncPython(PythonPackage):
     depends_on("py-reproject@0.14:", type=("build", "run"))
     depends_on("py-ska-sdp-datamodels@0.3.3:", type=("build", "run"))
     depends_on("py-ska-sdp-func", type=("build", "run"))
-    depends_on("dp3+python@6.1:", type=("build", "run"))
+    depends_on("dp3@6.1:", type=("build", "run"))
 
     # Not needed yet...
     # depends_on("py-xradio@0.0.40", type=("build", "run"))
