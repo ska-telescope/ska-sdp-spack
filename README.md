@@ -120,6 +120,12 @@ spack install
 
 Please follow the [SKA coding guidelines](https://developer.skao.int/en/latest/tools/codeguides.html).
 
+## Acknowledgement
+
+We acknowledge the initial work by our colleagues at Astron in the [schapp-spack](https://git.astron.nl/RD/schaap-spack) 
+repository, which served as the seed and foundation for this project and builds upon that work, 
+which is also ongoing in the current project. 
+
 ## License
 
 This project is licensed under the BSD 3-Clause "New" or "Revised" License - see the [LICENSE](LICENSE) file for details.
