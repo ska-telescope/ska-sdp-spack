@@ -7,8 +7,10 @@ class PySkaSdpWflowSelfcal(PythonPackage):
     calibration using DP3 and imaging using WSClean.
     """
 
-    homepage = "https://gitlab.com/ska-telescope/sdp/\
-        science-pipeline-workflows/ska-sdp-wflow-selfcal"
+    homepage = (
+        "https://gitlab.com/ska-telescope/sdp/"
+        + "science-pipeline-workflows/ska-sdp-wflow-selfcal"
+    )
     url = homepage + "/-/archive/0.3.0/ska-sdp-wflow-selfcal-0.3.0.tar.bz2"
     git = homepage
 
@@ -17,8 +19,8 @@ class PySkaSdpWflowSelfcal(PythonPackage):
     license("BSD 3-Clause")
 
     version("main", branch="main")
-    version("0.3.1", branch="0.3.1")
-    version("0.3.0", commit="0.3.0")
+    version("0.3.1", tag="0.3.1")
+    version("0.3.0", tag="0.3.0")
 
     # Basic Python dependencies.
     depends_on("python@3.9:", type=("build", "run"))
