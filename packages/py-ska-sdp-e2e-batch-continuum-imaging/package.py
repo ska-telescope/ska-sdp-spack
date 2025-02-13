@@ -1,11 +1,13 @@
-from spack.package import PythonPackage, depends_on, maintainers, version
+from spack.package import PythonPackage
 
 
 class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     """SKA SDP End-to-End Batch Continuum Imaging."""
 
-    homepage = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/\
-        ska-sdp-e2e-batch-continuum-imaging"
+    homepage = (
+        "https://gitlab.com/ska-telescope/sdp/"
+        + "science-pipeline-workflows/ska-sdp-wflow-selfcal"
+    )
     git = homepage
 
     maintainers("nimalan-m", "t3pleni9")
