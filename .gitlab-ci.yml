@@ -1,6 +1,7 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  SPACK_VERSION: v0.23.0
+  SPACK_VERSION: v1.0.0-alpha.3
+
 
 stages:
   - versioning
