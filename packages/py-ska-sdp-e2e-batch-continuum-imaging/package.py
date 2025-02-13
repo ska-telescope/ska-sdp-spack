@@ -6,7 +6,7 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
 
     homepage = (
         "https://gitlab.com/ska-telescope/sdp/"
-        + "science-pipeline-workflows/ska-sdp-wflow-selfcal"
+        "science-pipeline-workflows/ska-sdp-wflow-selfcal"
     )
     git = homepage
 
