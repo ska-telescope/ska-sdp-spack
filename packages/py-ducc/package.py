@@ -1,12 +1,7 @@
 import os
 
 import llnl.util.lang
-<<<<<<< HEAD
-
-from spack.package import PythonPackage
-=======
 from spack.package import PythonPackage, depends_on, version
->>>>>>> 094f075 (SP-4997 Formatting of Python package definitions)
 
 
 class PyDucc(PythonPackage):

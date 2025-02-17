@@ -1,10 +1,5 @@
 import llnl.util.lang
-<<<<<<< HEAD
-
-from spack.package import PythonPackage
-=======
 from spack.package import PythonPackage, depends_on, version
->>>>>>> 094f075 (SP-4997 Formatting of Python package definitions)
 
 
 class PyCasacore(PythonPackage):
@@ -24,20 +19,10 @@ class PyCasacore(PythonPackage):
 
     license("LPGL-3.0")
 
-<<<<<<< HEAD
-    # Since Python-casacore extracts its version from the .git tree, disable
-    # caching. Spack omits the .git tree from cached sources.
-    version("develop-3.6.0", branch="master", no_cache=True)
-    version(
-        "3.6.1",
-        sha256="48ca6e8d09d2e822c2bf5286247362d1dfe6d99acbb381676c4b16574959bc03",
-        no_cache=True,
-=======
     version("develop-3.6.0", branch="master")
     version(
         "3.6.1",
         sha256="48ca6e8d09d2e822c2bf5286247362d1dfe6d99acbb381676c4b16574959bc03",
->>>>>>> 094f075 (SP-4997 Formatting of Python package definitions)
     )
     version(
         "3.5.2",
