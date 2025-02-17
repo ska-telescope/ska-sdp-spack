@@ -17,6 +17,7 @@ class Dp3(CMakePackage):
     version('6.0', commit='v6.0', submodules=True)
     version('6.1', commit='v6.1', submodules=True)
     version('6.2.1', commit='v6.2.1', submodules=True)
+    version('6.3', commit='v6.3', submodules=True, preferred=True)
     version('latest', branch='master', submodules=True, no_cache=True)
 
     variant('python', default=True, description='Enable Python support')

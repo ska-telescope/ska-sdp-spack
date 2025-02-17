@@ -1,10 +1,4 @@
-from spack.package import (  # pylint: disable=redefined-builtin
-    PythonPackage,
-    depends_on,
-    license,
-    maintainers,
-    version,
-)
+from spack.package import PythonPackage
 
 
 class PySkaSdpBatchPreprocess(PythonPackage):
@@ -40,4 +34,6 @@ class PySkaSdpBatchPreprocess(PythonPackage):
     depends_on("py-pyyaml@6.0.1:", type=("build", "run"))
     depends_on("py-jsonschema@4.4.0:", type=("build", "run"))
     depends_on("py-h5py@3.7.0:", type=("build", "run"))
-    depends_on("dp3@6.0:", type=("build", "run"))
+    depends_on("py-dask@2024.7.1:", type=("build", "run"))
+    depends_on("py-distributed@2024.7.1:", type=("build", "run"))
+    depends_on("dp3@6.1:", type=("build", "run"))

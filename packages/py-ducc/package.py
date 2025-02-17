@@ -1,7 +1,8 @@
 import os
 
 import llnl.util.lang
-from spack.package import PythonPackage, depends_on, version
+
+from spack.package import PythonPackage
 
 
 class PyDucc(PythonPackage):
