@@ -1,0 +1,51 @@
+diff --git a/plugins/dool_cpufreq.py b/plugins/dool_cpufreq.py
+index 257e2e1..d5db357 100644
+--- a/plugins/dool_cpufreq.py
++++ b/plugins/dool_cpufreq.py
+@@ -1,4 +1,5 @@
+ ### Author: dag@wieers.com
++import os
+ 
+ class dool_plugin(dool):
+     """
+@@ -11,7 +12,7 @@ class dool_plugin(dool):
+         self.width = 4
+         self.scale = 34
+ 
+-    def check(self): 
++    def check(self):
+         for cpu in glob.glob('/sys/devices/system/cpu/cpu[0-9]*'):
+             if not os.access(cpu+'/cpufreq/scaling_cur_freq', os.R_OK):
+                 raise Exception('Cannot access acpi %s frequency information' % os.path.basename(cpu))
+@@ -19,6 +20,12 @@ class dool_plugin(dool):
+     def vars(self):
+         ret = []
+         for name in glob.glob('/sys/devices/system/cpu/cpu[0-9]*'):
++            try:
++                with open(f"{name}/cpufreq/scaling_cur_freq", "r") as _:
++                    _ = _.read() #print(f"{name}/cpufreq/scaling_cur_freq {_.read()}")
++            except OSError as e:
++                if "Device or resource busy" in str(e):
++                    continue
+             ret.append(os.path.basename(name))
+         ret.sort()
+         return ret
+@@ -29,14 +36,15 @@ class dool_plugin(dool):
+ 
+     def extract(self):
+         for cpu in self.vars:
+-            for line in dopen('/sys/devices/system/cpu/'+cpu+'/cpufreq/scaling_max_freq').readlines():
++            cpu_path = f"/sys/devices/system/cpu/{cpu}"
++            for line in dopen(f"{cpu_path}/cpufreq/scaling_max_freq").readlines():
+                 l = line.split()
+                 max = int(l[0])
+-            for line in dopen('/sys/devices/system/cpu/'+cpu+'/cpufreq/scaling_cur_freq').readlines():
++            for line in dopen(f"{cpu_path}/cpufreq/scaling_cur_freq").readlines():
+                 l = line.split()
+                 cur = int(l[0])
+             ### Need to close because of bug in sysfs (?)
+-            dclose('/sys/devices/system/cpu/'+cpu+'/cpufreq/scaling_cur_freq')
++            dclose(f"{cpu_path}/cpufreq/scaling_cur_freq")
+             self.set1[cpu] = self.set1[cpu] + cur * 100.0 / max
+ 
+             if op.update:
