@@ -111,6 +111,9 @@ build-aws:
     # try creating spack.lock from scratch using 'spack concretise -f'.
     - spack concretise || spack concretise -f
     - spack spec
+    # Add v0.23.0 mirror after concretisation so it doesn't get considered
+    - spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
+    - spack buildcache keys --install --trust
     # Install concretised specs. Should push to buildcache automatically via --autopush above
     - spack install --use-cache
     # Fail if env/aws/spack.lock was changed by "spack concretise". We do this after "spack install"
