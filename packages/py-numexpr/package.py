@@ -15,7 +15,7 @@ class PyNumexpr(PythonPackage):
 
     version(
         "2.10.2",
-        sha256="b0aff6b48ebc99d2f54f27b5f73a58cb92fde650aeff1b397c71c8788b4fff1a",
+        sha256="7e61a8aa4dacb15787b31c31bd7edf90c026d5e6dbe727844c238726e8464592",
     )
     version(
         "2.9.0",
