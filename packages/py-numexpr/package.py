@@ -1,10 +1,12 @@
-# Copyright Spack Project Developers. See COPYRIGHT file for details.
+# Copyright Spack Project Developers. See COPYRIGHT file in main Spack
+# repository for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack.package import PythonPackage, depends_on, version
+from spack.package import PythonPackage
 
 
+# TOOD: Overrides the native Spack package. Upstream!
 class PyNumexpr(PythonPackage):
     """Fast numerical expression evaluator for NumPy"""
 
