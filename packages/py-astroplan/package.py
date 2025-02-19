@@ -1,6 +1,7 @@
 from spack.package import PythonPackage, depends_on, version
 
 
+# TOOD: Overrides the native Spack package. Upstream!
 class PyAstroplan(PythonPackage):
     """
     astroplan is an open source Python package to help astronomers

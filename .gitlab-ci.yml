@@ -111,8 +111,14 @@ build-aws:
     # try creating spack.lock from scratch using 'spack concretise -f'.
     - spack concretise || spack concretise -f
     - spack spec
+    # Add v0.23.0 mirror after concretisation so it doesn't get considered
+    - spack mirror add v0.23.0 https://binaries.spack.io/v0.23.0
+    - spack buildcache keys --install --trust
     # Install concretised specs. Should push to buildcache automatically via --autopush above
-    - spack install --use-cache
+    - if ! spack install -j 4 --use-cache --only-concrete; then
+         cp -R /tmp/root/spack-stage .
+         exit 1;
+      fi
     # Fail if env/aws/spack.lock was changed by "spack concretise". We do this after "spack install"
     # so we are sure that the concretisation actually works.
     - if ! git diff --quiet env/aws/spack.lock; then
@@ -130,6 +136,8 @@ build-aws:
   artifacts:
     paths:
       - env/aws/spack.lock
+      # If a build failed, spack-stage contains logs that might help.
+      - spack-stage
     when: always
 
 deploy-aws:
