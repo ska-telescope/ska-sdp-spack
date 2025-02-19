@@ -5,8 +5,8 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     """SKA SDP End-to-End Batch Continuum Imaging."""
 
     homepage = (
-        "https://gitlab.com/ska-telescope/sdp/"
-        "science-pipeline-workflows/ska-sdp-wflow-selfcal"
+        "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/"
+        + "ska-sdp-e2e-batch-continuum-imaging"
     )
     git = homepage
 
@@ -15,6 +15,7 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     license("BSD 3-Clause")
 
     version("0.1.0", tag="0.1.0")
+    version("0.2.0", tag="0.2.0")
     version("main", branch="main")
 
     depends_on("python@3.10", type=("build", "run"))
