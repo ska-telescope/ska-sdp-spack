@@ -31,7 +31,7 @@ spack:
         py-ducc@develop-0.35.0,
 
         # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
-        python@3.10,
+        python@3.11,
 
         # Monitoring and benchmarking tools
         py-ska-sdp-benchmark-monitor@main,

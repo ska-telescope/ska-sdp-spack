@@ -18,7 +18,7 @@ class PySkaSdpE2eBatchContinuumImaging(PythonPackage):
     version("0.2.0", tag="0.2.0")
     version("main", branch="main")
 
-    depends_on("python@3.10", type=("build", "run"))
+    depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-poetry-core", type="build")
     depends_on("py-yaml@6.0.2:", type="run")
     depends_on("py-dask@2023.7.1:+distributed", type="run")
