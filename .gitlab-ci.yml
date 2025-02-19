@@ -136,6 +136,7 @@ build-aws:
   artifacts:
     paths:
       - env/aws/spack.lock
+      # If a build failed, spack-stage contains logs that might help.
       - spack-stage
     when: always
 
