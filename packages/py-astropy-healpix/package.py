@@ -7,6 +7,7 @@
 from spack.package import PythonPackage, depends_on, version
 
 
+# TOOD: Overrides the native Spack package. Upstream!
 class PyAstropyHealpix(PythonPackage):
     """HEALPix (Hierarchical Equal Area isoLatitude Pixelisation) is
     an algorithm for pixellizing a sphere that is sometimes used in

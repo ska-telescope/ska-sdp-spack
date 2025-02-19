@@ -6,6 +6,7 @@
 from spack.package import PythonPackage, depends_on, version
 
 
+# TOOD: Overrides the native Spack package. Upstream!
 class PyReproject(PythonPackage):
     """The reproject package is a Python package to reproject
     astronomical images using various techniques via a uniform
