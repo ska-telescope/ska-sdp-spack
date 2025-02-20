@@ -22,7 +22,6 @@ class PyCasacore(PythonPackage):
 
     # Since Python-casacore extracts its version from the .git tree, disable
     # caching. Spack omits the .git tree from cached sources.
-    version("develop-3.6.0", branch="master", no_cache=True, deprecated=True)
     version("master", branch="master", no_cache=True)
     version(
         "3.6.1",
@@ -57,12 +56,3 @@ class PyCasacore(PythonPackage):
     depends_on("wcslib", type="build")
 
     depends_on("casacore+python", type=("build", "link"))
-
-    @property
-    @llnl.util.lang.memoized
-    def _output_version(self):
-        spec_vers_str = str(self.spec.version.up_to(3))
-        if "develop" in spec_vers_str:
-            # Remove 'develop-' from the version in spack
-            spec_vers_str = spec_vers_str.partition("-")[2]
-        return spec_vers_str
