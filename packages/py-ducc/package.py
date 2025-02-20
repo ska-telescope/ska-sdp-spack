@@ -1,7 +1,5 @@
 import os
 
-import llnl.util.lang
-
 from spack.package import PythonPackage
 
 
@@ -30,15 +28,6 @@ class PyDucc(PythonPackage):
     depends_on("py-numpy@1.17.0:", type="build")
 
     depends_on("ducc", type=("build", "link"))
-
-    @property
-    @llnl.util.lang.memoized
-    def _output_version(self):
-        spec_vers_str = str(self.spec.version.up_to(3))
-        if "develop" in spec_vers_str:
-            # Remove 'develop-' from the version in spack
-            spec_vers_str = spec_vers_str.partition("-")[2]
-        return spec_vers_str
 
     def setup_build_environment(self, env):
         cmake_args = []
