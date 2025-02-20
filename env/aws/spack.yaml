@@ -8,15 +8,15 @@ spack:
         aoflagger,
         dal2,
         ducc,
-        everybeam,
+        everybeam@0.7.0,
         idg,
         pmt,
         rum,
         casacore@3.6.1,
         py-casacore@develop-3.6.0,
-        dp3@6.1,
+        dp3@6.3,
         dysco@1.2,
-        wsclean@3.5,
+        wsclean@3.5.1,
 
         # SKA libraries
         py-ska-telmodel@1.19.7,
@@ -31,12 +31,17 @@ spack:
         py-ducc@develop-0.35.0,
 
         # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
-        python@3.10,
+        python@3.11,
 
-        # Benchmark tools
-        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer
+        # Monitoring and benchmarking tools
+        py-ska-sdp-benchmark-monitor@main,
+        hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
 
-    ]
+        # Pipelines
+        py-ska-sdp-wflow-selfcal@0.3.1,
+        py-ska-sdp-batch-preprocess@2.2.0,
+        py-ska-sdp-e2e-batch-continuum-imaging@0.2.0
+      ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
     # We target the x86_64_v3 platform (i.e. AVX2 support including FMA, but not AVX512)
@@ -45,7 +50,10 @@ spack:
   view: false
   # For the moment we unify - likely will need to fall back to when_possible later
   concretizer:
-    unify: when_possible
+    unify: true
+    # For Spack 1.0
+    #timeout: 60
+    #error_on_timeout: false
   # Use ska_sdp_spack package repository
   repos:
   - ../..
@@ -58,6 +66,7 @@ spack:
     gitlab-mirror:
       url: oci://registry.gitlab.com/ska-telescope/sdp/ska-sdp-spack/spack-buildcache
       signed: false  # FIXME: Eventually SKA CI should sign builds
-    v0.23.0:
-      url: https://binaries.spack.io/v0.23.0
-      signed: false  # FIXME: Once the Spack build cache publishes its keys, install them and remove
+#    # Disabled, as it makes concretisation takes too long
+#    v0.23.0:
+#      url: https://binaries.spack.io/v0.23.0
+#      signed: false  # FIXME: Once the Spack build cache publishes its keys, install them and remove

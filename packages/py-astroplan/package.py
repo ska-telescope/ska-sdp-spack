@@ -1,6 +1,7 @@
+from spack.package import PythonPackage, depends_on, version
 
-from spack.package import *
 
+# TOOD: Overrides the native Spack package. Upstream!
 class PyAstroplan(PythonPackage):
     """
     astroplan is an open source Python package to help astronomers
@@ -12,13 +13,16 @@ class PyAstroplan(PythonPackage):
     powerful enough for observatories preparing nightly and long-term
     schedules.
     """
-    
+
     homepage = "https://github.com/astropy/astroplan.git"
     pypi = "astroplan/astroplan-0.10.1.tar.gz"
 
     license("BSD-3-Clause", checked_by="scpmw")
 
-    version('0.10.1', sha256="39d97c3377e1630abff3a94d8c956980f77a3e809e27a0376dd7d30abe3b6959")
+    version(
+        "0.10.1",
+        sha256="39d97c3377e1630abff3a94d8c956980f77a3e809e27a0376dd7d30abe3b6959",
+    )
 
     depends_on("py-numpy@1.17:", type=("build", "run"))
     depends_on("py-astropy@6:", type=("build", "run"))
@@ -26,5 +30,4 @@ class PyAstroplan(PythonPackage):
     depends_on("py-setuptools", type="build")
     depends_on("py-setuptools-scm", type="build")
     depends_on("py-pytz", type=("build", "run"))
-    depends_on("py-six", type=("build", "run")) # Fails without it
-
+    depends_on("py-six", type=("build", "run"))  # Fails without it

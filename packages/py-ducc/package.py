@@ -1,5 +1,8 @@
-from spack.package import *
 import os
+
+import llnl.util.lang
+
+from spack.package import PythonPackage
 
 
 class PyDucc(PythonPackage):
@@ -9,7 +12,7 @@ class PyDucc(PythonPackage):
     url = "https://gitlab.mpcdf.mpg.de/mtr/ducc.git"
     git = "https://gitlab.mpcdf.mpg.de/mtr/ducc.git"
 
-    # maintainers("saliei")
+    maintainers("saliei")
 
     license("Affero General Public License v1.0")
 

@@ -6,12 +6,16 @@
 
 # Overrides for specific packages
 /packages/dal2/ @bramveenboer
-/packages/ducc/ @saeid.aliei
+/packages/ducc/ @saliei
 /packages/hipfft-cuda/ @bramveenboer
 /packages/idg/ @mnijhuis-tos @bramveenboer
 /packages/pmt/ @bramveenboer
 /packages/pqxx*/ @bramveenboer
-/packages/py-ducc/ @saeid.aliei
+/packages/py-ducc/ @saliei
 /packages/qpid/ @bramveenboer
 /packages/rum/ @bramveenboer
 /packages/py-ska-sdp-batch-preprocess/ @saliei @vmorello
+/packages/py-dask-cuda/ @saliei
+/packages/py-rapids-dependency-file-generator/ @saliei
+/packages/py-rapids-build-backend/ @saliei
+/packages/py-ska-sdp-e2e-batch-continuum-imaging @nimalan-m @t3pleni9
