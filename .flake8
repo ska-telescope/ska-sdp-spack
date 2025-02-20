@@ -1,0 +1,3 @@
+[flake8]
+# undefined-name
+ignore = F821
