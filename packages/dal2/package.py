@@ -9,7 +9,7 @@ class Dal2(CMakePackage):
 
     version('latest', no_cache=True, branch='master', deprecated=True)
     version('master', no_cache=True, branch='master')
-    version('v3.3.2', commit='778747d6d5406f08f0669b94ed6c4f67abb5c5a9')
+    version('3.3.2', tag='v3.3.2')
 
     variant('python', default=False, description='Generate python bindings')
 
