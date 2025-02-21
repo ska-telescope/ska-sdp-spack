@@ -40,8 +40,9 @@ spack:
         # Pipelines
         py-ska-sdp-wflow-selfcal@0.3.1,
         py-ska-sdp-batch-preprocess@2.2.0,
-        py-ska-sdp-e2e-batch-continuum-imaging@0.2.0
-      ]
+        py-ska-sdp-e2e-batch-continuum-imaging@0.2.0,
+        py-ska-sdp-instrumental-calibration@0.1.5
+        ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
     # We target the x86_64_v3 platform (i.e. AVX2 support including FMA, but not AVX512)
