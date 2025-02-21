@@ -1,15 +1,22 @@
-from spack.package import *
+from spack.package import PythonPackage, depends_on, version
 
 
 class PySkaSdpInstrumentalCalibration(PythonPackage):
     """Batch instrumental calibration pipelines for the SKA SDP.
-    This project contains the functions and scripts needed to generate the initial calibration
-    products during standard SKA batch processing. It includes processing functions to prepare,
-    model and calibrate a visibility dataset, data handling functions for parallel processing,
-    and high level pipeline scripts and notebooks."""
+    This project contains the functions and scripts needed to generate the
+    initial calibration products during standard SKA batch processing. It
+    includes processing functions to prepare, model and calibrate a visibility
+    dataset, data handling functions for parallel processing, and high level
+    pipeline scripts and notebooks."""
 
-    homepage = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-instrumental-calibration"
-    git = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-instrumental-calibration"
+    homepage = (
+        "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/"
+        "ska-sdp-instrumental-calibration"
+    )
+    git = (
+        "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/"
+        "ska-sdp-instrumental-calibration"
+    )
 
     license("BSD 3-Clause")
 
