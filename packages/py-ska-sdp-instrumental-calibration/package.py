@@ -1,12 +1,11 @@
-
 from spack.package import *
 
 
 class PySkaSdpInstrumentalCalibration(PythonPackage):
-    """Batch instrumental calibration pipelines for the SKA SDP. 
-    This project contains the functions and scripts needed to generate the initial calibration 
-    products during standard SKA batch processing. It includes processing functions to prepare, 
-    model and calibrate a visibility dataset, data handling functions for parallel processing, 
+    """Batch instrumental calibration pipelines for the SKA SDP.
+    This project contains the functions and scripts needed to generate the initial calibration
+    products during standard SKA batch processing. It includes processing functions to prepare,
+    model and calibrate a visibility dataset, data handling functions for parallel processing,
     and high level pipeline scripts and notebooks."""
 
     homepage = "https://gitlab.com/ska-telescope/sdp/science-pipeline-workflows/ska-sdp-instrumental-calibration"
@@ -14,8 +13,10 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version('develop', branch='main')
-    version('0.1.5', commit="39c962f7d4c79f829797041a6999e5d657b3008b", preferred=True)
+    version("develop", branch="main")
+    version(
+        "0.1.5", commit="39c962f7d4c79f829797041a6999e5d657b3008b", preferred=True
+    )
 
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-poetry-core", type="build")
@@ -30,4 +31,3 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     depends_on("py-ska-sdp-func@1.2.0:", type=("build", "run"))
     depends_on("py-ska-sdp-func-python@0.5.1:", type=("build", "run"))
     depends_on("py-xarray@2024.7.0:", type=("build", "run"))
-
