@@ -22,7 +22,7 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
 
     version("develop", branch="main")
     version(
-        "0.1.5", commit="39c962f7d4c79f829797041a6999e5d657b3008b", preferred=True
+        "0.1.6", commit="2a1805c03dbbfc0cdf8766af9c8df8a5f5d86d3d", preferred=True
     )
 
     depends_on("python@3.10:", type=("build", "run"))
