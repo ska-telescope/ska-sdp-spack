@@ -6,7 +6,7 @@ spack:
 
         # Astron libraries and applications
         aoflagger@3.4.0,
-        dal2+python@3.3.2,
+        dal2~python@3.3.2,
         ducc@0.36.0,
         everybeam@0.7.0,
         idg@1.2.0,
