@@ -21,9 +21,8 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
     license("BSD 3-Clause")
 
     version("develop", branch="main")
-    version(
-        "0.1.6", commit="2a1805c03dbbfc0cdf8766af9c8df8a5f5d86d3d", preferred=True
-    )
+    version("0.1.6", tag="0.1.6")
+    version("0.1.5", tag="0.1.5")
 
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-poetry-core", type="build")
