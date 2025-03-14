@@ -41,7 +41,7 @@ spack:
         py-ska-sdp-wflow-selfcal@0.3.1,
         py-ska-sdp-batch-preprocess@2.2.0,
         py-ska-sdp-e2e-batch-continuum-imaging@0.2.0,
-        py-ska-sdp-instrumental-calibration@0.1.5
+        py-ska-sdp-instrumental-calibration@0.1.6
         ]
     # GCC 11.4.0 is available natively on Ubuntu 22.04
     - ['%gcc@11.4.0']
