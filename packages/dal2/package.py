@@ -19,7 +19,7 @@ class Dal2(CMakePackage):
 
     patch("cxx11.patch", when="@latest")
     patch("cxx11.patch", when="@master")
-    patch("cxx11.patch", when="@v3.3.2")
+    patch("cxx11.patch", when="@3.3.2")
 
     def cmake_args(self):
         spec = self.spec

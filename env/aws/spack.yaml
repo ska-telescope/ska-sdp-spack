@@ -9,6 +9,7 @@ spack:
         ducc@0.36.0,
         everybeam@0.7.0,
         idg@1.2.0,
+        dal2@3.3.2,
         pmt@master,
         rum@main,
         casacore@3.6.1,
