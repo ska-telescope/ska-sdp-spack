@@ -7,6 +7,7 @@ class Lofarstman(CMakePackage):
     homepage = "https://github.com/lofar-astron/LofarStMan"
     git      = "https://github.com/lofar-astron/LofarStMan.git"
 
-    version('latest', branch='master')
+    version('latest', branch='master', no_cache=True, deprecated=True)
+    version('master', branch='master', no_cache=True)
 
     depends_on('casacore+data')

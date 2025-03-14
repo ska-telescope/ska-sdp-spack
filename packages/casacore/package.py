@@ -17,7 +17,7 @@ class Casacore(CMakePackage):
     # TODO: support multiple spack versions (maintainers option)
     # spack version > 18.1 changed the maintainers syntax
     # maintainers("mpokorny")
-    version("3.6.1", sha256="480d3340fa17e9ba67f18efbaff4bbb272a01d1f400d2295c0b6c86eb7abcf82", preferred=True)
+    version("3.6.1", sha256="480d3340fa17e9ba67f18efbaff4bbb272a01d1f400d2295c0b6c86eb7abcf82")
     version("3.5.0", sha256="63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91")
     version("3.4.0", sha256="31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1")
     version("3.3.0", sha256="3a714644b908ef6e81489b792cc9b80f6d8267a275e15d38a42a6a5137d39d3d")

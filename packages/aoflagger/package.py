@@ -11,7 +11,10 @@ class Aoflagger(CMakePackage):
     version("3.2.0", commit="v3.2.0", submodules=True)
     version("3.3.0", commit="v3.3.0", submodules=True)
     version("3.4.0", commit="v3.4.0", submodules=True)
-    version("latest", branch="master", submodules=True)
+    version(
+        "latest", branch="master", no_cache=True, submodules=True, deprecated=True
+    )
+    version("master", branch="master", no_cache=True, submodules=True)
 
     variant("gui", default=False, description="Build rfigui and aoqplot tools")
 
