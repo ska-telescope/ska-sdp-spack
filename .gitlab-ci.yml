@@ -116,7 +116,7 @@ build-aws:
     - spack buildcache keys --install --trust
     # Install concretised specs. Should push to buildcache automatically via --autopush above
     - if ! spack install -j 4 --use-cache --only-concrete; then
-         cp -R /tmp/root/spack-stage .
+         cp -R /tmp/root/spack-stage .;
          exit 1;
       fi
     # Fail if env/aws/spack.lock was changed by "spack concretise". We do this after "spack install"

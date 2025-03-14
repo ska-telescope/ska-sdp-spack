@@ -14,7 +14,8 @@ class Idg(CMakePackage):
     version('1.0.0', commit='1.0.0', submodules=True)
     version('1.1.0', commit='1.1.0', submodules=True)
     version('1.2.0', commit='1.2.0', submodules=True)
-    version('latest', branch='master', preferred=True)
+    version('latest', branch='master', submodules=True, deprecated=True)
+    version('master', branch='master', submodules=True)
 
     variant('cuda', default=False, description='Enable CUDA support')
     variant('python', default=False, description='Enable Python support')

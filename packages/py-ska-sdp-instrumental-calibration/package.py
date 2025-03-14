@@ -20,7 +20,7 @@ class PySkaSdpInstrumentalCalibration(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version("develop", branch="main")
+    version("main", branch="main")
     version(
         "0.1.5", commit="39c962f7d4c79f829797041a6999e5d657b3008b", preferred=True
     )
