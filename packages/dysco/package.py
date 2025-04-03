@@ -12,7 +12,7 @@ class Dysco(CMakePackage):
     version('master', branch='master', submodules=True, no_cache=True)
 
     depends_on('boost+date_time+program_options')
-    depends_on('casacore')
+    depends_on('casacore@:3.4.0')
     depends_on('git')
     depends_on('gsl')
     depends_on('openblas threads=pthreads')

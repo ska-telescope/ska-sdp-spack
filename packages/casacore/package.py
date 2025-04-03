@@ -18,7 +18,7 @@ class Casacore(CMakePackage):
     # spack version > 18.1 changed the maintainers syntax
     # maintainers("mpokorny")
     version("3.7.1")
-    version("3.6.1")
+    version("3.6.1", preferred=True)
     version("3.5.0")
     version("3.4.0")
     version("3.3.0")
