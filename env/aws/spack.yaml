@@ -37,6 +37,10 @@ spack:
         py-ska-sdp-benchmark-monitor@main,
         hpctoolkit@2024.01.1~cray~cuda~debug~level_zero+mpi~opencl~papi+python~rocm~viewer,
 
+
+        # jupyter notebook
+        py-jupyter,
+
         # Pipelines
         py-ska-sdp-wflow-selfcal@0.3.1,
         py-ska-sdp-batch-preprocess@2.2.0,
