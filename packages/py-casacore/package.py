@@ -53,7 +53,5 @@ class PyCasacore(PythonPackage):
 
     depends_on("casacore+python", type=("build", "link"))
 
-
-    def config_settings(self, spec, prefix):
+    def config_settings(self, _spec, _prefix):
         return {"cmake.define.CMAKE_INSTALL_RPATH_USE_LINK_PATH": "ON"}
-
