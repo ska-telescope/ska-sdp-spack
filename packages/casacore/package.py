@@ -68,6 +68,8 @@ class Casacore(CMakePackage):
     depends_on("boost +system +filesystem", when="+dysco")
     depends_on("py-numpy", when="+python")
     depends_on("gsl", when="+dysco")
+    depends_on("gsl", when="@3.3.0:3.4.0")
+    
     depends_on("tar", when="+data")
 
     conflicts("~mpi", when="+adios2")
