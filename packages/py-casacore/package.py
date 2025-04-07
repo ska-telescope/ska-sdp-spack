@@ -53,5 +53,7 @@ class PyCasacore(PythonPackage):
 
     depends_on("casacore+python", type=("build", "link"))
 
+    # Disable RPATH stripping on CMake install. scikit-build-core
+    # encapsulation prevents spack to do that automatically
     def config_settings(self, _spec, _prefix):
         return {"cmake.define.CMAKE_INSTALL_RPATH_USE_LINK_PATH": "ON"}
