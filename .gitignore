@@ -2,4 +2,3 @@
 build
 docs/build
 poetry.lock
-test-env/
