@@ -7,6 +7,15 @@
 from spack.package import PythonPackage
 
 
+# This recipe is a backport of the official 
+# py-notebook recipe from the upstream repo
+# with a version bump. This backport fixes
+# the problem reported in SCOOP-383 and related to the following issue
+# https://github.com/microsoft/azuredatastudio/issues/24436 
+#
+# This backport can be removed when the upstream py-notebook version
+# become superior or equal to 7.X
+
 class PyNotebook(PythonPackage):
     """Jupyter Interactive Notebook"""
 
