@@ -12,7 +12,7 @@ class Pqxx(CMakePackage):
     version('7.7.4', commit='17e5a6c8ac3abc05329891aaa378bd6004b9c8ee')
     version('6.4.8', commit='d631e84b2f0ecad3f0d9237168ad6100abfbd5b9')
 
-    depends_on('cmake@:3.29.6', type='build')
+    depends_on('cmake@:3.29', type='build')
 
     #
     # these versions are not recommended:
