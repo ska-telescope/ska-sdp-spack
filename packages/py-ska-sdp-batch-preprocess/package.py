@@ -25,9 +25,11 @@ class PySkaSdpBatchPreprocess(PythonPackage):
 
     license("BSD 3-Clause")
 
-    version("latest", branch="main", preferred=True)
-    version("2.2.0", commit="98747f8fa7064c770cd2b7b9e6232f0fdc722ea4")
-    version("2.1.1", commit="0754ad2ca1fa67978ba30af8a38f03189e158c1f")
+    version("latest", branch="main", no_cache=True, deprecated=True)
+    version("main", branch="main", no_cache=True)
+    version("2.3.0", tag="2.3.0")
+    version("2.2.0", tag="2.2.0")
+    version("2.1.1", tag="2.1.1")
 
     depends_on("python@3.10:", type=("build", "run"))
     depends_on("py-poetry-core", type="build")

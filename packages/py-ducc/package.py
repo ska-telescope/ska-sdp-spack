@@ -1,7 +1,5 @@
 import os
 
-import llnl.util.lang
-
 from spack.package import PythonPackage
 
 
@@ -16,8 +14,9 @@ class PyDucc(PythonPackage):
 
     license("Affero General Public License v1.0")
 
-    version("develop-0.35.0", branch="ducc0", preferred=True)
-    version("develop-0.34.0", branch="ducc0")
+    version("0.36.0", tag="ducc0_0_36_0")
+    version("0.35.0", tag="ducc0_0_35_0")
+    version("0.34.0", tag="ducc0_0_34_0")
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
@@ -29,15 +28,6 @@ class PyDucc(PythonPackage):
     depends_on("py-numpy@1.17.0:", type="build")
 
     depends_on("ducc", type=("build", "link"))
-
-    @property
-    @llnl.util.lang.memoized
-    def _output_version(self):
-        spec_vers_str = str(self.spec.version.up_to(3))
-        if "develop" in spec_vers_str:
-            # Remove 'develop-' from the version in spack
-            spec_vers_str = spec_vers_str.partition("-")[2]
-        return spec_vers_str
 
     def setup_build_environment(self, env):
         cmake_args = []

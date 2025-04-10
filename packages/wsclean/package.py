@@ -23,9 +23,13 @@ class Wsclean(CMakePackage):
         preferred=True,
     )
     version(
-        "latest",
+        "latest", branch="master", submodules=True, no_cache=True, deprecated=True
+    )
+    version(
+        "master",
         branch="master",
         submodules=True,
+        no_cache=True,
     )
 
     variant("python", default=False, description="Enable Python support")
@@ -41,14 +45,16 @@ class Wsclean(CMakePackage):
     depends_on("everybeam@0.5.1", when="@3.3")
     depends_on("everybeam@0.5.3", when="@3.4")
     depends_on("everybeam@0.6:0.7", when="@3.5")
-    depends_on("everybeam@0.6:0.7", when="@3.6")
+    depends_on("everybeam@0.6:0.7", when="@3.6:")
     depends_on("everybeam@0.6:0.7", when="@latest")
     depends_on("dp3@6.1:,latest", when="@latest")
+    depends_on("dp3@6.1:", when="@master")
     depends_on("idg@1.0.0", when="@3.1")
     depends_on("idg@1.1.0", when="@3.2")
     depends_on("idg@1.1.0", when="@3.3")
     depends_on("idg@1.2.0", when="@3.4:")
     depends_on("idg@latest", when="@latest")
+    depends_on("idg@master", when="@master")
     depends_on("idg+cuda", when="+cuda")
     depends_on("idg+python", when="+python")
     depends_on("boost+date_time+program_options")

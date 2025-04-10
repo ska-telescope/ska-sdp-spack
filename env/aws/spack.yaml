@@ -5,15 +5,15 @@ spack:
     - [
 
         # Astron libraries and applications
-        aoflagger,
-        dal2,
-        ducc,
+        aoflagger@3.4.0,
+        ducc@0.36.0,
         everybeam@0.7.0,
-        idg,
-        pmt,
-        rum,
+        idg@1.2.0,
+        dal2@3.3.2,
+        pmt@master,
+        rum@main,
         casacore@3.6.1,
-        py-casacore@develop-3.6.0,
+        py-casacore@3.6.1,
         dp3@6.3,
         dysco@1.2,
         wsclean@3.5.1,
@@ -28,7 +28,7 @@ spack:
         py-reproject@0.14.1,
         py-photutils@1.5.0,
         py-astropy@6.1.0,
-        py-ducc@develop-0.35.0,
+        py-ducc@0.36.0,
 
         # https://confluence.skatelescope.org/display/SWSI/SKAO+Supported+Software+Versions
         python@3.11,
@@ -39,7 +39,7 @@ spack:
 
         # Pipelines
         py-ska-sdp-wflow-selfcal@0.3.1,
-        py-ska-sdp-batch-preprocess@2.2.0,
+        py-ska-sdp-batch-preprocess@2.3.0,
         py-ska-sdp-e2e-batch-continuum-imaging@0.2.0,
         py-ska-sdp-instrumental-calibration@0.1.6
         ]
